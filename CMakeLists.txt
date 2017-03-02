@@ -94,7 +94,6 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
-include(Dependencies.cmake)
 include(ProjectFiles.cmake)
 include_directories(AFTER "${INCLUDE_PATH}")
 
@@ -132,17 +131,8 @@ if(BUILD_TESTS)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TEST_PATH})
 
   add_executable(${TEST_NAME} ${TEST_SRC})
-  if(NOT CATCH_FOUND)
-    add_dependencies(${TEST_NAME} catch-lib)
-  endif(NOT CATCH_FOUND)
   target_link_libraries(${TEST_NAME} ${LIB_NAME})
   add_test(NAME ${TEST_NAME} COMMAND "${TEST_PATH}/${TEST_NAME}")
-
-  if(BUILD_COVERAGE_ANALYSIS)
-    include(CodeCoverage)
-    set(COVERAGE_EXTRACT '${PROJECT_PATH}/include/*' '${PROJECT_PATH}/src/*')
-    setup_target_for_coverage(coverage "${TEST_NAME}" coverage)
-  endif(BUILD_COVERAGE_ANALYSIS)
 endif(BUILD_TESTS)
 
 # Install header files and library.

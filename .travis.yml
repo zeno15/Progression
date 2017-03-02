@@ -27,10 +27,10 @@ matrix:
 addons:
   coverity_scan:
     project:
-      name: "kartikkumar/cppbase"
+      name: "markdavison/Progression"
       description: "Build submitted via Travis CI"
     notification_email: me@kartikkumar.com
-    build_command_prepend: "mkdir build; cd build; cmake -DPROJECT_NAME=cppbase -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on .."
+    build_command_prepend: "mkdir build; cd build; cmake -DPROJECT_NAME=project -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on .."
     build_command: "make"
     branch_pattern: coverity_scan
 
