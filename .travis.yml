@@ -24,15 +24,6 @@ matrix:
     - compiler: gcc
       env: COVERITY_SCAN_BRANCH_PATTERN=coverity_scan BUILD_TYPE=Release
 
-addons:
-  coverity_scan:
-    project:
-      name: "markdavison/Progression"
-      description: "Build submitted via Travis CI"
-    notification_email: me@kartikkumar.com
-    build_command_prepend: "mkdir build; cd build; cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE .."
-    build_command: "make"
-    branch_pattern: coverity_scan
 
-before_script::
+before_script:
   - ls -R $HOME/cmake
