@@ -7,6 +7,11 @@ set(SRC
   "${SRC_PATH}/factorial.cpp"
 )
 
+# Set project header files.
+set(HEADER
+	"${INCLUDE_PATH}/factorial.hpp"
+)
+
 # Set project main file.
 set(MAIN_SRC
   "${SRC_PATH}/main.cpp"
