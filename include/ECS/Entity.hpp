@@ -71,7 +71,7 @@ namespace ECS {
 		///	\return	The entities Id.
 		///
 		////////////////////////////////////////////////////////////
-		inline unsigned int Entity::getId(void) const {
+		inline unsigned int getId(void) const {
 			return m_Id;
 		}
 
