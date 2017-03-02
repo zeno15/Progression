@@ -8,7 +8,7 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "cppbase/factorial.hpp"
+#include <Progression/Factorial.hpp>
 
 int main( const int numberOfInputs, const char* inputArguments[ ] )
 {

@@ -7,7 +7,7 @@
 #include <sstream>
 #include <stdexcept>
 
-#include "cppbase/factorial.hpp"
+#include <Progression/Factorial.hpp>
 
 namespace cppbase
 {
