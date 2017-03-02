@@ -9,11 +9,8 @@ sudo: false
 compiler:
   - gcc
 
-#before_install:
-#  - bash scripts/install_cmake.sh
-
-build_command:
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make
+script:
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
