@@ -5,14 +5,22 @@ PROJECT(Progression)
 
 SET(INCLUDE_FILES ${INCLUDE_FILES}
   ${CMAKE_SOURCE_DIR}/include/Progression/Factorial.hpp
+
+  ${CMAKE_SOURCE_DIR}/include/ECS/Component.hpp
+  ${CMAKE_SOURCE_DIR}/include/ECS/Entity.hpp
 )
 
 SET(SOURCE_FILES ${SOURCE_FILES}
-  ${CMAKE_SOURCE_DIR}/src/Factorial.cpp
+  ${CMAKE_SOURCE_DIR}/src/Progression/Factorial.cpp
+
+  ${CMAKE_SOURCE_DIR}/src/ECS/Component.cpp
 )
 
 SET(TEST_SOURCE_FILES ${TEST_SOURCE_FILES}
   ${CMAKE_SOURCE_DIR}/test/factorialTest.cpp
+
+  ${CMAKE_SOURCE_DIR}/test/ECS/EntityTests.cpp
+  ${CMAKE_SOURCE_DIR}/test/ECS/ComponentTests.cpp
 )
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
