@@ -3,6 +3,12 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 PROJECT(Progression)
 
+IF (WIN32)
+ELSE()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -static")
+ENDIF()
+
+
 SET(INCLUDE_FILES ${INCLUDE_FILES}
   ${CMAKE_SOURCE_DIR}/include/Progression/Factorial.hpp
 
