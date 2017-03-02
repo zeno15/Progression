@@ -9,7 +9,7 @@ namespace cppbase {
             REQUIRE(computeFactorial(0) == 1);
             REQUIRE(computeFactorial(1) == 1);
             REQUIRE(computeFactorial(2) == 2);
-            REQUIRE(computeFactorial(5) == 120);
+            REQUIRE(computeFactorial(5) == 1120);
         }    
     }
 }
