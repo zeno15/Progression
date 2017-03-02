@@ -30,33 +30,9 @@ addons:
       name: "markdavison/Progression"
       description: "Build submitted via Travis CI"
     notification_email: me@kartikkumar.com
-    build_command_prepend: "mkdir build; cd build; cmake -DPROJECT_NAME=project -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on .."
+    build_command_prepend: "mkdir build; cd build; cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE .."
     build_command: "make"
     branch_pattern: coverity_scan
 
-before_install:
-  - bash scripts/install_cmake.sh
-  - bash scripts/install_doxygen.sh
-  - chmod ugo+x scripts/check_doxygen.sh
-  - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ] && [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then
-      pip install --user cpp-coveralls;
-    fi
-
 before_script::
   - ls -R $HOME/cmake
-  - ls -R $HOME/doxygen
-
-script:
-  - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ]; then
-      mkdir build;
-      cd build;
-      $HOME/cmake/bin/cmake -DPROJECT_NAME=cppbase -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=on -DDOXYGEN_EXECUTABLE=$HOME/doxygen/bin/doxygen -DBUILD_DOXYGEN_DOCS=on ..;
-      make;
-      ctest -V;
-      ../scripts/check_doxygen.sh;
-    fi
-
-after_success:
-  - if [ "$COVERITY_SCAN_BRANCH_PATTERN" != "coverity_scan" ] && [ "$CXX" == "g++" ] && [ "$BUILD_TYPE" == "Debug" ]; then
-      coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*" -E ".*src/main.cpp.*";
-    fi
