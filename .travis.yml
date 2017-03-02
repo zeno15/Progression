@@ -24,10 +24,9 @@ matrix:
     - compiler: gcc
       env: COVERITY_SCAN_BRANCH_PATTERN=coverity_scan BUILD_TYPE=Release
 
-build_command: make
-
 before_install:
   - bash scripts/install_cmake.sh
 
 before_script:
+  - ls
   - ls -R $HOME/cmake
