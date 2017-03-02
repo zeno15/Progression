@@ -7,7 +7,8 @@
 #ifndef CPPBASE_FACTORIAL_HPP
 #define CPPBASE_FACTORIAL_HPP
 
-namespace cppbase {
+namespace cppbase
+{
 
 //! Compute factorial.
 /*!

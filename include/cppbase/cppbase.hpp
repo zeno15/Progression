@@ -7,6 +7,6 @@
 #ifndef CPPBASE_HPP
 #define CPPBASE_HPP
 
-#include "cppbase/Factorial.hpp"
+#include "cppbase/factorial.hpp"
 
 #endif // CPPBASE_HPP

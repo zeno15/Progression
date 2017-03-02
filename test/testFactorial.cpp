@@ -6,7 +6,7 @@
 
 #include <catch.hpp>
 
-#include "cppbase/Factorial.hpp"
+#include "cppbase/factorial.hpp"
 
 namespace cppbase
 {

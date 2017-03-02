@@ -1,4 +1,4 @@
-# Copyright (c) 2017 Mark Davison (markdavison0@gmail.com)
+# Copyright (c) <year> <author> (<email>)
 # Distributed under the MIT License.
 # See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
 

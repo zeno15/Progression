@@ -1,4 +1,4 @@
-# Copyright (c) 2017 Mark Davison (markdavison0@gmail.com)
+# Copyright (c) <year> <author> (<email>)
 # Distributed under the MIT License.
 # See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
 
@@ -32,7 +32,7 @@ if(NOT EXTERNAL_PATH)
   set(EXTERNAL_PATH                            "${PROJECT_PATH}/external")
 endif(NOT EXTERNAL_PATH)
 if(NOT DOXYGEN_PATH)
-  set(DOXYGEN_PATH                             "${PROJECT_PATH}/doxydocs")`
+  set(DOXYGEN_PATH                             "${PROJECT_PATH}/doxydocs")
 endif(NOT DOXYGEN_PATH)
 if(NOT DOCS_PATH)
   set(DOCS_PATH                                "${PROJECT_PATH}/docs")
