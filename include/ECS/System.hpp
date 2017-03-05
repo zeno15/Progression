@@ -43,7 +43,7 @@ namespace ECS {
         /// \param  The system event to process
         ///
         ////////////////////////////////////////////////////////////
-        virtual void handleEvent(const sf::Event& _event) {};
+        //virtual void handleEvent(const sf::Event& _event) {};
         ////////////////////////////////////////////////////////////
         ///
         /// \brief  Draws all entities within the system.

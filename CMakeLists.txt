@@ -37,6 +37,7 @@ SET(TEST_SOURCE_FILES ${TEST_SOURCE_FILES}
 
   ${CMAKE_SOURCE_DIR}/test/ECS/EntityTests.cpp
   ${CMAKE_SOURCE_DIR}/test/ECS/ComponentTests.cpp
+  ${CMAKE_SOURCE_DIR}/test/ECS/SystemTests.cpp
 
   
   ${CMAKE_SOURCE_DIR}/test/Infrastructure/InstanceCollectionTests.cpp
