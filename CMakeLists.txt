@@ -18,6 +18,7 @@ SET(INCLUDE_FILES ${INCLUDE_FILES}
 
   ${CMAKE_SOURCE_DIR}/include/ECS/Component.hpp
   ${CMAKE_SOURCE_DIR}/include/ECS/Entity.hpp
+  ${CMAKE_SOURCE_DIR}/include/ECS/System.hpp
 
   ${CMAKE_SOURCE_DIR}/include/Infrastructure/InstanceCollection.hpp
   ${CMAKE_SOURCE_DIR}/include/Infrastructure/Manager.hpp
