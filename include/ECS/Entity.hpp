@@ -160,6 +160,69 @@ namespace ECS {
         }
 
 
+        ////////////////////////////////////////////////////////////
+        ///
+        /// \brief  Revives a dead entity
+        ///
+        ////////////////////////////////////////////////////////////
+        inline void revive(void) {
+            //assert(!m_Alive);
+            m_Alive = true;
+            m_ToBeRemoved = false;
+
+        }
+        ////////////////////////////////////////////////////////////
+        ///
+        /// \brief  Kills an entity
+        ///
+        ////////////////////////////////////////////////////////////
+        inline void kill(void) {
+            //assert(m_Alive);
+            m_Alive = false;
+            m_ToBeRemoved = false;
+            for (auto c : m_Components) {
+                delete c.second;
+            }
+            m_Components.clear();
+        }
+
+
+        ////////////////////////////////////////////////////////////
+        ///
+        /// \brief  Flags an entity to be removed
+        ///
+        ////////////////////////////////////////////////////////////
+        inline void flagToBeRemoved() {
+            m_ToBeRemoved = true;
+        }
+
+        ////////////////////////////////////////////////////////////
+        ///
+        /// \brief  Removes flag for entity to be removed
+        ///
+        ////////////////////////////////////////////////////////////
+        inline void clearFlagToBeRemoved() {
+            m_ToBeRemoved = false;
+        }
+
+        ////////////////////////////////////////////////////////////
+        ///
+        /// \brief  Gets whether the entity has been flagged to be removed
+        ///
+        ////////////////////////////////////////////////////////////
+        inline bool getToBeRemoved() const {
+            return m_ToBeRemoved;
+        }
+
+        ////////////////////////////////////////////////////////////
+        ///
+        /// \brief  Gets whether the entity is alive
+        ///
+        ////////////////////////////////////////////////////////////
+        inline bool isAlive() const {
+            return m_Alive;
+        }
+
 
     private:
         unsigned int m_Id;                                      ///<    Entity Id

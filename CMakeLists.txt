@@ -18,6 +18,7 @@ SET(INCLUDE_FILES ${INCLUDE_FILES}
 
   ${CMAKE_SOURCE_DIR}/include/ECS/Component.hpp
   ${CMAKE_SOURCE_DIR}/include/ECS/Entity.hpp
+  ${CMAKE_SOURCE_DIR}/include/ECS/EntityManager.hpp
   ${CMAKE_SOURCE_DIR}/include/ECS/System.hpp
 
   ${CMAKE_SOURCE_DIR}/include/Infrastructure/InstanceCollection.hpp
@@ -28,6 +29,7 @@ SET(SOURCE_FILES ${SOURCE_FILES}
   ${CMAKE_SOURCE_DIR}/src/Progression/Factorial.cpp
 
   ${CMAKE_SOURCE_DIR}/src/ECS/Component.cpp
+  ${CMAKE_SOURCE_DIR}/src/ECS/EntityManager.cpp
 
   ${CMAKE_SOURCE_DIR}/src/Infrastructure/InstanceCollection.cpp
 )
@@ -36,6 +38,7 @@ SET(TEST_SOURCE_FILES ${TEST_SOURCE_FILES}
   ${CMAKE_SOURCE_DIR}/test/factorialTest.cpp
 
   ${CMAKE_SOURCE_DIR}/test/ECS/EntityTests.cpp
+  ${CMAKE_SOURCE_DIR}/test/ECS/EntityManagerTests.cpp
   ${CMAKE_SOURCE_DIR}/test/ECS/ComponentTests.cpp
   ${CMAKE_SOURCE_DIR}/test/ECS/SystemTests.cpp
 

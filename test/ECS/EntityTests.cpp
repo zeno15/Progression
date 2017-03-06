@@ -78,6 +78,17 @@ namespace ECS {
 
         	REQUIRE(result);
         }
+
+		TEST_CASE("When entity is killed its components are deleted", "[Entity]") {
+			unsigned int id = 552;
+
+			auto entity = ECS::Entity(id);
+			entity.addComponent(new TestComponent1(id));
+
+			REQUIRE(entity.hasComponent<TestComponent1>());
+			entity.kill();
+			REQUIRE_FALSE(entity.hasComponent<TestComponent1>());
+		}
     }
 }
 
