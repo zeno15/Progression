@@ -153,7 +153,7 @@ namespace ECS {
         template<typename... Args>
         bool hasComponents() {
             std::vector<bool> components = { hasComponent<Args>()... };
-            for (auto&& ok : components) {
+            for (auto ok : components) {
                 if (!ok) return false;
             }
             return true;
