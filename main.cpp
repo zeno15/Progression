@@ -8,29 +8,9 @@
 #include <iostream>
 #include <stdexcept>
 
-#include <Progression/Factorial.hpp>
 
-int main( const int numberOfInputs, const char* inputArguments[ ] )
-{
-	try
-	{
-		const int factorial = cppbase::computeFactorial( 10 );
-		std::cout << "10! = " << factorial << std::endl;
-	}
-	catch( std::exception& error )
-	{
-		std::cout << error.what( ) << std::endl;
-	}
-
-	try
-	{
-		const int factorial = cppbase::computeFactorial( -5 );
-		std::cout << "5! = " << factorial << std::endl;
-	}
-	catch( std::exception& error )
-	{
-		std::cout << error.what( ) << std::endl;
-	}
+int main( const int _argc, const char **_argv ) {
+	std::cout << "Hello World!" << std::endl;
 
 	return EXIT_SUCCESS;
 }
