@@ -10,3 +10,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
 		echo Mac OSX
 fi
+
+echo $CXX
+echo $CC
