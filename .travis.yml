@@ -2,6 +2,17 @@
 # Distributed under the MIT License.
 # See accompanying file LICENSE.md or copy at http://opensource.org/licenses/MIT
 
+
+#before_script:
+#  - mac http://www.sfml-dev.org/files/SFML-2.4.2-osx-clang.tar.gz
+#  - linux http://www.sfml-dev.org/files/SFML-2.4.2-linux-gcc-64-bit.tar.gz
+#  - wget http://sfml-dev.org/download/sfml/2.1/SFML-2.1-linux-gcc-64bits.tar.bz2 -O /tmp/sfml.tar.bz2
+#  - tar -xjvf /tmp/sfml.tar.bz2
+#  - sudo cp -r SFML-2.1/* /usr/
+#  - sudo apt-get install -y libjpeg62-dev libsndfile1-dev libglew1.5 libglew1.5-dev libfreetype6 libjpeg-turbo8 libjpeg8 libopenal-data libopenal1  libxrandr2 libxrender1 libsoil1 
+
+#script: make
+
 sudo: required
 dist: precise
 language: cpp
@@ -10,8 +21,11 @@ compiler:
   - gcc
   - clang
 
+before_install:
+  - bash scripts/install_sfml.sh
+
 install:
-- if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 addons:
   apt:
     sources:
