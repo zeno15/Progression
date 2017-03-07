@@ -17,4 +17,4 @@ elif [[ $CXX = "g++" ]]; then
 
 fi
 
-ls $HOME
+ls $HOME/SFML
