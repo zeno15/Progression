@@ -5,7 +5,7 @@
 #include <cassert>
 #include <algorithm> 
 
-//#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 ////////////////////////////////////////////////////////////
 ///
@@ -43,7 +43,7 @@ namespace ECS {
         /// \param  The system event to process
         ///
         ////////////////////////////////////////////////////////////
-        //virtual void handleEvent(const sf::Event& _event) {};
+        virtual void handleEvent(const sf::Event& _event) {};
         ////////////////////////////////////////////////////////////
         ///
         /// \brief  Draws all entities within the system.
@@ -53,7 +53,7 @@ namespace ECS {
         /// \param  The render _states
         ///
         ////////////////////////////////////////////////////////////
-        //virtual void draw(sf::RenderTarget& _target, sf::RenderStates _states) const {};
+        virtual void draw(sf::RenderTarget& _target, sf::RenderStates _states) const {};
 
         ////////////////////////////////////////////////////////////
         ///
