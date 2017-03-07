@@ -5,15 +5,18 @@ PROJECT(Progression)
 
 IF (WIN32)
 ELSE()
-  IF (APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
-  ELSE()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-  ENDIF()
+	INCLUDE_DIRECTORIES($ENV{HOME}/SFML/include)
+
+	IF (APPLE)
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+	ELSE()
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+	ENDIF()
 ENDIF()
 
 
 INCLUDE(${CMAKE_SOURCE_DIR}/ProjectFiles.cmake)
+
 
 SET(LIBS ${LIBS}
   Lua
