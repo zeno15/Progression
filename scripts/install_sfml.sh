@@ -13,7 +13,7 @@ elif [[ $CXX = "g++" ]]; then
 	echo "G++"
 	wget http://www.sfml-dev.org/files/SFML-2.4.2-linux-gcc-64-bit.tar.gz --no-check-certificate
 	tar -xzvf SFML-2.4.2-linux-gcc-64-bit.tar.gz
-	mv SFML-2.4.2-linux-gcc-64-bit $HOME/SFML
+	mv SFML-2.4.2 $HOME/SFML
 
 fi
 
