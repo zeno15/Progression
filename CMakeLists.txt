@@ -15,9 +15,9 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 		SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
-		  libsfml-window.${SFML_VER}
-		  libsfml-graphics.${SFML_VER}
-		  libsfml-system.${SFML_VER}
+		  sfml-window
+		  sfml-graphics
+		  sfml-system
 		)
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 		MESSAGE(STATUS "G++ system/compiler detected")
@@ -43,6 +43,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
 		MESSAGE(STATUS "Intel system/compiler detected")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+	ADD_DEFINITIONS(-DSFML_STATIC)
 	MESSAGE(STATUS "Windows system/compiler detected")
 	IF (SFML_DIR STREQUAL "")
 		SET(SFML_DIR "C:/Libraries/SFML-2.3.2")
@@ -72,9 +73,6 @@ set(LIBRARY_EXTENSION "${LIBRARY_EXTENSION}-s")
 if (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_BUILD_TYPE Debug)
     set(LIBRARY_EXTENSION "${LIBRARY_EXTENSION}-d")
-	IF (WIN32)
-		ADD_DEFINITIONS(-DSFML_STATIC)
-	ENDIF()
 
 else(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_BUILD_TYPE Release)
