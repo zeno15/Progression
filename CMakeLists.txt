@@ -9,15 +9,40 @@ SET(SFML_VER "" CACHE STRING "SFML Version")
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 		MESSAGE(STATUS "Clang system/compiler detected")
+		IF (SFML_DIR STREQUAL "")
+			SET(SFML_DIR "$ENV{HOME}/SFML/include")
+		ENDIF()
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+
+		SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
+		  sfml-window.${SFML_VER}
+		  sfml-graphics.${SFML_VER}
+		  sfml-system.${SFML_VER}
+		)
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 		MESSAGE(STATUS "G++ system/compiler detected")
+		IF (SFML_DIR STREQUAL "")
+			SET(SFML_DIR "$ENV{HOME}/SFML/include")
+		ENDIF()
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+
+		SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
+		  sfml-window-s-d
+		  sfml-graphics-s-d
+		  sfml-system-s-d
+		  xcb
+		  X11
+		  GL
+		  GLEW
+		  freetype
+		  dl
+          Xrandr
+		  udev
+		  jpeg
+		)
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
 		MESSAGE(STATUS "Intel system/compiler detected")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-	MESSAGE(STATUS "Windows system/compiler detected")
-endif()
-
-IF (WIN32)
 	MESSAGE(STATUS "Windows system/compiler detected")
 	IF (SFML_DIR STREQUAL "")
 		SET(SFML_DIR "C:/Libraries/SFML-2.3.2")
@@ -35,42 +60,7 @@ IF (WIN32)
 	  winmm
 	  gdi32
 	)
-ELSE()
-	IF (SFML_DIR STREQUAL "")
-		SET(SFML_DIR "$ENV{HOME}/SFML/include")
-	ENDIF()
-
-	IF ($CXX STREQUAL "clang++")
-		MESSAGE(STATUS "Clang system/compiler detected")
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
-
-		SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
-		  sfml-window.${SFML_VER}
-		  sfml-graphics.${SFML_VER}
-		  sfml-system.${SFML_VER}
-		)
-
-	ELSE()
-		MESSAGE(STATUS "G++ system/compiler detected")
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-
-		SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
-		  sfml-window-s-d
-		  sfml-graphics-s-d
-		  sfml-system-s-d
-		  xcb
-		  X11
-		  GL
-		  GLEW
-		  freetype
-		  dl
-          Xrandr
-		  udev
-		  jpeg
-		)
-	ENDIF()
-ENDIF()
-
+endif()
 
 INCLUDE(${CMAKE_SOURCE_DIR}/ProjectFiles.cmake)
 
