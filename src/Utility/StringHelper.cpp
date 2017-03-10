@@ -1,6 +1,4 @@
-//#include <Utility/StringHelper.hpp>
-
-#include "C:\Users\markd\Documents\Git\Progression\include\Utility\StringHelper.hpp"
+#include <Utility/StringHelper.hpp>
 
 #include <iostream>
 
