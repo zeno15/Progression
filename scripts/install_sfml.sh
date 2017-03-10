@@ -16,10 +16,3 @@ elif [[ $CXX = "g++" ]]; then
 	mv SFML-2.4.2 $HOME/SFML
 
 fi
-
-echo $HOME
-ls $HOME
-
-echo $HOME/SFML
-ls $HOME/SFML
-

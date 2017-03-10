@@ -40,10 +40,7 @@ addons:
 script:
   - mkdir build
   - cd build
-  - echo $HOME
-  - echo $HOME"/SFML/include"
-  - echo $ENV{HOME}
-  - cmake .. -DSFML_DIR="$HOME/SFML/include"
+  - cmake .. -DSFML_DIR="$HOME/SFML"
   - make
   - ./Test
   - ./Main
