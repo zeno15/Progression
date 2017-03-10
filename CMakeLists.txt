@@ -37,8 +37,12 @@ ELSE()
 		  sfml-window-s-d
 		  sfml-graphics-s-d
 		  sfml-system-s-d
+		  xcb
+		  X11
+		  GL
+		  GLEW
 		  freetype
-		  jpeg
+		  dl
 		)
 	ENDIF()
 ENDIF()
