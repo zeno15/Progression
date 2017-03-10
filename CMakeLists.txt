@@ -5,7 +5,17 @@ PROJECT(Progression)
 
 SET(SFML_DIR "" CACHE STRING "Base directory for SFML")
 SET(SFML_VER "" CACHE STRING "SFML Version")
-MESSAGE(STATUS $ENV{CXX})
+
+
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+		MESSAGE(STATUS "Clang system/compiler detected")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+		MESSAGE(STATUS "G++ system/compiler detected")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+		MESSAGE(STATUS "Intel system/compiler detected")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+	MESSAGE(STATUS "Windows system/compiler detected")
+endif()
 
 IF (WIN32)
 	MESSAGE(STATUS "Windows system/compiler detected")
