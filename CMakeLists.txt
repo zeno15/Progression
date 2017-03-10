@@ -30,6 +30,13 @@ ELSE()
 
 	IF (APPLE)
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+
+		SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
+		  sfml-window.${SFML_VER}
+		  sfml-graphics.${SFML_VER}
+		  sfml-system.${SFML_VER}
+		)
+
 	ELSE()
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
@@ -72,6 +79,7 @@ endif()
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
 
+MESSAGE(STATUS "SFML Version:" ${SFML_VER})
 MESSAGE(STATUS "SFML Include Directory: " ${SFML_DIR}/include)
 INCLUDE_DIRECTORIES(${SFML_DIR}/include)
 MESSAGE(STATUS "SFML Link Directory: " ${SFML_DIR}/lib)
