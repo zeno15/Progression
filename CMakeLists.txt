@@ -21,37 +21,75 @@ ELSE()
 	ENDIF()
 ENDIF()
 
-message(STATUS "SFML_DIR: " ${SFML_DIR})
 
 INCLUDE(${CMAKE_SOURCE_DIR}/ProjectFiles.cmake)
 
 
-SET(LIBS ${LIBS}
-  Lua
-)
-
-# Currently always making static libs
+# Currently always making static THIRD_PARTY_LIBS
 set(LIBRARY_EXTENSION "${LIBRARY_EXTENSION}-s")
 
 # Determine what type of library (Debug/Release) to build
 if (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_BUILD_TYPE Debug)
     set(LIBRARY_EXTENSION "${LIBRARY_EXTENSION}-d")
+	IF (WIN32)
+		ADD_DEFINITIONS(-DSFML_STATIC)
+	ENDIF()
 
 else(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_BUILD_TYPE Release)
 
-endif(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "Debug")
+endif()
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
+
+MESSAGE(STATUS "SFML Include Directory: " ${SFML_DIR}/include)
 INCLUDE_DIRECTORIES(${SFML_DIR}/include)
+MESSAGE(STATUS "SFML Link Directory: " ${SFML_DIR}/lib)
+LINK_DIRECTORIES(${SFML_DIR}/lib)
+
+
+GET_DIRECTORY_PROPERTY( DirDefs DIRECTORY ${CMAKE_SOURCE_DIR} COMPILE_DEFINITIONS )
+FOREACH( d ${DirDefs} )
+    MESSAGE( STATUS "Definition: " ${d} )
+ENDFOREACH()
 
 ADD_LIBRARY(Progression${LIBRARY_EXTENSION} STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
 
+SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
+  sfml-main-d
+  sfml-window-s-d
+  sfml-graphics-s-d
+  sfml-system-s-d
+  opengl32
+  freetype
+  jpeg
+  winmm
+  gdi32
+)
+
+SET(LOCAL_LIBS ${LOCAL_LIBS}
+	Progression${LIBRARY_EXTENSION}
+)
+
+SET(ALL_LIBS ${ALL_LIBS}
+	${LOCAL_LIBS}
+	${THIRD_PARTY_LIBS}
+)
+
+FOREACH( l ${THIRD_PARTY_LIBS} )
+    MESSAGE( STATUS "Third Party Library: " ${l} )
+ENDFOREACH()
+FOREACH( l ${LOCAL_LIBS} )
+    MESSAGE( STATUS "Local Library: " ${l} )
+ENDFOREACH()
+
 ADD_EXECUTABLE(Main main.cpp)
-TARGET_LINK_LIBRARIES(Main LINK_PUBLIC Progression${LIBRARY_EXTENSION} ${Libs})
+TARGET_LINK_LIBRARIES(Main LINK_PUBLIC ${ALL_LIBS})
+ADD_EXECUTABLE(CMakeSFMLTest main.cpp)
+TARGET_LINK_LIBRARIES(CMakeSFMLTest LINK_PUBLIC ${ALL_LIBS})
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/test/include)
 
 ADD_EXECUTABLE(Test test/testMain.cpp ${TEST_SOURCE_FILES})
-TARGET_LINK_LIBRARIES(Test LINK_PUBLIC Progression${LIBRARY_EXTENSION} ${Libs})
+TARGET_LINK_LIBRARIES(Test LINK_PUBLIC ${ALL_LIBS})
