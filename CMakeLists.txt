@@ -43,6 +43,7 @@ ELSE()
 		  GLEW
 		  freetype
 		  dl
+          Xrandr
 		)
 	ENDIF()
 ENDIF()
