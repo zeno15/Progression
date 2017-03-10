@@ -41,8 +41,9 @@ script:
   - mkdir build
   - cd build
   - echo $HOME
+  - echo $HOME"/SFML/include"
   - echo $ENV{HOME}
-  - cmake .. -DSFML_DIR="$ENV{HOME}/SFML/include"
+  - cmake .. -DSFML_DIR="$HOME/SFML/include"
   - make
   - ./Test
   - ./Main
