@@ -35,7 +35,7 @@ addons:
     - g++-4.8
     - clang
     - glew-utils
-	- libglew-dev
+    - libglew-dev
 
 
 
