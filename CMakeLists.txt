@@ -5,6 +5,7 @@ PROJECT(Progression)
 
 SET(SFML_DIR "" CACHE STRING "Base directory for SFML")
 SET(SFML_VER "" CACHE STRING "SFML Version")
+MESSAGE(STATUS $ENV{CXX})
 
 IF (WIN32)
 	MESSAGE(STATUS "Windows system/compiler detected")
