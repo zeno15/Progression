@@ -23,7 +23,7 @@ int main() {
 
 	sf::CircleShape ball(ball_radius - 4);
 	ball.setOutlineThickness(4);
-	ball.setOutlineColor(sf::Color::Black);
+	ball.setOutlineColor(sf::Color::Green);
 	ball.setFillColor(sf::Color::Yellow);
 	ball.setOrigin(ball.getRadius(), ball.getRadius());
 	ball.setPosition(window_width / 2, window_height / 2);
