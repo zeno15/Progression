@@ -36,7 +36,7 @@ addons:
     - clang
     - glew-utils
     - libglew-dev
-    - udev-dev
+    - libudev-dev
 
 
 
