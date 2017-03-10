@@ -7,6 +7,7 @@ SET(SFML_DIR "" CACHE STRING "Base directory for SFML")
 SET(SFML_VER "" CACHE STRING "SFML Version")
 
 IF (WIN32)
+	MESSAGE(STATUS "Windows system/compiler detected")
 	IF (SFML_DIR STREQUAL "")
 		SET(SFML_DIR "C:/Libraries/SFML-2.3.2")
 		SET(SFML_VER "2.3.2")
@@ -28,7 +29,8 @@ ELSE()
 		SET(SFML_DIR "$ENV{HOME}/SFML/include")
 	ENDIF()
 
-	IF (APPLE)
+	IF ($CXX STREQUAL "clang++")
+		MESSAGE(STATUS "Clang system/compiler detected")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 		SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
@@ -38,6 +40,7 @@ ELSE()
 		)
 
 	ELSE()
+		MESSAGE(STATUS "G++ system/compiler detected")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
 		SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
