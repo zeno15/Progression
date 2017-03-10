@@ -7,7 +7,7 @@ SET(SFML_DIR "" CACHE STRING "Base directory for SFML")
 SET(SFML_VER "" CACHE STRING "SFML Version")
 
 
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
 		MESSAGE(STATUS "Clang system/compiler detected")
 		IF (SFML_DIR STREQUAL "")
 			SET(SFML_DIR "$ENV{HOME}/SFML/include")
@@ -19,7 +19,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 		  sfml-graphics
 		  sfml-system
 		)
-elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
 		MESSAGE(STATUS "G++ system/compiler detected")
 		IF (SFML_DIR STREQUAL "")
 			SET(SFML_DIR "$ENV{HOME}/SFML/include")
@@ -40,9 +40,9 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 		  udev
 		  jpeg
 		)
-elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "Intel")
 		MESSAGE(STATUS "Intel system/compiler detected")
-elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL ${MSVC})
 	ADD_DEFINITIONS(-DSFML_STATIC)
 	MESSAGE(STATUS "Windows system/compiler detected")
 	IF (SFML_DIR STREQUAL "")
@@ -79,7 +79,7 @@ else(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 endif()
 
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include/)
 
 MESSAGE(STATUS "SFML Version:" ${SFML_VER})
 MESSAGE(STATUS "SFML Include Directory: " ${SFML_DIR}/include)
