@@ -19,7 +19,7 @@ int main() {
 	auto random = std::bind(distribution, std::ref(engine));
 
 	sf::Vector2f direction(static_cast<float>(random()), static_cast<float>(random()));
-	const float velocity = std::sqrtf(direction.x * direction.x + direction.y * direction.y);
+	const float velocity = sqrtf(direction.x * direction.x + direction.y * direction.y);
 
 	sf::CircleShape ball(ball_radius - 4);
 	ball.setOutlineThickness(4);
