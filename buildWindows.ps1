@@ -4,7 +4,9 @@ New-Item -ItemType Directory -Force -Path build
 
 cd build
 
-cmake -G "NMake Makefiles" ..
+cls
+
+cmake -G "NMake Makefiles" -DSFML_DIR="C:/Libraries/SFML-2.3.2" ..
 
 nmake
 

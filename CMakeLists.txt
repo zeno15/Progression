@@ -21,6 +21,7 @@ ELSE()
 	ENDIF()
 ENDIF()
 
+message(STATUS "SFML_DIR: " ${SFML_DIR})
 
 INCLUDE(${CMAKE_SOURCE_DIR}/ProjectFiles.cmake)
 
