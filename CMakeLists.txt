@@ -44,6 +44,7 @@ ELSE()
 		  freetype
 		  dl
           Xrandr
+		  udev
 		)
 	ENDIF()
 ENDIF()
