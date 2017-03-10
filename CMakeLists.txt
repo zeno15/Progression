@@ -4,11 +4,25 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 PROJECT(Progression)
 
 SET(SFML_DIR "" CACHE STRING "Base directory for SFML")
+SET(SFML_VER "" CACHE STRING "SFML Version")
 
 IF (WIN32)
 	IF (SFML_DIR STREQUAL "")
 		SET(SFML_DIR "C:/Libraries/SFML-2.3.2")
+		SET(SFML_VER "2.3.2")
 	ENDIF()
+
+	SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
+	  sfml-main-d
+	  sfml-window-s-d
+	  sfml-graphics-s-d
+	  sfml-system-s-d
+	  opengl32
+	  freetype
+	  jpeg
+	  winmm
+	  gdi32
+	)
 ELSE()
 	IF (SFML_DIR STREQUAL "")
 		SET(SFML_DIR "$ENV{HOME}/SFML/include")
@@ -18,6 +32,14 @@ ELSE()
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 	ELSE()
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+
+		SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
+		  sfml-window-s-d
+		  sfml-graphics-s-d
+		  sfml-system-s-d
+		  freetype
+		  jpeg
+		)
 	ENDIF()
 ENDIF()
 
@@ -49,24 +71,10 @@ MESSAGE(STATUS "SFML Link Directory: " ${SFML_DIR}/lib)
 LINK_DIRECTORIES(${SFML_DIR}/lib)
 
 
-GET_DIRECTORY_PROPERTY( DirDefs DIRECTORY ${CMAKE_SOURCE_DIR} COMPILE_DEFINITIONS )
-FOREACH( d ${DirDefs} )
-    MESSAGE( STATUS "Definition: " ${d} )
-ENDFOREACH()
 
+# Create Local Libraries
 ADD_LIBRARY(Progression${LIBRARY_EXTENSION} STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
 
-SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
-  sfml-main-d
-  sfml-window-s-d
-  sfml-graphics-s-d
-  sfml-system-s-d
-  opengl32
-  freetype
-  jpeg
-  winmm
-  gdi32
-)
 
 SET(LOCAL_LIBS ${LOCAL_LIBS}
 	Progression${LIBRARY_EXTENSION}
@@ -77,6 +85,10 @@ SET(ALL_LIBS ${ALL_LIBS}
 	${THIRD_PARTY_LIBS}
 )
 
+GET_DIRECTORY_PROPERTY( DirDefs DIRECTORY ${CMAKE_SOURCE_DIR} COMPILE_DEFINITIONS )
+FOREACH( d ${DirDefs} )
+    MESSAGE( STATUS "Definition: " ${d} )
+ENDFOREACH()
 FOREACH( l ${THIRD_PARTY_LIBS} )
     MESSAGE( STATUS "Third Party Library: " ${l} )
 ENDFOREACH()
@@ -86,8 +98,6 @@ ENDFOREACH()
 
 ADD_EXECUTABLE(Main main.cpp)
 TARGET_LINK_LIBRARIES(Main LINK_PUBLIC ${ALL_LIBS})
-ADD_EXECUTABLE(CMakeSFMLTest main.cpp)
-TARGET_LINK_LIBRARIES(CMakeSFMLTest LINK_PUBLIC ${ALL_LIBS})
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/test/include)
 
