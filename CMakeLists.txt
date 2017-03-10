@@ -45,6 +45,7 @@ ELSE()
 		  dl
           Xrandr
 		  udev
+		  jpeg
 		)
 	ENDIF()
 ENDIF()

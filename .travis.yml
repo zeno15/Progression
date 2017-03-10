@@ -37,6 +37,7 @@ addons:
     - glew-utils
     - libglew-dev
     - libudev-dev
+    - libjpeg-dev
 
 
 
