@@ -15,9 +15,9 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 		SET(THIRD_PARTY_LIBS ${THIRD_PARTY_LIBS}
-		  sfml-window.${SFML_VER}
-		  sfml-graphics.${SFML_VER}
-		  sfml-system.${SFML_VER}
+		  libsfml-window.${SFML_VER}
+		  libsfml-graphics.${SFML_VER}
+		  libsfml-system.${SFML_VER}
 		)
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 		MESSAGE(STATUS "G++ system/compiler detected")
