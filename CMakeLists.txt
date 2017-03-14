@@ -63,7 +63,6 @@ elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL ${MSVC})
 	)
 endif()
 
-INCLUDE(${CMAKE_SOURCE_DIR}/ProjectFiles.cmake)
 
 
 # Currently always making static THIRD_PARTY_LIBS
@@ -87,6 +86,8 @@ INCLUDE_DIRECTORIES(${SFML_DIR}/include)
 MESSAGE(STATUS "SFML Link Directory: " ${SFML_DIR}/lib)
 LINK_DIRECTORIES(${SFML_DIR}/lib)
 
+
+INCLUDE(${CMAKE_SOURCE_DIR}/ProjectFiles.cmake)
 
 
 # Create Local Libraries
