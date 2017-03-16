@@ -14,8 +14,10 @@ SET(ECS_INCLUDE_FILES ${ECS_INCLUDE_FILES}
 )
 
 SET(INFRASTRUCTURE_INCLUDE_FILES ${INFRASTRUCTURE_INCLUDE_FILES}
+	${CMAKE_SOURCE_DIR}/include/Infrastructure/FontManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/InstanceCollection.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/Manager.hpp
+	${CMAKE_SOURCE_DIR}/include/Infrastructure/TextureManager.hpp
 )
 
 SET(UTILITY_INCLUDE_FILES ${UTILITY_INCLUDE_FILES}
@@ -38,7 +40,9 @@ SET(ECS_SOURCE_FILES ${ECS_SOURCE_FILES}
 )
 
 SET (INFRASTRUCTURE_SOURCE_FILES ${INFRASTRUCTURE_SOURCE_FILES}
+	${CMAKE_SOURCE_DIR}/src/Infrastructure/FontManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/InstanceCollection.cpp
+	${CMAKE_SOURCE_DIR}/src/Infrastructure/TextureManager.cpp
 )
 
 SET(UTILITY_SOURCE_FILES ${UTILITY_SOURCE_FILES}
