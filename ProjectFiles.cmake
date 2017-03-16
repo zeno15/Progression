@@ -14,6 +14,7 @@ SET(ECS_INCLUDE_FILES ${ECS_INCLUDE_FILES}
 )
 
 SET(INFRASTRUCTURE_INCLUDE_FILES ${INFRASTRUCTURE_INCLUDE_FILES}
+	${CMAKE_SOURCE_DIR}/include/Infrastructure/Application.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/FontManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/InstanceCollection.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/Manager.hpp
@@ -42,6 +43,7 @@ SET(ECS_SOURCE_FILES ${ECS_SOURCE_FILES}
 )
 
 SET (INFRASTRUCTURE_SOURCE_FILES ${INFRASTRUCTURE_SOURCE_FILES}
+	${CMAKE_SOURCE_DIR}/src/Infrastructure/Application.cpp
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/FontManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/InstanceCollection.cpp
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/Scene.cpp
@@ -70,6 +72,7 @@ SET(ECS_TEST_SOURCE_FILES ${ECS_TEST_SOURCE_FILES}
 )
 
 SET (INFRASTRUCTURE_TEST_SOURCE_FILES ${INFRASTRUCTURE_TEST_SOURCE_FILES}
+	${CMAKE_SOURCE_DIR}/test/Infrastructure/ApplicationTests.cpp
 	${CMAKE_SOURCE_DIR}/test/Infrastructure/InstanceCollectionTests.cpp
 	${CMAKE_SOURCE_DIR}/test/Infrastructure/SceneTests.cpp
 	${CMAKE_SOURCE_DIR}/test/Infrastructure/SceneManagerTests.cpp
