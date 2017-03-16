@@ -6,7 +6,7 @@
 #include <utility>
 
 namespace ECS {
-    namespace tests {
+    namespace EntityTests {
 		class TestComponent1 : public Component {
 		public:
 			TestComponent1(unsigned int _entityId) : Component(_entityId) {}

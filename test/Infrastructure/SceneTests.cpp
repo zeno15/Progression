@@ -3,7 +3,7 @@
 #include <Infrastructure/Scene.hpp>
 
 namespace Infrastructure {
-	namespace tests {
+	namespace SceneTests {
 		class TestScene : public Scene {
 		public:
 			TestScene(const std::string& _name) : Scene(_name) {}
@@ -12,7 +12,7 @@ namespace Infrastructure {
 			void draw(sf::RenderTarget& _target, sf::RenderStates _states) const {};
 		};
 
-		TEST_CASE("Scene sets its name correctly") {
+		TEST_CASE("Scene sets its name correctly", "[Scene]") {
 			std::string name = "TestSceneName";
 
 			auto testScene = TestScene(name);

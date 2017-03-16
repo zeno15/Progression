@@ -8,7 +8,7 @@
 #include <iostream>
 
 namespace ECS {
-    namespace tests {
+    namespace EntityManagerTests {
 		class TestComponent : public Component {
 		public:
 			TestComponent(unsigned int _entityId) : Component(_entityId) {}

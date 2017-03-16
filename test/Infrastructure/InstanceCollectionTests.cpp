@@ -3,7 +3,7 @@
 #include <Infrastructure/InstanceCollection.hpp>
 
 namespace Infrastructure {
-    namespace tests {
+    namespace InstanceCollectionTests {
     	class TestManager : public Manager {
     	public:
     		static const std::string Name;

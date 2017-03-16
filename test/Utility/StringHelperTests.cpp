@@ -3,7 +3,7 @@
 #include <Utility/StringHelper.hpp>
 
 namespace Utility {
-	namespace tests {
+	namespace StringHelperTests {
 		TEST_CASE("startsWith works as expected", "[StringHelper]") {
 			std::string str = "Housework";
 

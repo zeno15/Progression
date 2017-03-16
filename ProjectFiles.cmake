@@ -18,6 +18,7 @@ SET(INFRASTRUCTURE_INCLUDE_FILES ${INFRASTRUCTURE_INCLUDE_FILES}
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/InstanceCollection.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/Manager.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/Scene.hpp
+	${CMAKE_SOURCE_DIR}/include/Infrastructure/SceneManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/TextureManager.hpp
 )
 
@@ -44,6 +45,7 @@ SET (INFRASTRUCTURE_SOURCE_FILES ${INFRASTRUCTURE_SOURCE_FILES}
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/FontManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/InstanceCollection.cpp
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/Scene.cpp
+	${CMAKE_SOURCE_DIR}/src/Infrastructure/SceneManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/TextureManager.cpp
 )
 
@@ -70,6 +72,7 @@ SET(ECS_TEST_SOURCE_FILES ${ECS_TEST_SOURCE_FILES}
 SET (INFRASTRUCTURE_TEST_SOURCE_FILES ${INFRASTRUCTURE_TEST_SOURCE_FILES}
 	${CMAKE_SOURCE_DIR}/test/Infrastructure/InstanceCollectionTests.cpp
 	${CMAKE_SOURCE_DIR}/test/Infrastructure/SceneTests.cpp
+	${CMAKE_SOURCE_DIR}/test/Infrastructure/SceneManagerTests.cpp
 )
 
 SET (UTILITY_TEST_SOURCE_FILES ${UTILITY_TEST_SOURCE_FILES}

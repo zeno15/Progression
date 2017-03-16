@@ -4,7 +4,7 @@
 #include <Utility/XML.hpp>
 
 namespace Utility {
-	namespace tests {
+	namespace XMLTests {
 		const std::string basic = R"(
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <Root>

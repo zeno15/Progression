@@ -6,7 +6,7 @@
 
 
 namespace ECS {
-    namespace tests {
+    namespace ComponentTests {
         TEST_CASE("Test default constructor applies entity id", "[Component]") {
         	unsigned int id = 552;
 
