@@ -20,6 +20,7 @@ SET(INFRASTRUCTURE_INCLUDE_FILES ${INFRASTRUCTURE_INCLUDE_FILES}
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/Manager.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/Scene.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/SceneManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Infrastructure/Signal.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/TextureManager.hpp
 )
 
@@ -76,6 +77,7 @@ SET (INFRASTRUCTURE_TEST_SOURCE_FILES ${INFRASTRUCTURE_TEST_SOURCE_FILES}
 	${CMAKE_SOURCE_DIR}/test/Infrastructure/InstanceCollectionTests.cpp
 	${CMAKE_SOURCE_DIR}/test/Infrastructure/SceneTests.cpp
 	${CMAKE_SOURCE_DIR}/test/Infrastructure/SceneManagerTests.cpp
+	${CMAKE_SOURCE_DIR}/test/Infrastructure/SignalTests.cpp
 )
 
 SET (UTILITY_TEST_SOURCE_FILES ${UTILITY_TEST_SOURCE_FILES}
