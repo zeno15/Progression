@@ -4,6 +4,7 @@
 #include <ECS/Entity.hpp>
 
 #include <Infrastructure/Manager.hpp>
+#include <Infrastructure/Signal.hpp>
 
 #include <vector>
 
@@ -96,6 +97,10 @@ namespace ECS {
         ///
         ////////////////////////////////////////////////////////////
         std::vector<unsigned int> getAliveEntityIds(void) const;
+
+
+	public:
+		Infrastructure::Signal<unsigned int> entityKilled;		///<	Signal invoked when entity is killed
 
     protected:
         ////////////////////////////////////////////////////////////

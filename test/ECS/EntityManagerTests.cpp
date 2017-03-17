@@ -122,5 +122,21 @@ namespace ECS {
 			Infrastructure::InstanceCollection::getInstance<EntityManager>().cleanupEntities();
 			REQUIRE_FALSE(Infrastructure::InstanceCollection::getInstance<EntityManager>().getEntity(e1Id).isAlive());
 		}
+
+		TEST_CASE("When entity is killed the entity killed signal is invoked", "[EntityManager]") {
+			Infrastructure::InstanceCollection::clear();
+			Infrastructure::InstanceCollection::registerInstance<EntityManager>();
+
+			auto& e1 = Infrastructure::InstanceCollection::getInstance<EntityManager>().createEntity();
+			unsigned int killedEntityId;
+
+			Infrastructure::InstanceCollection::getInstance<EntityManager>().entityKilled.registerCallback([&](unsigned int _entityId) {
+				killedEntityId = _entityId;
+			});
+
+			Infrastructure::InstanceCollection::getInstance<EntityManager>().killEntity(e1);
+
+			REQUIRE(killedEntityId == e1.getId());
+		}
     }
 }

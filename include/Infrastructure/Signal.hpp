@@ -2,6 +2,7 @@
 #define INCLUDED_INFRASTRUCTURE_SIGNAL_HPP_
 
 #include <vector>
+#include <algorithm>
 #include <functional>
 
 ////////////////////////////////////////////////////////////

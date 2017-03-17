@@ -1,9 +1,12 @@
 #pragma once
 
 #include <ECS/Entity.hpp>
+#include <ECS/EntityManager.hpp>
+#include <Infrastructure/InstanceCollection.hpp>
 
 #include <cassert>
 #include <algorithm> 
+#include <functional>
 
 #include <SFML/Graphics.hpp>
 
@@ -82,7 +85,8 @@ namespace ECS {
         ////////////////////////////////////////////////////////////
         virtual void removeEnitity(unsigned int _id) = 0;
     protected:
-        std::vector<Entity *> m_SystemEntities;         ///<    Entities that belong to this system
+        std::vector<Entity *> m_SystemEntities;					///<    Entities that belong to this system
+		unsigned int m_EntityKilledCallbackRegistrationId;		///<	The registration id of the callback when entities are killed
     };
 
     ////////////////////////////////////////////////////////////
@@ -95,6 +99,12 @@ namespace ECS {
     template <typename... Args>
     class System : public SystemBase {
     public:
+		System() {
+			m_EntityKilledCallbackRegistrationId = 
+				Infrastructure::InstanceCollection::getInstance<EntityManager>()
+					.entityKilled.registerCallback(std::bind(&System::onEntityKilled, this, std::placeholders::_1));
+		}
+
         ////////////////////////////////////////////////////////////
         ///
         /// \brief  Virtual destructor
@@ -145,6 +155,11 @@ namespace ECS {
                     return _entity->getId() == _id;
                 }), m_SystemEntities.end());
         }
+
+	private:
+		void onEntityKilled(unsigned int _entityId) {
+			removeEnitity(_entityId);
+		}
 
     };
 

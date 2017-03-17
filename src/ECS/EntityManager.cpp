@@ -3,6 +3,7 @@
 #include <Infrastructure/InstanceCollection.hpp>
 
 #include <iostream>
+#include <algorithm>
 
 #define ENTITY_COUNT 1000
 
@@ -50,7 +51,7 @@ namespace ECS {
 	}
 	void EntityManager::killEntity(unsigned int _id) {
 		auto& e = getEntity(_id);
-		//Infrastructure::InstanceCollection::getInstance<Infrastructure::NotificationManager>().onEntityDeleted(_id);
+		entityKilled.invoke(_id);
 		e.kill();
 		m_ReUsableKeys.push_back(_id);
 	}
