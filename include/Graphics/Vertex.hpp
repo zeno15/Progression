@@ -1,0 +1,74 @@
+#ifndef INCLUDED_GRAPHICS_VERTEX_HPP_
+#define INCLUDED_GRAPHICS_VERTEX_HPP_
+
+#include <Graphics/Colour.hpp>
+#include <System/Vector2.hpp>
+#include <System/Vector3.hpp>
+
+////////////////////////////////////////////////////////////
+///
+///	\namespace Graphics
+///
+////////////////////////////////////////////////////////////
+namespace Graphics {
+
+	////////////////////////////////////////////////////////////
+	///
+	///	\brief	Class to encapsulate a single graphics vertex
+	///
+	////////////////////////////////////////////////////////////
+	class Vertex {
+	public:
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Constructor
+		///
+		////////////////////////////////////////////////////////////
+		Vertex(void);
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Constructor
+		///
+		///	\param	The vertex position
+		///
+		////////////////////////////////////////////////////////////
+		Vertex(const System::Vector3f& _position);
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Constructor
+		///
+		///	\param	The vertex position
+		///
+		///	\param	The vertex colour
+		///
+		////////////////////////////////////////////////////////////
+		Vertex(const System::Vector3f& _position, const Graphics::Colour& _colour);
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Constructor
+		///
+		///	\param	The vertex position
+		///
+		///	\param	The vertex texture coordinates
+		///
+		////////////////////////////////////////////////////////////
+		Vertex(const System::Vector3f& _position, const System::Vector2f& _texture);
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Constructor
+		///
+		///	\param	The vertex position
+		///
+		///	\param	The vertex colour
+		///
+		///	\param	The vertex texture coordinates
+		///
+		////////////////////////////////////////////////////////////
+		Vertex(const System::Vector3f& _position, const Graphics::Colour& _colour, const System::Vector2f& _texture);
+
+		System::Vector3f position;			///<	The position of the vertex
+		Graphics::Colour colour;			///<	The colour of the vertex
+		System::Vector2f texture;			///<	The texture coordinates of the vertex
+	};
+} 
+#endif // INCLUDED_GRAPHICS_VERTEX_HPP_

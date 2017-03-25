@@ -3,8 +3,6 @@
 
 #include <string>
 
-#include <SFML/Graphics.hpp>
-
 #include <Infrastructure/Scene.hpp>
 #include <Infrastructure/Manager.hpp>
 
@@ -42,7 +40,7 @@ namespace Infrastructure {
 		///	\return	Whether the event was handled
 		///
 		////////////////////////////////////////////////////////////
-		bool handleEvent(const sf::Event& _event);
+		bool handleEvent(const System::Event& _event);
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Draws all the scenes
@@ -52,7 +50,7 @@ namespace Infrastructure {
 		///	\param	The states to draw with
 		///
 		////////////////////////////////////////////////////////////
-		void draw(sf::RenderTarget& _target, sf::RenderStates _states) const;
+		void draw(Window::Window& _window, Graphics::RenderData _states) const;
 
 		////////////////////////////////////////////////////////////
 		///

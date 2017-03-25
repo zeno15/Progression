@@ -3,7 +3,7 @@
 
 #include <Infrastructure/Manager.hpp>
 
-#include <SFML/Graphics/Texture.hpp>
+#include <Graphics/Texture.hpp>
 
 #include <map>
 
@@ -45,7 +45,7 @@ namespace Infrastructure {
 		///	\return	The texture
 		///
 		////////////////////////////////////////////////////////////
-		sf::Texture& getTexture(const std::string& _textureName);
+		Graphics::Texture& getTexture(const std::string& _textureName);
 
 	private:
 		////////////////////////////////////////////////////////////
@@ -61,7 +61,7 @@ namespace Infrastructure {
 		////////////////////////////////////////////////////////////
 		~TextureManager();
 
-		std::map<std::string, sf::Texture *> m_Textures;		///<	Texture name map
+		std::map<std::string, Graphics::Texture *> m_Textures;		///<	Texture name map
 	};
 }
 

@@ -1,0 +1,74 @@
+#ifndef INCLUDED_GRAPHICS_TEXT_HPP_
+#define INCLUDED_GRAPHICS_TEXT_HPP_
+
+#include <Graphics/Font.hpp>
+#include <Graphics/Renderable.hpp>
+
+////////////////////////////////////////////////////////////
+///
+///	\namespace	Graphics
+///
+////////////////////////////////////////////////////////////
+namespace Graphics {
+	////////////////////////////////////////////////////////////
+	///
+	///	\brief	Class to encapsulate renderable text
+	///
+	////////////////////////////////////////////////////////////
+	class Text : Renderable {
+	public:
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Constructor
+		///
+		////////////////////////////////////////////////////////////
+		Text(void);
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Destructor
+		///
+		////////////////////////////////////////////////////////////
+		~Text(void);
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Pure virtual method to override to allow rendering
+		///
+		///	\param	The window to render to
+		///
+		///	\param	The render states to use
+		///
+		////////////////////////////////////////////////////////////
+		void render(const Window::Window& _window, RenderData _RenderData) const override;
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Generates verticies and texture coordinates 
+		///
+		///	\param	The string to generate
+		///
+		///	\param	The font to use
+		///
+		////////////////////////////////////////////////////////////
+		void generateText(const std::string& _text, Font *_font);
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Sets the colour of the text
+		///
+		///	\param	The colour
+		///
+		////////////////////////////////////////////////////////////
+		void setColour(const Colour& _colour);
+
+	private:
+		unsigned int m_VAO;					///<	OpenGL VAO handle
+		unsigned int m_VBO;					///<	OpenGL VBO handle
+		Font *	m_Font;						///<	The font last used
+		bool m_UseKerning;					///<	Whether kerning is to be used
+		unsigned int		m_Verticies;	///<	The number of verticies last generated
+		Colour					m_Colour;	///<	The colour of the text;
+	};
+}
+
+#endif // INCLUDED_GRAPHICS_TEXT_HPP_

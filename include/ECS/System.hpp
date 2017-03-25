@@ -4,11 +4,12 @@
 #include <ECS/EntityManager.hpp>
 #include <Infrastructure/InstanceCollection.hpp>
 
+#include <System/Event.hpp>
+#include <Graphics/Renderable.hpp>
+
 #include <cassert>
 #include <algorithm> 
 #include <functional>
-
-#include <SFML/Graphics.hpp>
 
 ////////////////////////////////////////////////////////////
 ///
@@ -19,7 +20,7 @@ namespace ECS {
 
     ////////////////////////////////////////////////////////////
     ///
-    /// \brief  Base class for ECS System, allows vectors of systems
+    /// \brief  Base class for ECS System
     ///
     ////////////////////////////////////////////////////////////
     class SystemBase {
@@ -46,7 +47,7 @@ namespace ECS {
         /// \param  The system event to process
         ///
         ////////////////////////////////////////////////////////////
-        virtual void handleEvent(const sf::Event& _event) {};
+        virtual void handleEvent(const System::Event& _event) {};
         ////////////////////////////////////////////////////////////
         ///
         /// \brief  Draws all entities within the system.
@@ -56,7 +57,7 @@ namespace ECS {
         /// \param  The render _states
         ///
         ////////////////////////////////////////////////////////////
-        virtual void draw(sf::RenderTarget& _target, sf::RenderStates _states) const {};
+        virtual void Renderable(Window::Window& _window, Graphics::RenderData _states) const {};
 
         ////////////////////////////////////////////////////////////
         ///

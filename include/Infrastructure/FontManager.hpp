@@ -3,7 +3,7 @@
 
 #include <Infrastructure/Manager.hpp>
 
-#include <SFML/Graphics/Font.hpp>
+#include <Graphics/Font.hpp>
 
 #include <map>
 
@@ -45,7 +45,7 @@ namespace Infrastructure {
 		///	\return	The font
 		///
 		////////////////////////////////////////////////////////////
-		sf::Font& getFont(const std::string& _fontName);
+		Graphics::Font& getFont(const std::string& _fontName);
 
 	private:
 		////////////////////////////////////////////////////////////
@@ -61,7 +61,7 @@ namespace Infrastructure {
 		////////////////////////////////////////////////////////////
 		~FontManager();
 
-		std::map<std::string, sf::Font *> m_Fonts;		///<	Font name map
+		std::map<std::string, Graphics::Font *> m_Fonts;		///<	Font name map
 	};
 }
 

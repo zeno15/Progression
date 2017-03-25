@@ -6,10 +6,10 @@ Set-Location build
 
 Clear-Host
 
-cmake -G "NMake Makefiles" -DSFML_DIR="C:/Libraries/SFML-2.3.2" ..
+cmake -G "NMake Makefiles" ..
 
 nmake
 
-.\Test.exe
+.\Test.exe 
 
 Set-Location ..

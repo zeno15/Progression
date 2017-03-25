@@ -3,9 +3,11 @@
 
 #include <string>
 
-#include <SFML/Graphics.hpp>
-
 #include <Infrastructure/Manager.hpp>
+
+#include <System/Vector2.hpp>
+
+#include <Window/Window.hpp>
 
 ////////////////////////////////////////////////////////////
 ///
@@ -34,7 +36,7 @@ namespace Infrastructure {
 		///	\param	The starting window title
 		///
 		////////////////////////////////////////////////////////////
-		void initialise(const sf::Vector2u& _size, const std::string& _title);
+		void initialise(const System::Vector2u& _size, const std::string& _title);
 
 		////////////////////////////////////////////////////////////
 		///
@@ -57,7 +59,7 @@ namespace Infrastructure {
 		///	\return	The application window
 		///
 		////////////////////////////////////////////////////////////
-		sf::RenderWindow& getWindow(void);
+		Window::Window& getWindow(void);
 
 		////////////////////////////////////////////////////////////
 		///
@@ -101,7 +103,7 @@ namespace Infrastructure {
 
 		bool m_Running;						///<	Whether the windows is and should keep running
 
-		sf::RenderWindow m_Window;			///<	The application window
+		Window::Window m_Window;			///<	The application window
 	};
 }
 

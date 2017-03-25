@@ -13,8 +13,8 @@ namespace Infrastructure {
 				m_UValue += 1;
 				m_FValue += _delta;
 			}
-			bool handleEvent(const sf::Event& _event) { return false; };
-			void draw(sf::RenderTarget& _target, sf::RenderStates _states) const {};
+			bool handleEvent(const System::Event& _event) { return false; };
+			void render(const Window::Window& _window, Graphics::RenderData _states) const override {};
 
 			unsigned int m_UValue;
 			float m_FValue;

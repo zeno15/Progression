@@ -12,16 +12,16 @@ namespace Infrastructure {
 
 	void TextureManager::addTexture(const std::string& _filename, const std::string& _textureName) {
 		if (m_Textures.find(_textureName) == m_Textures.end()) {
-			auto t = new sf::Texture();
+			auto t = new Graphics::Texture();
 			if (!t->loadFromFile(_filename)) {
 				throw std::runtime_error("Failed to load texture");
 			}
 
-			m_Textures.insert(std::pair<std::string, sf::Texture *>(_textureName, t));
+			m_Textures.insert(std::pair<std::string, Graphics::Texture *>(_textureName, t));
 		}
 	}
 
-	sf::Texture& TextureManager::getTexture(const std::string& _textureName) {
+	Graphics::Texture& TextureManager::getTexture(const std::string& _textureName) {
 		if (m_Textures.find(_textureName) != m_Textures.end()) {
 			return *m_Textures[_textureName];
 		}

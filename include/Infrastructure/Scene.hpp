@@ -2,9 +2,7 @@
 #define INCLUDED_INFRASTRUCTURE_SCENE_HPP_
 
 #include <string>
-
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
+#include <Graphics/Renderable.hpp>
 
 ////////////////////////////////////////////////////////////
 ///
@@ -18,7 +16,7 @@ namespace Infrastructure {
 	///	\brief	Class to represent single gameplay scene
 	///
 	////////////////////////////////////////////////////////////
-	class Scene : public sf::Drawable {
+	class Scene : public Graphics::Renderable {
 	public:
 		////////////////////////////////////////////////////////////
 		///
@@ -61,17 +59,17 @@ namespace Infrastructure {
 		///	\return	Whether the event was handled or not
 		///
 		////////////////////////////////////////////////////////////
-		virtual bool handleEvent(const sf::Event& _event) = 0;
+		virtual bool handleEvent(const System::Event& _event) = 0;
 		////////////////////////////////////////////////////////////
 		///
-		///	\brief	Draws the scene
+		///	\brief	Renders the scene
 		///
-		///	\param	The target to draw on
+		///	\param	The window to draw on
 		///
 		///	\param	The states to draw with
 		///
 		////////////////////////////////////////////////////////////
-		virtual void draw(sf::RenderTarget& _target, sf::RenderStates _states) const = 0;
+		virtual void render(const Window::Window& _window, Graphics::RenderData _RenderData) const = 0;
 
 
 	private:

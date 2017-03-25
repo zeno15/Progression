@@ -3,6 +3,8 @@
 #include <Infrastructure/InstanceCollection.hpp>
 #include <Infrastructure/SceneManager.hpp>
 
+#include <System/Clock.hpp>
+
 #include <iostream>
 
 namespace Infrastructure {
@@ -14,9 +16,12 @@ namespace Infrastructure {
 	Application::~Application() {}
 
 
-	void Application::initialise(const sf::Vector2u& _size, const std::string& _title) {
-		m_Window.create(sf::VideoMode(_size.x, _size.y), _title);
-		m_Window.setVerticalSyncEnabled(true);
+	void Application::initialise(const System::Vector2u& _size, const std::string& _title) {
+		Window::VideoMode videoMode = Window::VideoMode();
+		videoMode.width = _size.x;
+		videoMode.height = _size.y;
+		m_Window.create(videoMode, _title, Window::WindowStyle::Default);
+		//m_Window.setVerticalSyncEnabled(true);
 	}
 
 	void Application::start(void) {
@@ -31,7 +36,7 @@ namespace Infrastructure {
 		unsigned int fpsAccumulator = 0;
 		unsigned int upsAccumulator = 0;
 
-		sf::Clock clock;
+		System::Clock clock;
 
 
 
@@ -70,11 +75,12 @@ namespace Infrastructure {
 	void Application::update(float _delta) {
 
 
-		sf::Event event;
+		System::Event event;
 		while (m_Window.pollEvent(event)) {
 
-			if (event.type == sf::Event::Closed)
+			if (event.type == System::Event::WindowClosed) {
 				m_Running = false;
+			}
 
 			Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().handleEvent(event);
 		}
@@ -85,9 +91,10 @@ namespace Infrastructure {
 	void Application::render(float _alpha) {
 		m_Window.clear();
 
-		auto states = sf::RenderStates::Default;
+		// TODO Replace Drawable and RenderData
+		//auto states = sf::RenderData::Default;
 
-		Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().draw(m_Window, states);
+		//Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().draw(m_Window, states);
 
 		m_Window.display();
 	}
@@ -96,7 +103,7 @@ namespace Infrastructure {
 		m_Running = false;
 	}
 
-	sf::RenderWindow& Application::getWindow(void) {
+	Window::Window& Application::getWindow(void) {
 		return m_Window;
 	}
 

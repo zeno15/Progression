@@ -43,6 +43,6 @@ addons:
 script:
   - mkdir build
   - cd build
-  - cmake .. -DSFML_DIR="$HOME/SFML" -DSFML_VER="2.4.2"
+  - cmake ..
   - make
   - ./Test

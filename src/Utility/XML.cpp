@@ -36,8 +36,8 @@ namespace Utility {
 			std::size_t closeLoc = data.find(ElementEnd);
 
 			if (startLoc == std::string::npos) {
-				//~ Either _data is pure content, or an error has occured
-				//~ Assume content
+				// Either _data is pure content, or an error has occured
+				// Assume content
 
 				data = StringHelper::trim(data);
 
@@ -60,7 +60,7 @@ namespace Utility {
 			std::string element = data.substr(startLoc, closeLoc - startLoc + 1);
 
 			if (StringHelper::startsWith(element, DeclarationStart) && StringHelper::endsWith(element, DeclarationEnd)) {
-				//~ TODO extract declaration from element
+				// TODO extract declaration from element
 
 				XMLNode *node = new XMLNode();
 
@@ -71,7 +71,7 @@ namespace Utility {
 				data = data.substr(data.find(ElementStart, closeLoc), std::string::npos);
 			}
 			else if (StringHelper::startsWith(element, CommentStart) && StringHelper::endsWith(element, CommentEnd)) {
-				//~ TODO extract comment from element
+				// TODO extract comment from element
 
 				XMLNode *node = new XMLNode();
 
@@ -84,7 +84,7 @@ namespace Utility {
 			else if (StringHelper::startsWith(element, ClosedElementStart) && StringHelper::endsWith(element, ClosedElementEnd)) {
 				std::size_t startLocation = data.find(ElementStart, closeLoc);
 
-				//~ If you cant find a tag start '<' then the data can be replaced with an empty string, no more content/tags
+				// If you cant find a tag start '<' then the data can be replaced with an empty string, no more content/tags
 				data = (startLocation == std::string::npos) ? "" : data.substr(startLocation, std::string::npos);
 
 

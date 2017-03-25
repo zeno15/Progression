@@ -18,7 +18,7 @@ namespace Infrastructure {
 			m_CurrentScene->update(_delta);
 		}
 	}
-	bool SceneManager::handleEvent(const sf::Event& _event) {
+	bool SceneManager::handleEvent(const System::Event& _event) {
 		if (m_CurrentScene != nullptr) {
 			if (m_CurrentScene->handleEvent(_event)) {
 				return true;
@@ -27,9 +27,10 @@ namespace Infrastructure {
 
 		return false;
 	}
-	void SceneManager::draw(sf::RenderTarget& _target, sf::RenderStates _states) const {
+
+	void SceneManager::draw(Window::Window& _window, Graphics::RenderData _states) const {
 		if (m_CurrentScene != nullptr) {
-			m_CurrentScene->draw(_target, _states);
+			m_CurrentScene->render(_window, _states);
 		}
 	}
 
