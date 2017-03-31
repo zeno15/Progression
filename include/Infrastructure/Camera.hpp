@@ -1,5 +1,5 @@
-#ifndef INCLUDED_DRILLER_MANAGERS_CAMERA_HPP_
-#define INCLUDED_DRILLER_MANAGERS_CAMERA_HPP_
+#ifndef INCLUDED_INFRASTRUCTURE_CAMERA_HPP_
+#define INCLUDED_INFRASTRUCTURE_CAMERA_HPP_
 
 #include <Infrastructure/Manager.hpp>
 
@@ -14,13 +14,13 @@ namespace System {
 ///	\namespace Driller
 ///
 ////////////////////////////////////////////////////////////
-namespace Driller {
+namespace Infrastructure {
 	////////////////////////////////////////////////////////////
 	///
 	///	\brief	Camera for 2d side scroller Driller
 	///
 	////////////////////////////////////////////////////////////
-	class Camera : public Infrastructure::Manager {
+	class Camera : public Manager {
 	public:
 		friend class InstanceCollection;
 
@@ -107,4 +107,4 @@ namespace Driller {
 	};
 }
 
-#endif // INCLUDED_DRILLER_MANAGERS_CAMERA_HPP_
+#endif // INCLUDED_INFRASTRUCTURE_CAMERA_HPP_

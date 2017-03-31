@@ -1,6 +1,5 @@
 #include <Driller/Scenes/DrillerGameScene.hpp>
 
-#include <Driller/Managers/Camera.hpp>
 #include <Driller/Managers/JobManager.hpp>
 #include <Driller/Managers/NotificationService.hpp>
 #include <Driller/Managers/RoomManager.hpp>
@@ -8,6 +7,7 @@
 #include <Driller/Managers/WorkerManager.hpp>
 
 #include <Infrastructure/Application.hpp>
+#include <Infrastructure/Camera.hpp>
 #include <Infrastructure/InstanceCollection.hpp>
 #include <Infrastructure/ShaderManager.hpp>
 
@@ -75,7 +75,7 @@ namespace Driller {
 			return true;
 		}
 
-		if (Infrastructure::InstanceCollection::getInstance<Camera>().handleEvent(_event)) {
+		if (Infrastructure::InstanceCollection::getInstance<Infrastructure::Camera>().handleEvent(_event)) {
 			return true;
 		}
 
@@ -93,8 +93,8 @@ namespace Driller {
 	void DrillerGameScene::render(const Window::Window& _window, Graphics::RenderData) const {
 
 		auto size = System::Vector2f(Infrastructure::InstanceCollection::getInstance<Infrastructure::Application>().getWindow().getSize());
-		auto cameraPosition = Infrastructure::InstanceCollection::getInstance<Camera>().getPosition();
-		auto zoom = Infrastructure::InstanceCollection::getInstance<Camera>().getZoom();
+		auto cameraPosition = Infrastructure::InstanceCollection::getInstance<Infrastructure::Camera>().getPosition();
+		auto zoom = Infrastructure::InstanceCollection::getInstance<Infrastructure::Camera>().getZoom();
 
 		System::Mat4x4 view = System::Mat4x4::createTranslation(System::Vector3f(-cameraPosition.x, -cameraPosition.y, 0.0f));
 		System::Mat4x4 projection = System::Mat4x4::Orthographic2D(

@@ -3,6 +3,12 @@
 
 #include <Infrastructure/Scene.hpp>
 
+#include <Pong/PongDefinitions.hpp>
+
+namespace Pong {
+	class Ball;
+}
+
 ////////////////////////////////////////////////////////////
 ///
 ///	\namespace Pong
@@ -57,6 +63,19 @@ namespace Pong {
 		///
 		////////////////////////////////////////////////////////////
 		void render(const Window::Window& _window, Graphics::RenderData _renderData) const override;
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Handles when a ball is lost
+		///
+		///	\param	The team that lost
+		///
+		///	\param	The ball that was lost
+		///
+		////////////////////////////////////////////////////////////
+		void ballLost(const PongDefinitions::PaddleTeam& _losingTeam, Ball *_ball);
+
+	private:
 	};
 }
 

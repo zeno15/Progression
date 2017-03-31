@@ -1,12 +1,12 @@
 #include <Driller/Managers/UserInteractionManager.hpp>
 
-#include <Driller/Managers/Camera.hpp>
 #include <Driller/Managers/NotificationService.hpp>
 
 #include <Driller/DrillerDefinitions.hpp>
 #include <Driller/DrillerResources.hpp>
 
 #include <Infrastructure/Application.hpp>
+#include <Infrastructure/Camera.hpp>
 #include <Infrastructure/InstanceCollection.hpp>
 #include <Infrastructure/ShaderManager.hpp>
 
@@ -53,7 +53,7 @@ namespace Driller {
 	bool UserInteractionManager::checkForActivatedTile(const System::Event& _event) {
 		if (_event.type == System::Event::MouseButtonPressed) {
 			auto size = System::Vector2f(Infrastructure::InstanceCollection::getInstance<Infrastructure::Application>().getWindow().getSize());
-			auto cameraPosition = Infrastructure::InstanceCollection::getInstance<Camera>().getPosition();
+			auto cameraPosition = Infrastructure::InstanceCollection::getInstance<Infrastructure::Camera>().getPosition();
 
 			float x = cameraPosition.x + static_cast<float>(_event.mouseButton.x) - size.x / 2.0f;
 			float y = cameraPosition.y + size.y - static_cast<float>(_event.mouseButton.y) - size.y / 2.0f;
@@ -79,7 +79,7 @@ namespace Driller {
 	}
 	System::Vector2i UserInteractionManager::getTilePositionFromEventCoordinates(const System::Vector2i& _eventCoordinates) {
 		auto size = System::Vector2f(Infrastructure::InstanceCollection::getInstance<Infrastructure::Application>().getWindow().getSize());
-		auto cameraPosition = Infrastructure::InstanceCollection::getInstance<Camera>().getPosition();
+		auto cameraPosition = Infrastructure::InstanceCollection::getInstance<Infrastructure::Camera>().getPosition();
 
 		float x = cameraPosition.x + static_cast<float>(_eventCoordinates.x) - size.x / 2.0f;
 		float y = cameraPosition.y + size.y - static_cast<float>(_eventCoordinates.y) - size.y / 2.0f;
@@ -88,7 +88,7 @@ namespace Driller {
 	}
 	System::Vector2f UserInteractionManager::getWorldPositionFromEventCoordinates(const System::Vector2i& _eventCoordinates) {
 		auto size = System::Vector2f(Infrastructure::InstanceCollection::getInstance<Infrastructure::Application>().getWindow().getSize());
-		auto cameraPosition = Infrastructure::InstanceCollection::getInstance<Camera>().getPosition();
+		auto cameraPosition = Infrastructure::InstanceCollection::getInstance<Infrastructure::Camera>().getPosition();
 
 		float x = cameraPosition.x + static_cast<float>(_eventCoordinates.x) - size.x / 2.0f;
 		float y = cameraPosition.y + size.y - static_cast<float>(_eventCoordinates.y) - size.y / 2.0f;

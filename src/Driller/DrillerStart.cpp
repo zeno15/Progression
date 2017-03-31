@@ -2,7 +2,6 @@
 
 #include <Driller/DrillerResources.hpp>
 
-#include <Driller/Managers/Camera.hpp>
 #include <Driller/Managers/JobManager.hpp>
 #include <Driller/Managers/NotificationService.hpp>
 #include <Driller/Managers/RoomManager.hpp>
@@ -13,6 +12,7 @@
 #include <Driller/Scenes/DrillerGameScene.hpp>
 
 #include <Infrastructure/Application.hpp>
+#include <Infrastructure/Camera.hpp>
 #include <Infrastructure/InstanceCollection.hpp>
 #include <Infrastructure/FontManager.hpp>
 #include <Infrastructure/SceneManager.hpp>
@@ -25,12 +25,12 @@ namespace Driller {
 
 	void initialiseManagers(void) {
 		Infrastructure::InstanceCollection::registerInstance<Infrastructure::Application>();
+		Infrastructure::InstanceCollection::registerInstance<Infrastructure::Camera>();
 		Infrastructure::InstanceCollection::registerInstance<Infrastructure::FontManager>();
 		Infrastructure::InstanceCollection::registerInstance<Infrastructure::SceneManager>();
 		Infrastructure::InstanceCollection::registerInstance<Infrastructure::ShaderManager>();
 		Infrastructure::InstanceCollection::registerInstance<Infrastructure::TextureManager>();
 
-		Infrastructure::InstanceCollection::registerInstance<Camera>();
 		Infrastructure::InstanceCollection::registerInstance<JobManager>();
 		Infrastructure::InstanceCollection::registerInstance<NotificationService>();
 		Infrastructure::InstanceCollection::registerInstance<RoomManager>();
