@@ -4,8 +4,8 @@ namespace Pong {
 	const float PongDefinitions::PaddleWidth = 8.0f;
 	const float PongDefinitions::PaddleHeight = 64.0f; 
 	const float PongDefinitions::PaddleBaseSpeed = 256.0f;
-	const float PongDefinitions::BoardWidth = 1000.0f;
-	const float PongDefinitions::BoardHeight = 600.0f;
+	const float PongDefinitions::BoardWidth = 800.0f;
+	const float PongDefinitions::BoardHeight = 560.0f;
 	const float PongDefinitions::BoardOutlineThickness = 8.0f;
 	const float PongDefinitions::BallSize = 8.0f;
 	const float PongDefinitions::BallInitialSpeed = 396.0f;

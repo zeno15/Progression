@@ -3,6 +3,8 @@
 
 #include <Infrastructure/Scene.hpp>
 
+#include <Graphics/Text.hpp>
+
 #include <Pong/PongDefinitions.hpp>
 
 namespace Pong {
@@ -76,6 +78,10 @@ namespace Pong {
 		void ballLost(const PongDefinitions::PaddleTeam& _losingTeam, Ball *_ball);
 
 	private:
+		Graphics::Text			m_LeftPlayerScoreText;
+		unsigned int			m_LeftPlayerScore;
+		Graphics::Text			m_RightPlayerScoreText;
+		unsigned int			m_RightPlayerScore;
 	};
 }
 

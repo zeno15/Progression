@@ -61,6 +61,15 @@ namespace Graphics {
 		////////////////////////////////////////////////////////////
 		void setColour(const Colour& _colour);
 
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Sets the pen position
+		///
+		///	\param	The position
+		///
+		////////////////////////////////////////////////////////////
+		void setPosition(const System::Vector2f& _position);
+
 	private:
 		unsigned int m_VAO;					///<	OpenGL VAO handle
 		unsigned int m_VBO;					///<	OpenGL VBO handle
@@ -68,6 +77,7 @@ namespace Graphics {
 		bool m_UseKerning;					///<	Whether kerning is to be used
 		unsigned int		m_Verticies;	///<	The number of verticies last generated
 		Colour					m_Colour;	///<	The colour of the text;
+		System::Vector2f		m_Position;	///<	The starting pen position
 	};
 }
 

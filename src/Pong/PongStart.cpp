@@ -33,10 +33,19 @@ namespace Pong {
 	}
 
 	void loadResources(void) {
+		Infrastructure::InstanceCollection::getInstance<Infrastructure::FontManager>().addFont(PongResources::DefaultFontFilename, PongResources::DefaultFontName);
+
 		Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().addShader(PongResources::SolidNoTextureShaderName, PongResources::SolidNoTextureShaderVertexPath, PongResources::SolidNoTextureShaderFragmentPath);
 		Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader(PongResources::SolidNoTextureShaderName).getLocationOfUniforms({
 			PongResources::SolidNoTextureShaderUniformMVP,
 			PongResources::SolidNoTextureShaderUniformColour
+		});
+
+		Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().addShader(PongResources::TextShaderName, PongResources::TextShaderVertexPath, PongResources::TextShaderFragmentPath);
+		Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader(PongResources::TextShaderName).getLocationOfUniforms({
+			PongResources::TextShaderUniformView,
+			PongResources::TextShaderUniformTexSize,
+			PongResources::TextShaderUniformColour
 		});
 	}
 

@@ -4,6 +4,7 @@
 #include <Infrastructure/SceneManager.hpp>
 
 #include <System/Clock.hpp>
+#include <Window/OpenGL.hpp>
 
 #include <iostream>
 
@@ -18,10 +19,18 @@ namespace Infrastructure {
 
 	void Application::initialise(const System::Vector2u& _size, const std::string& _title) {
 		Window::VideoMode videoMode = Window::VideoMode();
+		videoMode.bitsPerPixel = 32;
 		videoMode.width = _size.x;
 		videoMode.height = _size.y;
+		videoMode.major = 4;
+		videoMode.minor = 5;
 		m_Window.create(videoMode, _title, Window::WindowStyle::Titlebar | Window::WindowStyle::Close);
 		//m_Window.setVerticalSyncEnabled(true);
+
+		std::cout << "Vendor: " << glGetString(GL_VENDOR) << std::endl;
+		std::cout << "Renderer: " << glGetString(GL_RENDERER) << std::endl;
+		std::cout << "Version: " << glGetString(GL_VERSION) << std::endl;
+		std::cout << "Shading langauge version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 	}
 
 	void Application::start(void) {
