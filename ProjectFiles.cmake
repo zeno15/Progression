@@ -31,6 +31,7 @@ SET(GRAPHICS_INCLUDE_FILES ${GRAPHICS_INCLUDE_FILES}
 
 SET(INFRASTRUCTURE_INCLUDE_FILES ${INFRASTRUCTURE_INCLUDE_FILES}
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/Application.hpp
+	${CMAKE_SOURCE_DIR}/include/Infrastructure/Camera.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/FontManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/InstanceCollection.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/Manager.hpp
@@ -39,6 +40,9 @@ SET(INFRASTRUCTURE_INCLUDE_FILES ${INFRASTRUCTURE_INCLUDE_FILES}
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/ShaderManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/Signal.hpp
 	${CMAKE_SOURCE_DIR}/include/Infrastructure/TextureManager.hpp
+
+
+	${CMAKE_SOURCE_DIR}/include/Infrastructure.hpp
 )
 
 SET(SYSTEM_INCLUDE_FILES ${SYSTEM_INCLUDE_FILES}
@@ -92,7 +96,6 @@ SET(DRILLER_INCLUDE_FILES ${DRILLER_INCLUDE_FILES}
 	${CMAKE_SOURCE_DIR}/include/Driller/Elements/UndergroundTileElement.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Elements/WorkerElement.hpp
 	
-	${CMAKE_SOURCE_DIR}/include/Driller/Managers/Camera.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/JobManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/NotificationService.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/RoomManager.hpp
@@ -105,6 +108,21 @@ SET(DRILLER_INCLUDE_FILES ${DRILLER_INCLUDE_FILES}
 	${CMAKE_SOURCE_DIR}/include/Driller/Systems/RenderSystem.hpp
 )
 
+SET(PONG_INCLUDE_FILES ${PONG_INCLUDE_FILES}
+	${CMAKE_SOURCE_DIR}/include/Pong/PongDefinitions.hpp
+	${CMAKE_SOURCE_DIR}/include/Pong/PongResources.hpp
+	${CMAKE_SOURCE_DIR}/include/Pong/PongStart.hpp
+	
+	${CMAKE_SOURCE_DIR}/include/Pong/GameObjects/Ball.hpp
+	${CMAKE_SOURCE_DIR}/include/Pong/GameObjects/Board.hpp
+	${CMAKE_SOURCE_DIR}/include/Pong/GameObjects/GameObject.hpp
+	${CMAKE_SOURCE_DIR}/include/Pong/GameObjects/Paddle.hpp
+	
+	${CMAKE_SOURCE_DIR}/include/Pong/Managers/GameObjectManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Pong/Managers/NotificationManager.hpp
+
+	${CMAKE_SOURCE_DIR}/include/Pong/Scenes/PongGameScene.hpp
+)
 
 SET(INCLUDE_FILES ${INCLUDE_FILES}
 	${ECS_INCLUDE_FILES}
@@ -115,6 +133,7 @@ SET(INCLUDE_FILES ${INCLUDE_FILES}
 	${WINDOW_INCLUDE_FILES}
 
 	${DRILLER_INCLUDE_FILES}
+	${PONG_INCLUDE_FILES}
 )
 
 SET(THIRD_PARTY_STB_INCLUDE_FILES ${THIRD_PARTY_STB_INCLUDE_FILES}
@@ -149,6 +168,7 @@ SET (GRAPHICS_SOURCE_FILES ${GRAPHICS_SOURCE_FILES}
 
 SET (INFRASTRUCTURE_SOURCE_FILES ${INFRASTRUCTURE_SOURCE_FILES}
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/Application.cpp
+	${CMAKE_SOURCE_DIR}/src/Infrastructure/Camera.cpp
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/FontManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/InstanceCollection.cpp
 	${CMAKE_SOURCE_DIR}/src/Infrastructure/Scene.cpp
@@ -195,7 +215,6 @@ SET(DRILLER_SOURCE_FILES ${DRILLER_SOURCE_FILES}
 	${CMAKE_SOURCE_DIR}/src/Driller/Elements/UndergroundTileElement.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Elements/WorkerElement.cpp
 	
-	${CMAKE_SOURCE_DIR}/src/Driller/Managers/Camera.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/JobManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/NotificationService.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/RoomManager.cpp
@@ -208,6 +227,22 @@ SET(DRILLER_SOURCE_FILES ${DRILLER_SOURCE_FILES}
 	${CMAKE_SOURCE_DIR}/src/Driller/Systems/RenderSystem.cpp
 )
 
+SET(PONG_SOURCE_FILES ${PONG_SOURCE_FILES}
+	${CMAKE_SOURCE_DIR}/src/Pong/PongDefinitions.cpp
+	${CMAKE_SOURCE_DIR}/src/Pong/PongResources.cpp
+	${CMAKE_SOURCE_DIR}/src/Pong/PongStart.cpp
+	
+	${CMAKE_SOURCE_DIR}/src/Pong/GameObjects/Ball.cpp
+	${CMAKE_SOURCE_DIR}/src/Pong/GameObjects/Board.cpp
+	${CMAKE_SOURCE_DIR}/src/Pong/GameObjects/GameObject.cpp
+	${CMAKE_SOURCE_DIR}/src/Pong/GameObjects/Paddle.cpp
+	
+	${CMAKE_SOURCE_DIR}/src/Pong/Managers/GameObjectManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Pong/Managers/NotificationManager.cpp
+
+	${CMAKE_SOURCE_DIR}/src/Pong/Scenes/PongGameScene.cpp
+)
+
 SET(SOURCE_FILES ${SOURCE_FILES}
 	${ECS_SOURCE_FILES}
 	${GRAPHICS_SOURCE_FILES}
@@ -217,6 +252,7 @@ SET(SOURCE_FILES ${SOURCE_FILES}
 	${WINDOW_SOURCE_FILES}
 
 	${DRILLER_SOURCE_FILES}
+	${PONG_SOURCE_FILES}
 )
 
 

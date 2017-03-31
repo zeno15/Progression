@@ -1,8 +1,8 @@
-#include <Driller/Managers/Camera.hpp>
+#include <Infrastructure/Camera.hpp>
 
 #include <System/Event.hpp>
 
-namespace Driller {
+namespace Infrastructure {
 	const std::string Camera::Name = "Camera";
 
 	Camera::Camera(void) :

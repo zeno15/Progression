@@ -17,10 +17,11 @@ namespace Graphics {
 	}
 
 	Text::~Text(void) {
-		glDeleteVertexArrays(1, &m_VAO);
-		glDeleteBuffers(1, &m_VBO);
+		//glDeleteVertexArrays(1, &m_VAO);
+		//glDeleteBuffers(1, &m_VBO);
 
 	}
+
 
 	void Text::render(const Window::Window& _window, RenderData _RenderData) const {
 		auto& shader = Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader("TextShader");
@@ -46,7 +47,7 @@ namespace Graphics {
 
 		std::vector<float> data;
 
-		System::Vector2f penPos;
+		System::Vector2f penPos = m_Position;
 
 		float top = 0.0f;
 		float bottom = std::numeric_limits<float>().max();
@@ -103,5 +104,8 @@ namespace Graphics {
 	}
 	void Text::setColour(const Colour& _colour) {
 		m_Colour = _colour;
+	}
+	void Text::setPosition(const System::Vector2f& _position) {
+		m_Position = _position;
 	}
 }
