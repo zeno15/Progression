@@ -20,7 +20,7 @@ namespace Infrastructure {
 		Window::VideoMode videoMode = Window::VideoMode();
 		videoMode.width = _size.x;
 		videoMode.height = _size.y;
-		m_Window.create(videoMode, _title, Window::WindowStyle::Default);
+		m_Window.create(videoMode, _title, Window::WindowStyle::Titlebar | Window::WindowStyle::Close);
 		//m_Window.setVerticalSyncEnabled(true);
 	}
 
@@ -81,6 +81,9 @@ namespace Infrastructure {
 			if (event.type == System::Event::WindowClosed) {
 				m_Running = false;
 			}
+			if (event.type == System::Event::WindowSizeChanged) {
+				glViewport(0, 0, event.size.width, event.size.height);
+			}
 
 			Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().handleEvent(event);
 		}
@@ -91,10 +94,7 @@ namespace Infrastructure {
 	void Application::render(float _alpha) {
 		m_Window.clear();
 
-		// TODO Replace Drawable and RenderData
-		//auto states = sf::RenderData::Default;
-
-		//Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().draw(m_Window, states);
+		Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().draw(m_Window, Graphics::RenderData());
 
 		m_Window.display();
 	}

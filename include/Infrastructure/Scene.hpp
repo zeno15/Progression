@@ -69,7 +69,7 @@ namespace Infrastructure {
 		///	\param	The states to draw with
 		///
 		////////////////////////////////////////////////////////////
-		virtual void render(const Window::Window& _window, Graphics::RenderData _RenderData) const = 0;
+		virtual void render(const Window::Window& _window, Graphics::RenderData _renderData) const = 0;
 
 
 	private:

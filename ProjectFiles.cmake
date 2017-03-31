@@ -76,6 +76,35 @@ SET(WINDOW_INCLUDE_FILES ${WINDOW_INCLUDE_FILES}
 	${CMAKE_SOURCE_DIR}/include/Window/WindowStyle.hpp
 )
 
+SET(DRILLER_INCLUDE_FILES ${DRILLER_INCLUDE_FILES}
+	${CMAKE_SOURCE_DIR}/include/Driller/Components/RenderComponent.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Components/TransformationComponent.hpp
+
+	${CMAKE_SOURCE_DIR}/include/Driller/DrillerDefinitions.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/DrillerResources.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/DrillerStart.hpp
+	
+	${CMAKE_SOURCE_DIR}/include/Driller/Elements/BaseElement.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Elements/ElementHelpers.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Elements/ElevatorShaftElement.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Elements/JobElement.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Elements/RoomElement.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Elements/UndergroundTileElement.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Elements/WorkerElement.hpp
+	
+	${CMAKE_SOURCE_DIR}/include/Driller/Managers/Camera.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Managers/JobManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Managers/NotificationService.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Managers/RoomManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Managers/TileManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Managers/UserInteractionManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Managers/WorkerManager.hpp
+	
+	${CMAKE_SOURCE_DIR}/include/Driller/Scenes/DrillerGameScene.hpp
+
+	${CMAKE_SOURCE_DIR}/include/Driller/Systems/RenderSystem.hpp
+)
+
 
 SET(INCLUDE_FILES ${INCLUDE_FILES}
 	${ECS_INCLUDE_FILES}
@@ -84,6 +113,8 @@ SET(INCLUDE_FILES ${INCLUDE_FILES}
 	${SYSTEM_INCLUDE_FILES}
 	${UTILITY_INCLUDE_FILES}
 	${WINDOW_INCLUDE_FILES}
+
+	${DRILLER_INCLUDE_FILES}
 )
 
 SET(THIRD_PARTY_STB_INCLUDE_FILES ${THIRD_PARTY_STB_INCLUDE_FILES}
@@ -148,6 +179,35 @@ SET(WINDOW_SOURCE_FILES ${WINDOW_SOURCE_FILES}
 	${CMAKE_SOURCE_DIR}/src/Window/WindowImplementationWin32.cpp
 )
 
+SET(DRILLER_SOURCE_FILES ${DRILLER_SOURCE_FILES}
+	${CMAKE_SOURCE_DIR}/src/Driller/Components/RenderComponent.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Components/TransformationComponent.cpp
+
+	${CMAKE_SOURCE_DIR}/src/Driller/DrillerDefinitions.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/DrillerResources.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/DrillerStart.cpp
+	
+	${CMAKE_SOURCE_DIR}/src/Driller/Elements/BaseElement.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Elements/ElementHelpers.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Elements/ElevatorShaftElement.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Elements/JobElement.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Elements/RoomElement.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Elements/UndergroundTileElement.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Elements/WorkerElement.cpp
+	
+	${CMAKE_SOURCE_DIR}/src/Driller/Managers/Camera.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Managers/JobManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Managers/NotificationService.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Managers/RoomManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Managers/TileManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Managers/UserInteractionManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Managers/WorkerManager.cpp
+	
+	${CMAKE_SOURCE_DIR}/src/Driller/Scenes/DrillerGameScene.cpp
+
+	${CMAKE_SOURCE_DIR}/src/Driller/Systems/RenderSystem.cpp
+)
+
 SET(SOURCE_FILES ${SOURCE_FILES}
 	${ECS_SOURCE_FILES}
 	${GRAPHICS_SOURCE_FILES}
@@ -155,6 +215,8 @@ SET(SOURCE_FILES ${SOURCE_FILES}
 	${SYSTEM_SOURCE_FILES}
 	${UTILITY_SOURCE_FILES}
 	${WINDOW_SOURCE_FILES}
+
+	${DRILLER_SOURCE_FILES}
 )
 
 

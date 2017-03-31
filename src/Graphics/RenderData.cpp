@@ -21,6 +21,7 @@ namespace Graphics {
 		view(_view),
 		projection(_projection),
 		shaderName(_shaderName),
+		model(1.0f),
 		texture(_texture) {
 
 	}

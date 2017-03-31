@@ -57,7 +57,7 @@ namespace ECS {
         /// \param  The render _states
         ///
         ////////////////////////////////////////////////////////////
-        virtual void Renderable(Window::Window& _window, Graphics::RenderData _states) const {};
+        virtual void renderable(Window::Window& _window, Graphics::RenderData _states) const {};
 
         ////////////////////////////////////////////////////////////
         ///

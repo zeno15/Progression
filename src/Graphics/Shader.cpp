@@ -215,7 +215,7 @@ namespace Graphics {
 		GLint loc = glGetUniformLocation(m_ProgramId, _uniform.c_str());
 
 		if (loc == -1) {
-			std::cerr << "glGetUniformLocation failed" << std::endl;
+			std::cerr << "glGetUniformLocation failed for: '" << _uniform << "'" << std::endl;
 			return false;
 		}
 

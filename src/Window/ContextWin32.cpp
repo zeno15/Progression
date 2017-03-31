@@ -2,6 +2,8 @@
 
 #include <Window/OpenGL.hpp>
 
+#include <Graphics/Colour.hpp>
+
 
 namespace Window {
 
@@ -81,5 +83,4 @@ namespace Window {
 	void ContextWin32::clear(void) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
-
 }

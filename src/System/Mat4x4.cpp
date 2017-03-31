@@ -241,35 +241,30 @@ namespace System {
 	}
 
 	Mat4x4 Mat4x4::lookat(const Vector3<float>& _eye, const Vector3<float>& _pos, const Vector3<float>& _up) {
-		Vector3f forward = Vector3f(_pos - _eye);
-		normalise(forward);
-
-		Vector3f side = cross(forward, _up);
-		normalise(side);
-
-		Vector3f up = cross(side, forward);
-		normalise(up);
+		Vector3f zaxis = normalise(_pos - _eye);
+		Vector3f xaxis = normalise(cross(_up, zaxis));
+		Vector3f yaxis = cross(zaxis, xaxis);
 
 		Mat4x4 mat;
-		mat[0] = side.x;
-		mat[4] = side.y;
-		mat[8] = side.z;
-		mat[12] = -dot(side, _eye);
+		mat[0] =		xaxis.x;
+		mat[4] =		yaxis.x;
+		mat[8] =		zaxis.x;
+		mat[12] =		0.0f;
 
-		mat[1] = up.x;
-		mat[5] = up.y;
-		mat[9] = up.z;
-		mat[13] = -dot(up, _eye);
+		mat[1] =		xaxis.y;
+		mat[5] =		yaxis.y;
+		mat[9] =		zaxis.y;
+		mat[13] =		0.0f;
 
-		mat[2] = -forward.x;
-		mat[6] = -forward.y;
-		mat[10] = -forward.z;
-		mat[14] = -dot(forward, _eye);
+		mat[2] =		xaxis.z;
+		mat[6] =		yaxis.z;
+		mat[10] =		zaxis.z;
+		mat[14] =		0.0f;
 
-		mat[3] = 0.0f;
-		mat[7] = 0.0f;
-		mat[11] = 0.0f;
-		mat[15] = 1.0f;
+		mat[3] =		-dot(xaxis, _eye);
+		mat[7] =		-dot(yaxis, _eye);
+		mat[11] =		-dot(yaxis, _eye);
+		mat[15] =		1.0f;
 
 		return mat;
 	}

@@ -229,6 +229,12 @@ namespace System {
 				REQUIRE(System::Vector3f(-1.0f, -1.0f, +1.0f) == (mat * posBLB));
 			}
 			SECTION("Test lookat method", "[Mat4x4]") {
+				System::Vector3f cameraTarget(0.0f, 0.0f, 0.0f);
+				System::Vector3f cameraPosition(0.0f, 0.0f, -1.0f);
+				System::Vector3f upVector(0.0f, 1.0f, 0.0f);
+
+				auto lookat = System::Mat4x4::lookat(cameraPosition, cameraTarget, upVector);
+
 				REQUIRE(0.0f == 0.0f);
 			}
 			SECTION("Test persepective method", "[Mat4x4]") {

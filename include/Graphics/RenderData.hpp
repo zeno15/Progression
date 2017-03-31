@@ -63,10 +63,11 @@ namespace Graphics {
 		RenderData(const System::Mat4x4& _view, const System::Mat4x4& _projection, const std::string& _shaderName, Graphics::Texture *_texture);
 
 
-		std::string shaderName;			///<	The Shader name to use
-		System::Mat4x4 view;			///<	The vertex view matrix to use
-		System::Mat4x4 projection;			///<	The vertex projection matrix to use
-		Graphics::Texture *texture;		///<	The texture to apply
+		std::string shaderName;					///<	The Shader name to use
+		System::Mat4x4 view;					///<	The vertex view matrix to use
+		System::Mat4x4 projection;				///<	The vertex projection matrix to use
+		System::Mat4x4 model;					///<	The model matrix to optionally use 
+		Graphics::Texture *texture;				///<	The texture to apply
 	};
 }
 

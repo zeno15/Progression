@@ -4,6 +4,10 @@
 #include <Window/WindowImplementation.hpp>
 #include <Window/VideoMode.hpp>
 
+namespace Graphics {
+	class Colour;
+}
+
 ////////////////////////////////////////////////////////////
 ///
 ///	\namespace Window

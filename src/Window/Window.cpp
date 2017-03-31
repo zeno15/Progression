@@ -1,5 +1,7 @@
 #include <Window/Window.hpp>
 
+#include <Graphics/Colour.hpp>
+
 namespace Window {
 
 	Window::Window(void) :

@@ -57,19 +57,33 @@ namespace Window {
 	}
 
 	System::Vector2i WindowImplementationWin32::getPosition(void) const {
-		throw std::runtime_error("Not implemented: WindowImplementationWin32::getPosition");
+		RECT rect;
+
+		GetWindowRect(m_Handle, &rect);
+
+		return System::Vector2i(rect.left, rect.top);
 	}
 
 	void WindowImplementationWin32::setPosition(const System::Vector2i& _position) {
-		throw std::runtime_error("Not implemented: WindowImplementationWin32::setPosition");
+		if (SetWindowPos(m_Handle, m_Handle, _position.x, _position.y, -1, -1, SWP_NOSIZE | SWP_NOZORDER)) {
+			m_Position = _position;
+		}
 	}
 
 	System::Vector2u WindowImplementationWin32::getSize(void) const {
-		throw std::runtime_error("Not implemented: WindowImplementationWin32::getSize");
+		RECT rect;
+
+		GetClientRect(m_Handle, &rect);
+		LONG width = rect.right - rect.left;
+		LONG height = rect.bottom - rect.top;
+
+		return System::Vector2u(static_cast<unsigned int>(width), static_cast<unsigned int>(height));
 	}
 
 	void WindowImplementationWin32::setSize(const System::Vector2u& _size) {
-		throw std::runtime_error("Not implemented: WindowImplementationWin32::setSize");
+		if (SetWindowPos(m_Handle, m_Handle, -1, -1, _size.x, _size.y, SWP_NOMOVE | SWP_NOZORDER)) {
+			m_Size = _size;
+		}
 	}
 
 	void WindowImplementationWin32::display(void) {

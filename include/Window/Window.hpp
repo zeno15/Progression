@@ -8,6 +8,10 @@
 
 #include <System/Vector2.hpp>
 
+namespace Graphics {
+	class Colour;
+}
+
 ////////////////////////////////////////////////////////////
 ///
 ///	\namespace Window	
