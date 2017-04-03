@@ -1,5 +1,11 @@
 #include <Driller/Managers/JobManager.hpp>
 
+#include <Infrastructure/InstanceCollection.hpp>
+#include <Infrastructure/SceneManager.hpp>
+
+#include <Driller/DrillerDefinitions.hpp>
+#include <Driller/Scenes/DrillerGameScene.hpp>
+
 #include <algorithm>
 
 namespace Driller {
@@ -24,7 +30,7 @@ namespace Driller {
 			return job;
 		}
 
-		return JobElement("");
+		return JobElement(JobContextInfo());
 	}
 
 	bool JobManager::jobExists(void) {
@@ -39,7 +45,7 @@ namespace Driller {
 			return job;
 		}
 
-		return JobElement("");
+		return JobElement(JobContextInfo());
 	}
 
 	bool JobManager::jobExists(std::function<bool(const JobElement&)> _predicate) {
@@ -51,7 +57,7 @@ namespace Driller {
 			return m_Jobs.front();
 		}
 
-		return JobElement("");
+		return JobElement(JobContextInfo());
 	}
 
 	JobElement JobManager::peekJob(std::function<bool(const JobElement&)> _predicate) {
@@ -60,14 +66,14 @@ namespace Driller {
 			return JobElement(*iterator);
 		}
 
-		return JobElement("");
+		return JobElement(JobContextInfo());
 	}
 
 	void JobManager::popJob(const JobElement& _job) {
 
 		auto iterator = std::find_if(m_Jobs.begin(), m_Jobs.end(), [&](const JobElement& _j) {
 			return 
-				_j.m_JobName == _job.m_JobName &&
+				_j.m_JobInfo.JobType == _job.m_JobInfo.JobType &&
 				_j.m_JobType == _job.m_JobType &&
 				_j.m_TileCoordinates == _job.m_TileCoordinates &&
 				_j.m_WorkPosition == _job.m_WorkPosition;
@@ -75,5 +81,16 @@ namespace Driller {
 		if (m_Jobs.end() != iterator) {
 			m_Jobs.erase(iterator);
 		}
+	}
+	JobElement JobManager::getFirstAccessableJob(void) {
+		auto& drillerGameScene = Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().getScene<DrillerGameScene>("DrillerGameScene");
+
+		for (auto& job : m_Jobs) {
+			if (job.isAccessable(drillerGameScene)) {
+				return job;
+			}
+		}
+
+		return JobElement(JobContextInfo());
 	}
 }

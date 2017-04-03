@@ -11,4 +11,15 @@ namespace Driller {
 
 	const int DrillerDefinitions::MaximumWidth = 32;
 	const int DrillerDefinitions::MaximumHeight = 16;
+
+
+	const System::Vector2i DrillerDefinitions::RoomData[RoomType::NumberRoomTypes][RoomInfo::NumberRoomInfo] = {
+		// None
+		{ System::Vector2i(0, 1), System::Vector2i(1, 1) },
+		// Mining
+		{ System::Vector2i(0, 4), System::Vector2i(3, 1) },
+		// Dorm
+		{ System::Vector2i(0, 3), System::Vector2i(2, 1) }
+	};
+
 }

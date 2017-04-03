@@ -102,6 +102,8 @@ SET(DRILLER_INCLUDE_FILES ${DRILLER_INCLUDE_FILES}
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/TileManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/UserInteractionManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/WorkerManager.hpp
+
+	${CMAKE_SOURCE_DIR}/include/Driller/Models/JobContextInfo.hpp
 	
 	${CMAKE_SOURCE_DIR}/include/Driller/Scenes/DrillerGameScene.hpp
 

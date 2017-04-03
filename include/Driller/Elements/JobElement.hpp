@@ -3,6 +3,7 @@
 
 #include <Driller/DrillerDefinitions.hpp>
 #include <Driller/Elements/BaseElement.hpp>
+#include <Driller/Models/JobContextInfo.hpp>
 
 #include <Infrastructure/Signal.hpp>
 
@@ -27,37 +28,37 @@ namespace Driller {
 		///
 		///	\brief	Constructor
 		///
-		///	\param	_jobName				The job name
+		///	\param	_info				The job info
 		///
 		////////////////////////////////////////////////////////////
-		JobElement(const std::string& _jobName);
+		JobElement(const JobContextInfo& _info);
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Constructor
 		///
-		///	\param	_jobName				The job name
+		///	\param	_info				The job info
 		///
 		///	\param	_tileCoordinates		The tile coordinates for the job
 		///
 		////////////////////////////////////////////////////////////
-		JobElement(const std::string& _jobName, const System::Vector2i& _tileCoordinates);
+		JobElement(const JobContextInfo& _info, const System::Vector2i& _tileCoordinates);
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Constructor
 		///
-		///	\param	_jobName				The job name
+		///	\param	_info				The job info
 		///
 		///	\param	_tileCoordinates		The tile coordinates for the job
 		///
 		///	\param	_workPosition			The absolute coordinates to work the job at
 		///
 		////////////////////////////////////////////////////////////
-		JobElement(const std::string& _jobName, const System::Vector2i& _tileCoordinates, const System::Vector2f& _workPosition);
+		JobElement(const JobContextInfo& _info, const System::Vector2i& _tileCoordinates, const System::Vector2f& _workPosition);
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Constructor
 		///
-		///	\param	_jobName				The job name
+		///	\param	_info				The job info
 		///
 		///	\param	_tileCoordinates		The tile coordinates for the job
 		///
@@ -66,7 +67,7 @@ namespace Driller {
 		///	\param	_jobType				The type of job
 		///
 		////////////////////////////////////////////////////////////
-		JobElement(const std::string& _jobName, const System::Vector2i& _tileCoordinates, const System::Vector2f& _workPosition, DrillerDefinitions::JobType _jobType);
+		JobElement(const JobContextInfo& _info, const System::Vector2i& _tileCoordinates, const System::Vector2f& _workPosition, DrillerDefinitions::JobType _jobType);
 
 
 		////////////////////////////////////////////////////////////
@@ -100,12 +101,12 @@ namespace Driller {
 
 		////////////////////////////////////////////////////////////
 		///
-		///	\brief	Gets the job name
+		///	\brief	Gets the job info
 		///
-		///	\return	The job name
+		///	\return	The job info
 		///
 		////////////////////////////////////////////////////////////
-		std::string getJobName(void) const;
+		JobContextInfo getJobInfo(void) const;
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Gets the tile coordinates
@@ -201,7 +202,7 @@ namespace Driller {
 
 		Infrastructure::Signal<const JobElement&>	onJobComplete;
 
-		std::string							m_JobName;					///<	The job name
+		JobContextInfo						m_JobInfo;					///<	The job info
 		System::Vector2i					m_TileCoordinates;			///<	The tile coordinates for the job
 		System::Vector2f					m_WorkPosition;				///<	The absolute coordinates to work the job at
 		DrillerDefinitions::JobType			m_JobType;					///<	The type of job

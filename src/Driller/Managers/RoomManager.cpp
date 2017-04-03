@@ -12,6 +12,7 @@
 #include <Driller/DrillerResources.hpp>
 
 #include <Driller/Elements/JobElement.hpp>
+#include <Driller/Elements/ElementHelpers.hpp>
 
 #include <Driller/Scenes/DrillerGameScene.hpp>
 
@@ -26,26 +27,30 @@ namespace Driller {
 		m_VAO(0),
 		m_VBO(0),
 		m_DrawingGhost(false),
-		m_IsCurrentPositionValid(false) {
+		m_IsCurrentPositionValid(false),
+		m_CurrentRoom(DrillerDefinitions::RoomType::None){
 
 	}
 
 	void RoomManager::update(float _delta) {
-
+		for (auto& room : m_Rooms) {
+			room->update(_delta);
+		}
 	}
 
 	bool RoomManager::handleEvent(const System::Event& _event) {
 		if (_event.type == System::Event::KeyDown) {
 			if (_event.key.key == System::Keyboard::Num1) {
-				generateGhost(1);
+				generateGhost(DrillerDefinitions::RoomType::Dorm);
 				return true;
 			}
 			if (_event.key.key == System::Keyboard::Num2) {
-				generateGhost(2);
+				generateGhost(DrillerDefinitions::RoomType::Mining);
 				return true;
 			}
 			if (_event.key.key == System::Keyboard::Escape) {
 				m_DrawingGhost = false;
+				m_CurrentRoom = DrillerDefinitions::RoomType::None;
 				return true;
 			}
 		}
@@ -77,21 +82,14 @@ namespace Driller {
 							drillerGameScene.getTile(x, y)->setJobQueuedFlag(true);
 						}
 					}
-					JobElement job = JobElement("Build", bottomLeftTile, System::Vector2f((bottomLeftTile.x + static_cast<int>(m_CurrentGhostSize.x) / 2) * DrillerDefinitions::TileWidth, DrillerDefinitions::TileHeight * bottomLeftTile.y));
-					job.setRemaingTime(8.0f);
-					job.onJobComplete.registerCallback([&](const JobElement& _job) {
-						std::cout << "Build room job completed at " << _job.getTileCoordinates() << std::endl;
-						auto jobCoords = _job.getTileCoordinates();
-						m_Rooms.push_back(RoomElement(jobCoords, DrillerResources::MiningSpritePosition, DrillerResources::MiningSpriteSize));
-						for (int y = jobCoords.y; y < jobCoords.y + static_cast<int>(DrillerResources::MiningSpriteSize.y); y += 1) {
-							for (int x = jobCoords.x; x < jobCoords.x + static_cast<int>(DrillerResources::MiningSpriteSize.x); x += 1) {
-								drillerGameScene.getTile(x, y)->setJobQueuedFlag(false);
-							}
-						}
-					});
+					
+
+					auto contextInfo = JobContextInfo(JobContextInfo::BuildRoomJob(bottomLeftTile.x, bottomLeftTile.y, m_CurrentRoom));
+
+					auto job = ElementHelpers::createBuildRoomJob(contextInfo);
+
 					Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(job);
-					Infrastructure::InstanceCollection::getInstance<UserInteractionManager>().updateCurrentTileInteractionContext(DrillerDefinitions::TileInteractionContext::NoContext);
-					m_DrawingGhost = false;
+					resetFromDrawingGhost();
 				}
 
 				return true;
@@ -124,7 +122,7 @@ namespace Driller {
 
 	void RoomManager::render(const Window::Window& _window, Graphics::RenderData _renderData) const {
 		for (auto& room : m_Rooms) {
-			room.render(_window, _renderData);
+			room->render(_window, _renderData);
 		}
 
 
@@ -146,25 +144,13 @@ namespace Driller {
 		}
 	}
 
-	void RoomManager::generateGhost(unsigned int _index) {
+	void RoomManager::generateGhost(DrillerDefinitions::RoomType _roomType) {
+		m_CurrentRoom = _roomType;
 		m_DrawingGhost = true;
 		Infrastructure::InstanceCollection::getInstance<UserInteractionManager>().updateCurrentTileInteractionContext(DrillerDefinitions::TileInteractionContext::BuildRoomContext);
 
-		//const System::Vector2u spriteBottomLeft = DrillerResources::DormSpritePosition;
-		//m_CurrentGhostSize = DrillerResources::DormSpriteSize; 
-
-		System::Vector2u spriteBottomLeft;
-
-		switch (_index) {
-		case 1:
-			m_CurrentGhostSize = DrillerResources::DormSpriteSize;
-			spriteBottomLeft = DrillerResources::DormSpritePosition;
-			break;
-		case 2:
-			m_CurrentGhostSize = DrillerResources::MiningSpriteSize;
-			spriteBottomLeft = DrillerResources::MiningSpritePosition;
-			break;
-		}
+		System::Vector2i spriteBottomLeft = m_CurrentGhostSize = DrillerDefinitions::RoomData[m_CurrentRoom][DrillerDefinitions::RoomInfo::SpritePosition];;
+		m_CurrentGhostSize = m_CurrentGhostSize = DrillerDefinitions::RoomData[m_CurrentRoom][DrillerDefinitions::RoomInfo::SpriteSize];
 
 		std::vector<float> data = {
 			// TL
@@ -212,5 +198,14 @@ namespace Driller {
 		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void *)(0 * sizeof(float)));
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void *)(2 * sizeof(float)));
+	}
+
+	void RoomManager::addRoom(RoomElement *_room) {
+		m_Rooms.push_back(_room);
+	}
+	void RoomManager::resetFromDrawingGhost(void) {
+		Infrastructure::InstanceCollection::getInstance<UserInteractionManager>().updateCurrentTileInteractionContext(DrillerDefinitions::TileInteractionContext::NoContext);
+		m_DrawingGhost = false;
+		m_CurrentRoom = DrillerDefinitions::RoomType::None;
 	}
 }

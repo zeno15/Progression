@@ -3,6 +3,10 @@
 
 #include <Driller/Elements/BaseElement.hpp>
 
+namespace Driller {
+	class RoomElement;
+}
+
 ////////////////////////////////////////////////////////////
 ///
 ///	\namespace Driller
@@ -122,6 +126,23 @@ namespace Driller {
 		////////////////////////////////////////////////////////////
 		bool getJobQueued(void) const;
 
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Gets the current occupying room element
+		///
+		///	\return	The room
+		///
+		////////////////////////////////////////////////////////////
+		RoomElement *getRoomElement(void);
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Sets the occupying room element
+		///
+		///	\param	The room
+		///
+		////////////////////////////////////////////////////////////
+		void setRoomElement(RoomElement *_room);
+
 	private:
 		int					m_Level;			///<	The number of levels below the ground
 		int					m_Column;			///<	The column relative to the elevator
@@ -130,6 +151,8 @@ namespace Driller {
 
 		bool				m_IsClear;			///<	Whether the tile is free to build in
 		bool				m_HasJobQueued;		///<	Whether the tile has a job queued on it or not
+
+		RoomElement *		m_RoomElement;		///<	The room that occupies this tile
 
 	};
 }

@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <System/Vector2.hpp>
+
 ////////////////////////////////////////////////////////////
 ///
 ///	\namespace Driller
@@ -38,6 +40,20 @@ namespace Driller {
 			Time,
 			Amount
 		};
+
+		enum RoomType {
+			None,
+			Mining,
+			Dorm,
+			NumberRoomTypes
+		};
+		enum RoomInfo {
+			SpritePosition,
+			SpriteSize,
+			NumberRoomInfo
+		};
+
+		static const System::Vector2i RoomData[RoomType::NumberRoomTypes][RoomInfo::NumberRoomInfo];
 	};
 }
 

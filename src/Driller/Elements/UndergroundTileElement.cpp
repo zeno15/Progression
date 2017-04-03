@@ -16,7 +16,8 @@ namespace Driller {
 		m_Level(_level),
 		m_Column(_column),
 		m_IsClear(false),
-		m_HasJobQueued(false) {
+		m_HasJobQueued(false),
+		m_RoomElement(nullptr) {
 
 		updateBackgroundTexture(DrillerResources::DirtStaticSpriteIndex);
 	}
@@ -71,5 +72,12 @@ namespace Driller {
 	}
 	bool UndergroundTileElement::getJobQueued(void) const {
 		return m_HasJobQueued;
+	}
+
+	RoomElement *UndergroundTileElement::getRoomElement(void) {
+		return m_RoomElement;
+	}
+	void UndergroundTileElement::setRoomElement(RoomElement *_room) {
+		m_RoomElement = _room;
 	}
 }

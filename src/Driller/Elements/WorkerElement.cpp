@@ -21,7 +21,7 @@
 namespace Driller {
 
 	WorkerElement::WorkerElement(void) :
-	m_Job(""),
+	m_Job(JobContextInfo()),
 	m_VAO(0),
 	m_VBO(0) {
 		ElementHelpers::createBasicDoubleTriQuadForTextureId(DrillerResources::WorkerSpriteIndex, &m_VAO, &m_VBO);
@@ -36,42 +36,13 @@ namespace Driller {
 			moveTowardTarget(_delta);
 		}
 		else {
-			if (m_Job.getJobName() == "") {
+			if (m_Job.getJobInfo().JobType == JobContextInfo::None) {
 				// We don't have a job so lets try find one
 				auto& jobManager = Infrastructure::InstanceCollection::getInstance<JobManager>();
-				auto& drillerGameScene = Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().getScene<DrillerGameScene>("DrillerGameScene");
 
-				if (jobManager.jobExists([&](const JobElement& _job) {
-					return _job.getJobName() == "DigDirt" && _job.isAccessable(drillerGameScene);
-				})) {
-					auto job = jobManager.peekJob([&](const JobElement& _job) {
-						return _job.getJobName() == "DigDirt" && _job.isAccessable(drillerGameScene);
-					});
+				auto job = jobManager.getFirstAccessableJob();
 
-
-					jobManager.popJob(job);
-					setJob(job);
-				}
-
-				if (jobManager.jobExists([](const JobElement& _job) {
-					return _job.getJobName() == "BuildElevator";
-				})) {
-					auto job = jobManager.peekJob([](const JobElement& _job) {
-						return _job.getJobName() == "BuildElevator";
-					});
-
-
-					jobManager.popJob(job);
-					setJob(job);
-				}
-
-				if (jobManager.jobExists([](const JobElement& _job) {
-					return _job.getJobName() == "Build";
-				})) {
-					auto job = jobManager.peekJob([](const JobElement& _job) {
-						return _job.getJobName() == "Build";
-					});
-
+				if (job.getJobInfo().JobType != JobContextInfo::None) {
 					jobManager.popJob(job);
 					setJob(job);
 				}
@@ -90,11 +61,11 @@ namespace Driller {
 	void WorkerElement::render(const Window::Window& _window, Graphics::RenderData _renderData) const {
 		auto& shader = Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader(DrillerResources::StaticTexturedShaderName);
 		shader.bind();
-		shader.passUniform(DrillerResources::StaticTexturedShaderMVPUniformName, _renderData.projection * _renderData.view * System::Mat4x4::createTranslation(System::Vector3f(m_Position.x, -m_Position.y, 0.3f)));
+		shader.passUniform(DrillerResources::StaticTexturedShaderMVPUniformName, _renderData.projection * _renderData.view * System::Mat4x4::createTranslation(System::Vector3f(m_Position.x, -m_Position.y, 0.5f)));
 		Infrastructure::InstanceCollection::getInstance<Infrastructure::TextureManager>().getTexture(DrillerResources::SpriteSheetName).bind();
 		glBindVertexArray(m_VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-		if (m_Job.getJobName() != "") {
+		if (m_Job.getJobInfo().JobType != JobContextInfo::None) {
 			m_Job.render(_window, _renderData);
 		}
 	}

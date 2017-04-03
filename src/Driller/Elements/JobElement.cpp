@@ -14,21 +14,21 @@
 #include <Window/OpenGL.hpp>
 
 namespace Driller {
-	JobElement::JobElement(const std::string& _jobName) :
-		JobElement(_jobName, System::Vector2i()) {
+	JobElement::JobElement(const JobContextInfo& _info) :
+		JobElement(_info, System::Vector2i()) {
 	}
 
-	JobElement::JobElement(const std::string& _jobName, const System::Vector2i& _tileCoordinates) :
-		JobElement(_jobName, _tileCoordinates, System::Vector2f(_tileCoordinates.x * DrillerDefinitions::TileWidth, _tileCoordinates.y * DrillerDefinitions::TileHeight)) {
+	JobElement::JobElement(const JobContextInfo& _info, const System::Vector2i& _tileCoordinates) :
+		JobElement(_info, _tileCoordinates, System::Vector2f(_tileCoordinates.x * DrillerDefinitions::TileWidth, _tileCoordinates.y * DrillerDefinitions::TileHeight)) {
 
 	}
 
-	JobElement::JobElement(const std::string& _jobName, const System::Vector2i& _tileCoordinates, const System::Vector2f& _workPosition) :
-		JobElement(_jobName, _tileCoordinates, _workPosition, DrillerDefinitions::JobType::Instant) {
+	JobElement::JobElement(const JobContextInfo& _info, const System::Vector2i& _tileCoordinates, const System::Vector2f& _workPosition) :
+		JobElement(_info, _tileCoordinates, _workPosition, DrillerDefinitions::JobType::Instant) {
 	}
 
-	JobElement::JobElement(const std::string& _jobName, const System::Vector2i& _tileCoordinates, const System::Vector2f& _workPosition, DrillerDefinitions::JobType _jobType) :
-		m_JobName(_jobName),
+	JobElement::JobElement(const JobContextInfo& _info, const System::Vector2i& _tileCoordinates, const System::Vector2f& _workPosition, DrillerDefinitions::JobType _jobType) :
+		m_JobInfo(_info),
 		m_TileCoordinates(_tileCoordinates),
 		m_WorkPosition(_workPosition),
 		m_JobType(_jobType),
@@ -61,8 +61,8 @@ namespace Driller {
 		return m_RemainingTime <= 0.0f;
 	}
 
-	std::string JobElement::getJobName(void) const {
-		return m_JobName;
+	JobContextInfo JobElement::getJobInfo(void) const {
+		return m_JobInfo;
 	}
 
 	System::Vector2i JobElement::getTileCoordinates(void) const {
@@ -109,13 +109,19 @@ namespace Driller {
 
 	void JobElement::completeJob(void) {
 		onJobComplete.invoke(*this);
-		m_JobName = "";
+		m_JobInfo.JobType = JobContextInfo::None;
 		glDeleteBuffers(1, &m_VBO);
 		glDeleteVertexArrays(1, &m_VAO);
 	}
 	bool JobElement::isAccessable(DrillerGameScene& _scene) const {
 		auto lastElevatorLevel = _scene.getLastBuiltElevatorLevel();
 		if (m_TileCoordinates.y > lastElevatorLevel) {
+
+			if (m_TileCoordinates.x == 0) {
+				if (m_TileCoordinates.y >= lastElevatorLevel + 1) {
+					return true;
+				}
+			}
 			return false;
 		}
 

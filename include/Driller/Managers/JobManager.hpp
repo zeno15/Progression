@@ -110,6 +110,8 @@ namespace Driller {
 		////////////////////////////////////////////////////////////
 		void popJob(const JobElement& _job);
 
+		JobElement getFirstAccessableJob(void);
+
 	private:
 		std::vector<JobElement> m_Jobs;
 	};

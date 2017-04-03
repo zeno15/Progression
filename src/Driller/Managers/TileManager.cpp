@@ -3,6 +3,8 @@
 #include <Driller/Managers/JobManager.hpp>
 #include <Driller/Managers/RoomManager.hpp>
 
+#include <Driller/Elements/ElementHelpers.hpp>
+
 #include <Driller/Scenes/DrillerGameScene.hpp>
 
 #include <Infrastructure/InstanceCollection.hpp>
@@ -37,18 +39,8 @@ namespace Driller {
 			if (!elevator->isBuilt()) {
 				auto lastBuilt = drillerGameScene.getLastBuiltElevatorLevel();
 				if (lastBuilt + 1 == _y) {
+					Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(ElementHelpers::createBuildElevatorJob(_y));
 					auto elevator = drillerGameScene.getElevator(_y);
-					// Enque create elevator job.
-					auto job = JobElement("BuildElevator", System::Vector2i(_x, _y), System::Vector2f(_x * DrillerDefinitions::TileWidth, (_y - 1) * DrillerDefinitions::TileHeight));
-					job.setRemaingTime(5.0f);
-					job.onJobComplete.registerCallback([](const JobElement& _job) {
-						std::cout << "Build Elevator job at x: " << _job.getTileCoordinates().x << ", y: " << _job.getTileCoordinates().y << " is complete" << std::endl;
-						auto& drillerGameScene = Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().getScene<DrillerGameScene>("DrillerGameScene");
-						auto elevator = drillerGameScene.getElevator(_job.getTileCoordinates().y);
-						elevator->setIsBuilt(true);
-						elevator->setJobQueuedFlag(false);
-					});
-					Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(job);
 					elevator->setJobQueuedFlag(true);
 				}
 				else {
@@ -65,23 +57,7 @@ namespace Driller {
 			assert(tile != nullptr);
 
 			if (!tile->getIsClear() && !tile->getJobQueued()) {
-				// Enque dig/clear job.
-				auto job = JobElement("DigDirt", System::Vector2i(_x, _y));
-				job.setRemaingTime(2.0f);
-				if (_x > 0) {
-					job.m_WorkPosition = System::Vector2f((static_cast<float>(_x) - 0.9f) * DrillerDefinitions::TileWidth, _y * DrillerDefinitions::TileWidth);
-				}
-				else {
-					job.m_WorkPosition = System::Vector2f((static_cast<float>(_x) + 0.9f) * DrillerDefinitions::TileWidth, _y * DrillerDefinitions::TileWidth);
-				}
-				job.onJobComplete.registerCallback([](const JobElement& _job) {
-					std::cout << "Dig dirt job at x: " << _job.getTileCoordinates().x << ", y: " << _job.getTileCoordinates().y << " is complete" << std::endl;
-					auto& drillerGameScene = Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().getScene<DrillerGameScene>("DrillerGameScene");
-					auto tile = drillerGameScene.getTile(_job.getTileCoordinates().x, _job.getTileCoordinates().y);
-					tile->clear();
-					tile->setJobQueuedFlag(false);
-				});
-				Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(job);
+				Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(ElementHelpers::createDigDirtJob(_y, _x));
 				tile->setJobQueuedFlag(true);
 			}
 			else {

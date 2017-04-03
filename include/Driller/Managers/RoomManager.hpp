@@ -1,6 +1,8 @@
 #ifndef INCLUDED_DRILLER_MANAGERS_ROOM_MANAGER_HPP_
 #define INCLUDED_DRILLER_MANAGERS_ROOM_MANAGER_HPP_
 
+#include <Driller/DrillerDefinitions.hpp>
+
 #include <Driller/Elements/RoomElement.hpp>
 
 #include <Infrastructure/Manager.hpp>
@@ -62,8 +64,18 @@ namespace Driller {
 		////////////////////////////////////////////////////////////
 		void render(const Window::Window& _window, Graphics::RenderData _renderData) const;
 
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Adds a room
+		///
+		///	\param	The room
+		///
+		////////////////////////////////////////////////////////////
+		void addRoom(RoomElement *_room);
+
 	private:
-		void generateGhost(unsigned int _index);
+		void generateGhost(DrillerDefinitions::RoomType _roomType);
+		void resetFromDrawingGhost(void);
 
 	private:
 		unsigned int		m_VAO;						///<	OpenGL VAO handle
@@ -71,11 +83,12 @@ namespace Driller {
 
 		bool				m_DrawingGhost;				///<	Whether the ghost is being drawn
 		bool				m_IsCurrentPositionValid;	///<	Whether the position of the ghost is valid
+		DrillerDefinitions::RoomType m_CurrentRoom;		///<	The currentRoomTypeToBeDrawn
 
 		System::Vector2i	m_BottomLeftTile;			///<	The bottom left tile to draw the ghost from
 		System::Vector2u	m_CurrentGhostSize;			///<	The size of the current ghost
 
-		std::vector<RoomElement> m_Rooms;				///<	Collection of rooms
+		std::vector<RoomElement *> m_Rooms;				///<	Collection of rooms
 	};
 }
 
