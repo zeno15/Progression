@@ -56,7 +56,7 @@ namespace Driller {
 		}
 
 		if (_event.type == System::Event::MouseButtonPressed) {
-			if (m_DrawingGhost) {
+			if (_event.mouseButton.button == System::Mouse::Left && m_DrawingGhost) {
 				System::Vector2i mousePos(_event.mouseButton.x, _event.mouseButton.y);
 
 				int width = m_CurrentGhostSize.x;

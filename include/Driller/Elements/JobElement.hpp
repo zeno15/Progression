@@ -200,7 +200,40 @@ namespace Driller {
 		////////////////////////////////////////////////////////////
 		bool isAccessable(DrillerGameScene& _scene) const;
 
-		Infrastructure::Signal<const JobElement&>	onJobComplete;
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Gets whether the job has been claimed
+		///
+		///	\return Whether the job is claimed
+		///
+		////////////////////////////////////////////////////////////
+		bool isJobClaimed(void) const;
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Claims the job
+		///
+		////////////////////////////////////////////////////////////
+		void claimJob(void);
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Relinquishes the job
+		///
+		////////////////////////////////////////////////////////////
+		void relinquishJob(void);
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Gets whether the job contains the given tile
+		///
+		///	\param	The tile
+		///
+		///	\return	Whether the tile is contained
+		///
+		////////////////////////////////////////////////////////////
+		bool isTileContained(const System::Vector2i& __tileCoordinates);
+
+
+		Infrastructure::Signal<JobElement *>	onJobComplete;
 
 		JobContextInfo						m_JobInfo;					///<	The job info
 		System::Vector2i					m_TileCoordinates;			///<	The tile coordinates for the job
@@ -212,6 +245,8 @@ namespace Driller {
 
 		unsigned int						m_VAO;						///<	OpenGL VAO handle
 		unsigned int						m_VBO;						///<	OpenGL position VBO handle
+
+		bool								m_IsClaimed;				///<	Whether the job has been claimed or not
 	};
 }
 

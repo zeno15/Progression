@@ -16,12 +16,12 @@
 #include <iostream>
 
 #define SPEED_X 2.0f * DrillerDefinitions::TileWidth
-#define SPEED_Y 2.0f * DrillerDefinitions::TileHeight
+#define SPEED_Y 2.0f * DrillerDefinitions::TileWidth
 
 namespace Driller {
 
 	WorkerElement::WorkerElement(void) :
-	m_Job(JobContextInfo()),
+	m_Job(nullptr),
 	m_VAO(0),
 	m_VBO(0) {
 		ElementHelpers::createBasicDoubleTriQuadForTextureId(DrillerResources::WorkerSpriteIndex, &m_VAO, &m_VBO);
@@ -36,21 +36,23 @@ namespace Driller {
 			moveTowardTarget(_delta);
 		}
 		else {
-			if (m_Job.getJobInfo().JobType == JobContextInfo::None) {
+			if (m_Job == nullptr) {
 				// We don't have a job so lets try find one
 				auto& jobManager = Infrastructure::InstanceCollection::getInstance<JobManager>();
 
 				auto job = jobManager.getFirstAccessableJob();
 
-				if (job.getJobInfo().JobType != JobContextInfo::None) {
-					jobManager.popJob(job);
+				if (job != nullptr) {
+					job->claimJob();
 					setJob(job);
 				}
 			}
 			else {
 				// We have a job and we are at our target
-				if (m_Job.workTimedJob(_delta)) {
-					m_Job.completeJob();
+				if (m_Job->workTimedJob(_delta)) {
+					auto& jobManager = Infrastructure::InstanceCollection::getInstance<JobManager>();
+					jobManager.completeJob(m_Job);
+					m_Job = nullptr;
 				}
 			}
 		}
@@ -65,9 +67,6 @@ namespace Driller {
 		Infrastructure::InstanceCollection::getInstance<Infrastructure::TextureManager>().getTexture(DrillerResources::SpriteSheetName).bind();
 		glBindVertexArray(m_VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-		if (m_Job.getJobInfo().JobType != JobContextInfo::None) {
-			m_Job.render(_window, _renderData);
-		}
 	}
 
 	void WorkerElement::moveTowardTarget(float _delta) {
@@ -114,8 +113,16 @@ namespace Driller {
 		}
 	}
 
-	void WorkerElement::setJob(const JobElement& _job) {
+	void WorkerElement::setJob(JobElement *_job) {
 		m_Job = _job;
-		m_TargetPosition = m_Job.getWorkPosition();
+		if (m_Job != nullptr) {
+			m_TargetPosition = m_Job->getWorkPosition();
+		}
+		else {
+			m_TargetPosition = m_Position;
+		}
+	}
+	JobElement *WorkerElement::getJob(void) const {
+		return m_Job;
 	}
 }

@@ -46,7 +46,7 @@ namespace Driller {
 		///	\param	_job	The job to add
 		///
 		////////////////////////////////////////////////////////////
-		void addJob(JobElement _job);
+		void addJob(JobElement *_job);
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Gets a job off the queue
@@ -54,7 +54,7 @@ namespace Driller {
 		///	\return	Job from the queue
 		///
 		////////////////////////////////////////////////////////////
-		JobElement getJob(void);
+		JobElement *getJob(void);
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Gets whether the queue has any jobs
@@ -72,7 +72,7 @@ namespace Driller {
 		///	\return	The first job that matches the given predicate
 		///
 		////////////////////////////////////////////////////////////
-		JobElement getJob(std::function<bool(const JobElement& )> _predicate);
+		JobElement *getJob(std::function<bool(const JobElement *)> _predicate);
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Gets whether the queue has any jobs
@@ -82,7 +82,7 @@ namespace Driller {
 		///	\return	Whether there are any jobs that matche the given predicate
 		///
 		////////////////////////////////////////////////////////////
-		bool jobExists(std::function<bool(const JobElement&)> _predicate);
+		bool jobExists(std::function<bool(const JobElement *)> _predicate);
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Gets a copy of a job off the queue
@@ -90,7 +90,7 @@ namespace Driller {
 		///	\return	Job from the queue
 		///
 		////////////////////////////////////////////////////////////
-		JobElement peekJob(void);
+		JobElement *peekJob(void);
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Gets a copy of a job off the queue 
@@ -100,7 +100,7 @@ namespace Driller {
 		///	\return	The first job that matches the given predicate
 		///
 		////////////////////////////////////////////////////////////
-		JobElement peekJob(std::function<bool(const JobElement&)> _predicate);
+		JobElement *peekJob(std::function<bool(const JobElement *)> _predicate);
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Pops the given peeked job off the queue
@@ -108,12 +108,47 @@ namespace Driller {
 		///	\param	Job from the queue
 		///
 		////////////////////////////////////////////////////////////
-		void popJob(const JobElement& _job);
+		void popJob(const JobElement *_job);
 
-		JobElement getFirstAccessableJob(void);
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Gets the first accessable job
+		///
+		///	\return	The job
+		///
+		////////////////////////////////////////////////////////////
+		JobElement *getFirstAccessableJob(void);
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Completes a job 
+		///
+		///	\param	The job
+		///
+		////////////////////////////////////////////////////////////
+		void completeJob(JobElement *_job);
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Cancels a job 
+		///
+		///	\param	The job
+		///
+		////////////////////////////////////////////////////////////
+		void cancelJob(JobElement *_job);
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Gets all jobs that are involved at a tile
+		///
+		///	\param	The tile
+		///
+		///	\return	The jobs
+		///
+		////////////////////////////////////////////////////////////
+		std::vector<JobElement *> getJobsThatContainTile(const System::Vector2i& _tileCoordinates);
 
 	private:
-		std::vector<JobElement> m_Jobs;
+		std::vector<JobElement *> m_Jobs;
 	};
 }
 

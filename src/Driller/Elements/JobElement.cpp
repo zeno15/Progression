@@ -35,7 +35,8 @@ namespace Driller {
 		m_RemainingTime(0.0f),
 		m_RemainingAmount(0),
 		m_VAO(0), 
-		m_VBO(0) {
+		m_VBO(0),
+		m_IsClaimed(false) {
 
 		ElementHelpers::createBasicDoubleTriQuadForTextureId(DrillerResources::JobPendingSpriteIndex, &m_VAO, &m_VBO);
 
@@ -108,7 +109,7 @@ namespace Driller {
 	}
 
 	void JobElement::completeJob(void) {
-		onJobComplete.invoke(*this);
+		onJobComplete.invoke(this);
 		m_JobInfo.JobType = JobContextInfo::None;
 		glDeleteBuffers(1, &m_VBO);
 		glDeleteVertexArrays(1, &m_VAO);
@@ -135,5 +136,27 @@ namespace Driller {
 		}
 
 		return true;
+	}
+
+	bool JobElement::isJobClaimed(void) const {
+		return m_IsClaimed;
+	}
+	void JobElement::claimJob(void) {
+		m_IsClaimed = true;
+	}
+	void JobElement::relinquishJob(void) {
+		m_IsClaimed = false;
+	}
+
+	bool JobElement::isTileContained(const System::Vector2i& _tileCoordinates) {
+		auto sizeIncrease = m_JobInfo.getJobTileSize() - System::Vector2i(1, 1);
+		auto start = m_TileCoordinates;
+
+		if (start.x <= _tileCoordinates.x && _tileCoordinates.x <= start.x + sizeIncrease.x &&
+			start.y <= _tileCoordinates.y && _tileCoordinates.y <= start.y + sizeIncrease.y) {
+			return true;
+		}
+
+		return false;
 	}
 }

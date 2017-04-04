@@ -31,6 +31,7 @@ namespace Driller {
 
 		enum TileInteractionContext {
 			NoContext,
+			ResetContext,
 			BuildRoomContext
 		};
 

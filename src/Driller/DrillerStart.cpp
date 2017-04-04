@@ -45,6 +45,16 @@ namespace Driller {
 				&TileManager::onTileActivated, 
 				Infrastructure::InstanceCollection::getInstance<TileManager>(),
 				std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+
+		/*Infrastructure::InstanceCollection::getInstance<NotificationService>().OnJobCancelled.registerCallback(
+			std::bind(
+				&WorkerManager::onJobCancelled,
+				Infrastructure::InstanceCollection::getInstance<WorkerManager>(),
+				std::placeholders::_1));*/
+
+		Infrastructure::InstanceCollection::getInstance<NotificationService>().OnJobCancelled.registerCallback([](JobElement *_job) {
+			Infrastructure::InstanceCollection::getInstance<WorkerManager>().onJobCancelled(_job);
+		});
 	}
 	
 	void loadResources(void) {

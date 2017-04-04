@@ -23,9 +23,9 @@ namespace Driller {
 		static std::vector<float> createVerticiesForStaticTexture(const System::Vector2f& _textureId);
 		static void createBasicDoubleTriQuadForTextureId(const System::Vector2f& _textureId, unsigned int *m_VAO, unsigned int *_m_VBO);
 
-		static JobElement createBuildElevatorJob(int _level);
-		static JobElement createDigDirtJob(int _level, int _column);
-		static JobElement createBuildRoomJob(const JobContextInfo& _contextInfo);
+		static JobElement *createBuildElevatorJob(int _level);
+		static JobElement *createDigDirtJob(int _level, int _column);
+		static JobElement *createBuildRoomJob(const JobContextInfo& _contextInfo);
 	};
 }
 

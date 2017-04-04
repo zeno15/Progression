@@ -68,9 +68,16 @@ namespace Driller {
 				return false;
 			}
 
-			if (m_CurrentTileInteractionContext == DrillerDefinitions::TileInteractionContext::NoContext) {
+			if (m_CurrentTileInteractionContext == DrillerDefinitions::TileInteractionContext::NoContext && 
+				_event.mouseButton.button == System::Mouse::Left) {
 				Infrastructure::InstanceCollection::getInstance<NotificationService>().OnTileActivated.invoke(tileCoordinates.x, tileCoordinates.y, m_CurrentTileInteractionContext);
 
+				return true;
+			}
+			if (m_CurrentTileInteractionContext == DrillerDefinitions::TileInteractionContext::NoContext &&
+				System::Keyboard::isKeyDown(System::Keyboard::LControl) &&
+				_event.mouseButton.button == System::Mouse::Right) {
+				Infrastructure::InstanceCollection::getInstance<NotificationService>().OnTileActivated.invoke(tileCoordinates.x, tileCoordinates.y, DrillerDefinitions::TileInteractionContext::ResetContext);
 				return true;
 			}
 		}

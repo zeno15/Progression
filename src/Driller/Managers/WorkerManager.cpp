@@ -28,4 +28,12 @@ namespace Driller {
 	void WorkerManager::addWorker(WorkerElement *_worker) {
 		m_Workers.push_back(_worker);
 	}
+
+	void WorkerManager::onJobCancelled(JobElement *_job) {
+		for (auto& worker : m_Workers) {
+			if (worker->getJob() == _job) {
+				worker->setJob(nullptr);
+			}
+		}
+	}
 }

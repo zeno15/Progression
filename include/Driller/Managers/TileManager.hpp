@@ -48,6 +48,17 @@ namespace Driller {
 		///
 		////////////////////////////////////////////////////////////
 		void handleNoContextInteraction(int _x, int _y);
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Callback for when a tile is activated with reset context
+		///
+		///	\param	The x coordinate of the activated tile
+		///
+		///	\param	The y coordinate of the activated tile
+		///
+		////////////////////////////////////////////////////////////
+		void handleResetContextInteraction(int _x, int _y);
 	};
 }
 

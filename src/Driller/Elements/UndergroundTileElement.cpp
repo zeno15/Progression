@@ -55,6 +55,10 @@ namespace Driller {
 		m_IsClear = true;
 		ElementHelpers::createBasicDoubleTriQuadForTextureId(DrillerResources::EmptyDirtStaticSpriteIndex, &m_VAO, &m_VBO);
 	}
+	void UndergroundTileElement::reset(void) {
+		m_IsClear = false;
+		ElementHelpers::createBasicDoubleTriQuadForTextureId(DrillerResources::DirtStaticSpriteIndex, &m_VAO, &m_VBO);
+	}
 
 	int UndergroundTileElement::getLevel(void) const {
 		return m_Level;

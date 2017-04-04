@@ -53,6 +53,24 @@ namespace Driller {
 		////////////////////////////////////////////////////////////
 		void render(const Window::Window& _window, Graphics::RenderData _renderData) const override;
 
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Sets the workers job and target
+		///
+		///	\param	The new job
+		///
+		////////////////////////////////////////////////////////////
+		void setJob(JobElement *_job);
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Gets the job
+		///
+		///	\return	The job
+		///
+		////////////////////////////////////////////////////////////
+		JobElement *getJob(void) const;
+
 	private:
 		////////////////////////////////////////////////////////////
 		///
@@ -63,15 +81,6 @@ namespace Driller {
 		////////////////////////////////////////////////////////////
 		void moveTowardTarget(float _delta);
 
-		////////////////////////////////////////////////////////////
-		///
-		///	\brief	Sets the workers job and target
-		///
-		///	\param	The new job
-		///
-		////////////////////////////////////////////////////////////
-		void setJob(const JobElement& _job);
-
 	private:
 		unsigned int		m_VAO;						///<	OpenGL VAO handle
 		unsigned int		m_VBO;						///<	OpenGL position VBO handle
@@ -79,7 +88,7 @@ namespace Driller {
 		System::Vector2f	m_Position;					///<	Position of the worker
 		System::Vector2f	m_TargetPosition;			///<	Target position of the worker
 
-		JobElement			m_Job;						///<	The current job the worker has
+		JobElement *		m_Job;						///<	The current job the worker has
 	};
 }
 

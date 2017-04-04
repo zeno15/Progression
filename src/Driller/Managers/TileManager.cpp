@@ -1,5 +1,6 @@
 #include <Driller/Managers/TileManager.hpp>
 
+#include <Driller/Managers/NotificationService.hpp>
 #include <Driller/Managers/JobManager.hpp>
 #include <Driller/Managers/RoomManager.hpp>
 
@@ -21,6 +22,9 @@ namespace Driller {
 		switch (_context) {
 		case DrillerDefinitions::TileInteractionContext::NoContext:
 			handleNoContextInteraction(_x, _y);
+			break;
+		case DrillerDefinitions::TileInteractionContext::ResetContext:
+			handleResetContextInteraction(_x, _y);
 			break;
 		default:
 			std::cout << "Activated tile (" << _x << "," << _y << ") with unhandled context '" << _context << "'" << std::endl;
@@ -63,6 +67,31 @@ namespace Driller {
 			else {
 				//std::cout << "Activated  tile at x : " << _x << ", y: " << _y << " with no context where one exists and it is clear, do nothing." << std::endl;
 			}
+		}
+	}
+
+	void TileManager::handleResetContextInteraction(int _x, int _y) {
+		auto& drillerGameScene = Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().getScene<DrillerGameScene>("DrillerGameScene");
+		auto& tileManager = Infrastructure::InstanceCollection::getInstance<TileManager>();
+		auto& roomManager = Infrastructure::InstanceCollection::getInstance<RoomManager>();
+		auto& jobManager = Infrastructure::InstanceCollection::getInstance<JobManager>();
+
+		if (_x == 0) {
+			auto e = drillerGameScene.getElevator(_y);
+			if (e->isBuilt()) {
+				e->setIsBuilt(false);
+			}
+		}
+		else {
+			auto t = drillerGameScene.getTile(_x, _y);
+			t->setJobQueuedFlag(false);
+			t->reset();
+		}
+
+		auto jobs = jobManager.getJobsThatContainTile(System::Vector2i(_x, _y));
+
+		for (auto job : jobs) {
+			jobManager.cancelJob(job);
 		}
 	}
 }

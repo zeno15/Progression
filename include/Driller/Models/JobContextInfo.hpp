@@ -60,6 +60,22 @@ namespace Driller {
 			BuildRoomJob		BuildRoomData;
 		};
 
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Gets the tile size of the job
+		///
+		///	\return	The size
+		///
+		////////////////////////////////////////////////////////////
+		System::Vector2i getJobTileSize(void) const {
+			switch (JobType) {
+			case BuildRoom:
+				return DrillerDefinitions::RoomData[BuildRoomData.type][DrillerDefinitions::RoomInfo::SpriteSize];
+			default:
+				return System::Vector2i(1,1);
+			}
+		}
+
 
 		JobContextInfo() {
 			JobType = None;

@@ -6,6 +6,8 @@
 #include <Infrastructure/Manager.hpp>
 #include <Infrastructure/Signal.hpp>
 
+#include <Driller/Elements/JobElement.hpp>
+
 #include <Driller/DrillerDefinitions.hpp>
 
 ////////////////////////////////////////////////////////////
@@ -27,6 +29,7 @@ namespace Driller {
 
 	public:
 		Infrastructure::Signal<int, int, DrillerDefinitions::TileInteractionContext> OnTileActivated;				///<	Occurs when a tile is activated
+		Infrastructure::Signal<JobElement *> OnJobCancelled;														///<	Occurs when a job is cancelled
 	};
 }
 

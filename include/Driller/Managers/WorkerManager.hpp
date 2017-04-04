@@ -3,6 +3,7 @@
 
 #include <Infrastructure/Manager.hpp>
 
+#include <Driller/Elements/JobElement.hpp>
 #include <Driller/Elements/WorkerElement.hpp>
 
 #include <vector>
@@ -61,6 +62,15 @@ namespace Driller {
 		///
 		////////////////////////////////////////////////////////////
 		void addWorker(WorkerElement *_worker);
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Callback for when a job is cancelled
+		///
+		///	\param	The cancelled job
+		///
+		////////////////////////////////////////////////////////////
+		void onJobCancelled(JobElement *_job);
 
 	private:
 		std::vector<WorkerElement *>		m_Workers;		///<	Vector of all worker elements
