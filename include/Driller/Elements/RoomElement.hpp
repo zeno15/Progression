@@ -59,6 +59,23 @@ namespace Driller {
 		////////////////////////////////////////////////////////////
 		virtual void render(const Window::Window& _window, Graphics::RenderData _renderData) const override;
 
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Gets the bottom left tile of the room
+		///
+		///	\return	The bottom left tile
+		///
+		////////////////////////////////////////////////////////////
+		const System::Vector2i& getBottomLeftTile(void) const;
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Gets the size of the room in tiles
+		///
+		///	\return	The size
+		///
+		////////////////////////////////////////////////////////////
+		const System::Vector2i& getRoomSize(void) const;
+
 	private:
 		void generateGraphics(void);
 

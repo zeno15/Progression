@@ -66,7 +66,7 @@ namespace Driller {
 					drawingOffset.x -= 1;
 				}
 				else {
-					mousePos.x -= 32;
+					mousePos.x -= static_cast<int>(DrillerDefinitions::TileWidth) / 2;
 				}
 
 				auto bottomLeftTile = UserInteractionManager::getTilePositionFromEventCoordinates(mousePos) + drawingOffset;
@@ -75,14 +75,11 @@ namespace Driller {
 				auto isValid = drillerGameScene.isValid(bottomLeftTile, m_CurrentGhostSize);
 
 				if (isValid) {
-					std::cout << "Adding room job" << std::endl;
-
 					for (int y = bottomLeftTile.y; y < bottomLeftTile.y + static_cast<int>(m_CurrentGhostSize.y); y += 1) {
 						for (int x = bottomLeftTile.x; x < bottomLeftTile.x + static_cast<int>(m_CurrentGhostSize.x); x += 1) {
 							drillerGameScene.getTile(x, y)->setJobQueuedFlag(true);
 						}
-					}
-					
+					}				
 
 					auto contextInfo = JobContextInfo(JobContextInfo::BuildRoomJob(bottomLeftTile.x, bottomLeftTile.y, m_CurrentRoom));
 
@@ -203,9 +200,32 @@ namespace Driller {
 	void RoomManager::addRoom(RoomElement *_room) {
 		m_Rooms.push_back(_room);
 	}
+	void RoomManager::removeRoom(RoomElement *_room) {
+		for (unsigned int i = 0; i < m_Rooms.size(); i += 1) {
+			if (_room == m_Rooms[i]) {
+				delete _room;
+				m_Rooms.erase(m_Rooms.begin() + i);
+				return;
+			}
+		}
+	}
 	void RoomManager::resetFromDrawingGhost(void) {
 		Infrastructure::InstanceCollection::getInstance<UserInteractionManager>().updateCurrentTileInteractionContext(DrillerDefinitions::TileInteractionContext::NoContext);
 		m_DrawingGhost = false;
 		m_CurrentRoom = DrillerDefinitions::RoomType::None;
+	}
+
+	RoomElement *RoomManager::getRoomAtTile(const System::Vector2i& _tileCoordinates) {
+		for (auto& room : m_Rooms) {
+			auto sizeIncrease = System::Vector2i(room->getRoomSize()) - System::Vector2i(1, 1);
+			auto start = room->getBottomLeftTile();
+
+			if (start.x <= _tileCoordinates.x && _tileCoordinates.x <= start.x + sizeIncrease.x &&
+				start.y <= _tileCoordinates.y && _tileCoordinates.y <= start.y + sizeIncrease.y) {
+				return room;
+			}
+		}
+
+		return nullptr;
 	}
 }

@@ -26,7 +26,7 @@ namespace Graphics {
 		///	\param	The render states to use
 		///
 		////////////////////////////////////////////////////////////
-		virtual void render(const Window::Window& _window, RenderData _RenderData) const = 0;
+		virtual void render(const Window::Window& _window, RenderData _renderData) const = 0;
 	};
 }
 

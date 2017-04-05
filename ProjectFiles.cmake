@@ -14,6 +14,7 @@ SET(ECS_INCLUDE_FILES ${ECS_INCLUDE_FILES}
 )
 
 SET(GRAPHICS_INCLUDE_FILES ${GRAPHICS_INCLUDE_FILES}
+	${CMAKE_SOURCE_DIR}/include/Graphics/AnimatedSprite.hpp
 	${CMAKE_SOURCE_DIR}/include/Graphics/Colour.hpp
 	${CMAKE_SOURCE_DIR}/include/Graphics/Font.hpp
 	${CMAKE_SOURCE_DIR}/include/Graphics/Glyph.hpp
@@ -155,6 +156,7 @@ SET(ECS_SOURCE_FILES ${ECS_SOURCE_FILES}
 )
 
 SET (GRAPHICS_SOURCE_FILES ${GRAPHICS_SOURCE_FILES}
+	${CMAKE_SOURCE_DIR}/src/Graphics/AnimatedSprite.cpp
 	${CMAKE_SOURCE_DIR}/src/Graphics/Colour.cpp
 	${CMAKE_SOURCE_DIR}/src/Graphics/Font.cpp
 	${CMAKE_SOURCE_DIR}/src/Graphics/Glyph.cpp

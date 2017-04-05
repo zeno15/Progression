@@ -9,14 +9,17 @@
 #include <Infrastructure.hpp>
 #include <Graphics/Text.hpp>
 
+#define DRILLER 1
+#define PONG 0
+
 int main(int _argc, char **_argv) {
 
 	try {
-#if 1
+#if DRILLER
 		Driller::initialiseManagers();
 		Driller::start();
 #endif
-#if 0
+#if PONG
 		Pong::initialiseManagers();
 		Pong::start();
 #endif

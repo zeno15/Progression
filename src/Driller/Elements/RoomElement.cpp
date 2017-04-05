@@ -93,4 +93,12 @@ namespace Driller {
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void *)(2 * sizeof(float)));
 	}
+	
+	const System::Vector2i& RoomElement::getBottomLeftTile(void) const {
+		return m_BottomLeft;
+	}
+
+	const System::Vector2i& RoomElement::getRoomSize(void) const {
+		return System::Vector2i(m_RoomSize);
+	}
 }

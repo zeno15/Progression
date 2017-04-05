@@ -93,5 +93,21 @@ namespace Driller {
 		for (auto job : jobs) {
 			jobManager.cancelJob(job);
 		}
+
+		auto room = roomManager.getRoomAtTile(System::Vector2i(_x, _y));
+
+		if (room != nullptr) {
+			auto sizeIncrease = System::Vector2i(room->getRoomSize()) - System::Vector2i(1, 1);
+			auto start = room->getBottomLeftTile();
+			for (int y = start.y; y <= start.y + sizeIncrease.y; y += 1) {
+				for (int x = start.x; x <= start.x + sizeIncrease.x; x += 1) {
+					auto t = drillerGameScene.getTile(_x, _y);
+					t->setJobQueuedFlag(false);
+					t->clear();
+				}
+			}
+
+			roomManager.removeRoom(room);
+		}
 	}
 }

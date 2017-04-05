@@ -1,6 +1,0 @@
-Command:
-(remake)
-    -   cd .. && rm -r build && mkdir build && cd build && cmake .. && make
-
-(make)
-    -   mkdir build && cd build && cmake .. && make
