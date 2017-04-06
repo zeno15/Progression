@@ -16,6 +16,13 @@ namespace Driller {
 	const std::string DrillerResources::BuildingGhostShaderMVPUniformName = "MVP";
 	const std::string DrillerResources::BuildingGhostShaderColourUniformName = "Colour";
 
+
+	const std::string DrillerResources::AnimatedSpriteShader = "AnimatedSpriteShader";
+	const std::string DrillerResources::AnimatedSpriteShaderVertexFilename = "C:/Users/markd/Documents/Git/Progression/resources/Shaders/AnimatedSprite.Vertex.glsl";
+	const std::string DrillerResources::AnimatedSpriteShaderFragmentFilename = "C:/Users/markd/Documents/Git/Progression/resources/Shaders/AnimatedSprite.Fragment.glsl";
+	const std::string DrillerResources::AnimatedSpriteShaderMVPUniformName = "MVP";
+	const std::string DrillerResources::AnimatedSpriteShaderColourUniformName = "Colour";
+
 	const std::string DrillerResources::SpriteSheetName = "DrillerSpriteSheet";
 	const std::string DrillerResources::SpriteSheetFilename = "C:/Users/markd/Documents/Git/Progression/resources/Textures/Driller/SpriteSheet.png";
 

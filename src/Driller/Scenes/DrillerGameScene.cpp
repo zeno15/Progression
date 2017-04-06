@@ -57,6 +57,54 @@ namespace Driller {
 		}
 
 		m_ElevatorShafts[0]->setIsBuilt(true);
+
+		m_AnimatedSprite = new Graphics::AnimatedSprite(DrillerResources::SpriteSheetName);
+
+		m_AnimatedSprite->addAnimation(
+			System::Vector2f(
+				DrillerDefinitions::TileWidth,
+				DrillerDefinitions::TileHeight),
+			System::Vector2f(
+				DrillerDefinitions::TileWidth * 3.0f,
+				DrillerDefinitions::TileHeight * 0.0f),
+			System::Vector2f(
+				DrillerDefinitions::TileWidth,
+				DrillerDefinitions::TileHeight));
+
+		m_AnimatedSprite->addAnimation(
+			System::Vector2f(
+				DrillerDefinitions::TileWidth,
+				DrillerDefinitions::TileHeight),
+			System::Vector2f(
+				DrillerDefinitions::TileWidth * 4.0f,
+				DrillerDefinitions::TileHeight * 0.0f),
+			System::Vector2f(
+				DrillerDefinitions::TileWidth,
+				DrillerDefinitions::TileHeight));
+
+		m_AnimatedSprite->addAnimation(
+			System::Vector2f(
+				DrillerDefinitions::TileWidth,
+				DrillerDefinitions::TileHeight),
+			System::Vector2f(
+				DrillerDefinitions::TileWidth * 5.0f,
+				DrillerDefinitions::TileHeight * 0.0f),
+			System::Vector2f(
+				DrillerDefinitions::TileWidth,
+				DrillerDefinitions::TileHeight));
+
+		m_AnimatedSprite->addAnimation(
+			System::Vector2f(
+				DrillerDefinitions::TileWidth,
+				DrillerDefinitions::TileHeight),
+			System::Vector2f(
+				DrillerDefinitions::TileWidth * 6.0f,
+				DrillerDefinitions::TileHeight * 0.0f),
+			System::Vector2f(
+				DrillerDefinitions::TileWidth,
+				DrillerDefinitions::TileHeight));
+
+		m_AnimatedSprite->generate();
 	}
 
 	DrillerGameScene::~DrillerGameScene(void) {
@@ -87,6 +135,21 @@ namespace Driller {
 			return true;
 		}
 
+		if (_event.type == System::Event::KeyDown) {
+			if (_event.key.key == System::Keyboard::Q) {
+				m_AnimatedSprite->setAnimationIndex(0);
+			}
+			if (_event.key.key == System::Keyboard::W) {
+				m_AnimatedSprite->setAnimationIndex(1);
+			}
+			if (_event.key.key == System::Keyboard::E) {
+				m_AnimatedSprite->setAnimationIndex(2);
+			}
+			if (_event.key.key == System::Keyboard::R) {
+				m_AnimatedSprite->setAnimationIndex(3);
+			}
+		}
+		
 		return false;
 	}
 
@@ -134,6 +197,8 @@ namespace Driller {
 		glBindVertexArray(m_VAO);
 		glDrawArrays(GL_LINES, 0, 6);
 
+		renderData.shaderName = DrillerResources::AnimatedSpriteShader;
+		m_AnimatedSprite->render(_window, renderData);
 	}
 
 	ElevatorShaftElement *DrillerGameScene::getElevator(int _level) {

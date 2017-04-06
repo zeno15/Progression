@@ -77,6 +77,14 @@ namespace Driller {
 		Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader(DrillerResources::StaticTexturedShaderName).getLocationOfUniforms({
 			DrillerResources::StaticTexturedShaderMVPUniformName
 		});
+
+		Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().addShader(DrillerResources::AnimatedSpriteShader, DrillerResources::AnimatedSpriteShaderVertexFilename, DrillerResources::AnimatedSpriteShaderFragmentFilename);
+		Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader(DrillerResources::AnimatedSpriteShader).getLocationOfUniforms({
+			DrillerResources::AnimatedSpriteShaderMVPUniformName,
+			DrillerResources::AnimatedSpriteShaderColourUniformName
+		});
+
+		
 	}
 
 	void start(void) {

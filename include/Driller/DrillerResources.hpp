@@ -30,8 +30,14 @@ namespace Driller {
 		static const std::string				BuildingGhostShaderVertexFilename;				///<	
 		static const std::string				BuildingGhostShaderFragmentFilename;			///<	
 		static const std::string				BuildingGhostShaderMVPUniformName;				///<	
-		static const std::string				BuildingGhostShaderColourUniformName;			///<	
+		static const std::string				BuildingGhostShaderColourUniformName;			///<
 
+		static const std::string				AnimatedSpriteShader;							///<	
+		static const std::string				AnimatedSpriteShaderVertexFilename;				///<	
+		static const std::string				AnimatedSpriteShaderFragmentFilename;			///<	
+		static const std::string				AnimatedSpriteShaderMVPUniformName;				///<	
+		static const std::string				AnimatedSpriteShaderColourUniformName;			///<	
+		
 
 		static const std::string				SpriteSheetName;								///<	The texture manager registered name for the sprite sheet
 		static const std::string				SpriteSheetFilename;							///<	The path to the spritesheet
