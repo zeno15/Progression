@@ -33,11 +33,13 @@ namespace Driller {
 	const System::Vector2f DrillerResources::EmptyDirtStaticSpriteIndex =	System::Vector2f(2.0f, 0.0f);
 	const System::Vector2f DrillerResources::WorkerSpriteIndex =			System::Vector2f(1.0f, 1.0f);
 	const System::Vector2f DrillerResources::JobPendingSpriteIndex =		System::Vector2f(0.0f, 2.0f);
+	const System::Vector2f DrillerResources::ShuttleSpriteIndex =			System::Vector2f(4.0f, 1.0f);
 
 	const System::Vector2u DrillerResources::DormSpritePosition =			System::Vector2u(0, 3);
 	const System::Vector2u DrillerResources::DormSpriteSize =				System::Vector2u(2, 1);
 	const System::Vector2u DrillerResources::MiningSpritePosition =			System::Vector2u(0, 4);
 	const System::Vector2u DrillerResources::MiningSpriteSize =				System::Vector2u(3, 1);
+	const System::Vector2u DrillerResources::ShuttleSpriteSize =			System::Vector2u(3, 2);
 
 	const std::string DrillerResources::TestShaderName = "DrillerTestShaderName";
 	const std::string DrillerResources::TestShaderVertexFilename = "C:/Users/markd/Documents/Git/Progression/resources/Shaders/Driller/BasicPosition.Vertex.glsl";

@@ -26,6 +26,8 @@ namespace Driller {
 		static JobElement *createBuildElevatorJob(int _level);
 		static JobElement *createDigDirtJob(int _level, int _column);
 		static JobElement *createBuildRoomJob(const JobContextInfo& _contextInfo);
+
+		static JobElement *createJobForRoom(DrillerDefinitions::RoomType _roomType, const System::Vector2i& _tileCoordinates, const System::Vector2f& _workPosition);
 	};
 }
 

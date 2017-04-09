@@ -9,9 +9,18 @@ namespace Driller {
 	const float DrillerDefinitions::TileWidth = 64.0f;
 	const float DrillerDefinitions::TileHeight = 64.0f;
 
+	const float DrillerDefinitions::BackgroundZ = 0.0f;
+	const float DrillerDefinitions::BuildingZ = 0.1f;
+	const float DrillerDefinitions::EntityZ = 0.2f;
+
 	const int DrillerDefinitions::MaximumWidth = 32;
 	const int DrillerDefinitions::MaximumHeight = 16;
 
+	const float DrillerDefinitions::ShuttleInterval = 30.0f; 
+	const float DrillerDefinitions::MinimumShuttleLandingTime = 5.0f;
+	const System::Vector2f DrillerDefinitions::ShuttleLandingPoint =	System::Vector2f(-DrillerDefinitions::TileWidth * 4.0f, 0.0f); 
+	const System::Vector2f DrillerDefinitions::ShuttleBeginPoint =		System::Vector2f(-DrillerDefinitions::TileWidth * 16.0f, DrillerDefinitions::TileHeight * 12.0f);
+	const System::Vector2f DrillerDefinitions::ShuttleEndPoint =		System::Vector2f(+DrillerDefinitions::TileWidth * 16.0f, DrillerDefinitions::TileHeight * 20.0f);
 
 	const System::Vector2i DrillerDefinitions::RoomData[RoomType::NumberRoomTypes][RoomInfo::NumberRoomInfo] = {
 		// None

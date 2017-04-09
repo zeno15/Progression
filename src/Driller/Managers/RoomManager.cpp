@@ -199,10 +199,12 @@ namespace Driller {
 
 	void RoomManager::addRoom(RoomElement *_room) {
 		m_Rooms.push_back(_room);
+		_room->onRoomCreated();
 	}
 	void RoomManager::removeRoom(RoomElement *_room) {
 		for (unsigned int i = 0; i < m_Rooms.size(); i += 1) {
 			if (_room == m_Rooms[i]) {
+				_room->onRoomRemoved();
 				delete _room;
 				m_Rooms.erase(m_Rooms.begin() + i);
 				return;

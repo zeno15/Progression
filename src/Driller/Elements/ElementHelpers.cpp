@@ -124,6 +124,11 @@ namespace Driller {
 				DrillerDefinitions::RoomData[_job->getJobInfo().BuildRoomData.type][DrillerDefinitions::RoomInfo::SpritePosition],
 				DrillerDefinitions::RoomData[_job->getJobInfo().BuildRoomData.type][DrillerDefinitions::RoomInfo::SpriteSize]);
 
+			JobElement *workRoomJob = createJobForRoom(_job->getJobInfo().BuildRoomData.type, jobCoords, jobCoords);
+			if (workRoomJob != nullptr) {
+				Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(workRoomJob);
+			}
+
 			Infrastructure::InstanceCollection::getInstance<RoomManager>().addRoom(room);
 			auto& drillerGameScene = Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().getScene<DrillerGameScene>("DrillerGameScene");
 
@@ -136,5 +141,32 @@ namespace Driller {
 		});
 
 		return job;
+	}
+
+	JobElement *ElementHelpers::createJobForRoom(DrillerDefinitions::RoomType _roomType, const System::Vector2i& _tileCoordinates, const System::Vector2f& _workPosition) {
+		switch (_roomType) {
+		case DrillerDefinitions::RoomType::Mining: 
+		{
+			auto info = JobContextInfo(JobContextInfo::WorkRoomJob(_tileCoordinates.x, _tileCoordinates.y, _roomType, 1.0f));
+
+			auto job = new JobElement(
+				info, 
+				_tileCoordinates, 
+				System::Vector2i(_workPosition.x * DrillerDefinitions::TileWidth, _workPosition.y * DrillerDefinitions::TileHeight), 
+				DrillerDefinitions::JobType::Infinite);
+			job->setRemaingTime(1.0f);
+			job->onJobComplete.registerCallback([&](JobElement *_job) {
+				std::cout << "Work the mining room job complete" << std::endl;
+			});
+
+			return job;
+
+		} break;
+		default:
+			std::cout << "Creating job for room where type isn't specified" << std::endl;
+			break;
+		}
+
+		return nullptr;
 	}
 }

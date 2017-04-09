@@ -94,12 +94,18 @@ SET(DRILLER_INCLUDE_FILES ${DRILLER_INCLUDE_FILES}
 	${CMAKE_SOURCE_DIR}/include/Driller/Elements/ElevatorShaftElement.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Elements/JobElement.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Elements/RoomElement.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Elements/ShuttleElement.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Elements/UndergroundTileElement.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Elements/WorkerElement.hpp
+	
+	${CMAKE_SOURCE_DIR}/include/Driller/Elements/Rooms/Dorm.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Elements/Rooms/Mining.hpp
 	
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/JobManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/NotificationService.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/RoomManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Managers/ResourceManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Driller/Managers/ShuttleManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/TileManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/UserInteractionManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/WorkerManager.hpp
@@ -216,12 +222,18 @@ SET(DRILLER_SOURCE_FILES ${DRILLER_SOURCE_FILES}
 	${CMAKE_SOURCE_DIR}/src/Driller/Elements/ElevatorShaftElement.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Elements/JobElement.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Elements/RoomElement.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Elements/ShuttleElement.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Elements/UndergroundTileElement.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Elements/WorkerElement.cpp
 	
+	${CMAKE_SOURCE_DIR}/src/Driller/Elements/Rooms/Dorm.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Elements/Rooms/Mining.cpp
+	
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/JobManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/NotificationService.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Managers/ResourceManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/RoomManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Driller/Managers/ShuttleManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/TileManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/UserInteractionManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/WorkerManager.cpp

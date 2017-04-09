@@ -1,0 +1,22 @@
+#ifndef INCLUDED_DRILLER_ELEMENTS_ROOMS_MINING_HPP_
+#define INCLUDED_DRILLER_ELEMENTS_ROOMS_MINING_HPP_
+
+#include <Driller/Elements/RoomElement.hpp>
+
+////////////////////////////////////////////////////////////
+///
+///	\namespace Driller
+///
+////////////////////////////////////////////////////////////
+namespace Driller {
+	////////////////////////////////////////////////////////////
+	///
+	///	\brief	Class to describe mining room
+	///
+	////////////////////////////////////////////////////////////
+	class Mining : public RoomElement {
+
+	};
+}
+
+#endif // INCLUDED_DRILLER_ELEMENTS_ROOMS_MINING_HPP_

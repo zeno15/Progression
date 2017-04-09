@@ -47,11 +47,13 @@ namespace Driller {
 		static const System::Vector2f			EmptyDirtStaticSpriteIndex;						///<	Index of the mined out dirt sprite
 		static const System::Vector2f			WorkerSpriteIndex;								///<	Index of the worker sprite
 		static const System::Vector2f			JobPendingSpriteIndex;							///<	Index of the job pending sprite
+		static const System::Vector2f			ShuttleSpriteIndex;								///<	Index of shuttle sprite
 
 		static const System::Vector2u			DormSpritePosition;								///<	Position of bottom left tile of dorm sprite
 		static const System::Vector2u			DormSpriteSize;									///<	Size of dorm sprite in tiles
 		static const System::Vector2u			MiningSpritePosition;							///<	Position of bottom left tile of mining sprite
 		static const System::Vector2u			MiningSpriteSize;								///<	Size of mining sprite in tiles
+		static const System::Vector2u			ShuttleSpriteSize;								///<	Size of the shuttle sprite
 
 		static const std::string				TestShaderName;									///<	Name of the test shader
 		static const std::string				TestShaderVertexFilename;						///<	Filename of the test shader vertex file

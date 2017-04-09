@@ -18,16 +18,27 @@ namespace Driller {
 	////////////////////////////////////////////////////////////
 	class DrillerDefinitions {
 	public:
-		static const std::string RelaseVersion;			///<	The current dev release type
-		static const std::string MajorVersion;			///<	The current major dev version
-		static const std::string MinorVersion;			///<	The current minor dev version
-		static const std::string VersionString;			///<	The current dev version
+		static const std::string RelaseVersion;					///<	The current dev release type
+		static const std::string MajorVersion;					///<	The current major dev version
+		static const std::string MinorVersion;					///<	The current minor dev version
+		static const std::string VersionString;					///<	The current dev version
 
-		static const float TileWidth;					///<	Width of a tile
-		static const float TileHeight;					///<	Height of a tile
+		static const float TileWidth;							///<	Width of a tile
+		static const float TileHeight;							///<	Height of a tile
 
-		static const int MaximumWidth;					///<	Maximum number of tiles away from elevator
-		static const int MaximumHeight;					///<	Maximum number of tiles away from the surface
+		static const float BackgroundZ;							///<	Z depth of background sprites
+		static const float BuildingZ;							///<	Z depth of building sprites
+		static const float EntityZ;								///<	Z depth of entity sprites
+		
+
+		static const int MaximumWidth;							///<	Maximum number of tiles away from elevator
+		static const int MaximumHeight;							///<	Maximum number of tiles away from the surface
+
+		static const float ShuttleInterval;						///<	The time between shuttle arrivals
+		static const float MinimumShuttleLandingTime;			///<	The minimum time for the shuttle to land for
+		static const System::Vector2f ShuttleLandingPoint;		///<	The coordinates of where the shuttle lands
+		static const System::Vector2f ShuttleBeginPoint;		///<	The coordinates of where the shuttle begins
+		static const System::Vector2f ShuttleEndPoint;			///<	The coordinates of where the shuttle ends
 
 		enum TileInteractionContext {
 			NoContext,

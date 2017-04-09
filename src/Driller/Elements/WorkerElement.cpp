@@ -125,4 +125,9 @@ namespace Driller {
 	JobElement *WorkerElement::getJob(void) const {
 		return m_Job;
 	}
+
+	void WorkerElement::setPosition(const System::Vector2f& _position) {
+		m_Position = System::Vector2f(_position);
+		m_TargetPosition = m_Position;
+	}
 }

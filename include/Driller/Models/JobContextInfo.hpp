@@ -21,7 +21,8 @@ namespace Driller {
 			None,
 			DigDirt,
 			BuildElevator,
-			BuildRoom
+			BuildRoom,
+			WorkRoom
 		} JobType;
 
 		struct DigDirtJob {
@@ -54,10 +55,25 @@ namespace Driller {
 			DrillerDefinitions::RoomType type;
 		};
 
+		struct WorkRoomJob {
+			WorkRoomJob(int _column, int _level, DrillerDefinitions::RoomType _type, float _interval) :
+				type(_type),
+				column(_column),
+				level(_level),
+				interval(_interval) {
+			}
+
+			DrillerDefinitions::RoomType type;
+			int column;
+			int level;
+			float interval;
+		};
+
 		union {
 			DigDirtJob			DigDirtData;
 			BuildElevatorJob	BuildElevatorData;
 			BuildRoomJob		BuildRoomData;
+			WorkRoomJob			WorkRoomData;
 		};
 
 		////////////////////////////////////////////////////////////
@@ -76,6 +92,22 @@ namespace Driller {
 			}
 		}
 
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Gets the interval for pseudo completing infinite jobs
+		///
+		///	\return The interval
+		///
+		////////////////////////////////////////////////////////////
+		float getInfiniteInterval(void) const {
+			switch (JobType) {
+			case WorkRoom:
+				return WorkRoomData.interval;
+			default:
+				return 0.0f;
+			}
+		}
+
 
 		JobContextInfo() {
 			JobType = None;
@@ -91,6 +123,14 @@ namespace Driller {
 		JobContextInfo(const BuildRoomJob& _job) {
 			BuildRoomData = _job;
 			JobType = BuildRoom;
+		}
+		JobContextInfo(const WorkRoomJob& _job) {
+			WorkRoomData = _job;
+			JobType = WorkRoom;
+		}
+		
+		~JobContextInfo() {
+
 		}
 	};
 }

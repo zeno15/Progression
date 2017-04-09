@@ -5,7 +5,6 @@
 
 #include <Driller/Elements/ElevatorShaftElement.hpp>
 #include <Driller/Elements/UndergroundTileElement.hpp>
-#include <Graphics/AnimatedSprite.hpp>
 
 #include <vector>
 
@@ -123,10 +122,6 @@ namespace Driller {
 		std::vector<ElevatorShaftElement *>							m_ElevatorShafts;				///<	Collection of elevator shafts
 		std::vector<std::vector<UndergroundTileElement *>>			m_LeftTiles;					///<	The tiles to the left of the elevator
 		std::vector<std::vector<UndergroundTileElement *>>			m_RightTiles;					///<	The tiles to the right of the elevator
-		unsigned int												m_VAO;							///<	OpenGL VAO handle
-		unsigned int												m_VBO;							///<	OpenGL VBO handle
-
-		Graphics::AnimatedSprite *									m_AnimatedSprite;
 	};
 }
 

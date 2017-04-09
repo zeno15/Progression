@@ -2,6 +2,8 @@
 
 #include <Driller/Managers/JobManager.hpp>
 #include <Driller/Managers/NotificationService.hpp>
+#include <Driller/Managers/ShuttleManager.hpp>
+#include <Driller/Managers/ResourceManager.hpp>
 #include <Driller/Managers/RoomManager.hpp>
 #include <Driller/Managers/UserInteractionManager.hpp>
 #include <Driller/Managers/WorkerManager.hpp>
@@ -18,33 +20,9 @@
 
 #include <iostream>
 
-#define AXIS_LENGTH 1000.0f
-
 namespace Driller {
 	DrillerGameScene::DrillerGameScene(void) :
 		Infrastructure::Scene("DrillerGameScene") {
-
-
-		float data[] = {
-			-AXIS_LENGTH, 0.0f, 0.0f, 0.0f,
-			0.0f, 0.0f, 0.0f, -AXIS_LENGTH,
-			0.0f, 0.0f, +AXIS_LENGTH, 0.0f
-		};
-
-		glGenVertexArrays(1, &m_VAO);
-		glBindVertexArray(m_VAO);
-
-		glGenBuffers(1, &m_VBO);
-		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, data, GL_STATIC_DRAW);
-
-		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-
-		glLineWidth(1.0f);
-
-
 
 		for (int i = 0; i < DrillerDefinitions::MaximumHeight; i += 1) {
 			m_ElevatorShafts.push_back(new ElevatorShaftElement(i));
@@ -57,64 +35,15 @@ namespace Driller {
 		}
 
 		m_ElevatorShafts[0]->setIsBuilt(true);
-
-		m_AnimatedSprite = new Graphics::AnimatedSprite(DrillerResources::SpriteSheetName);
-
-		m_AnimatedSprite->addAnimation(
-			System::Vector2f(
-				DrillerDefinitions::TileWidth,
-				DrillerDefinitions::TileHeight),
-			System::Vector2f(
-				DrillerDefinitions::TileWidth * 3.0f,
-				DrillerDefinitions::TileHeight * 0.0f),
-			System::Vector2f(
-				DrillerDefinitions::TileWidth,
-				DrillerDefinitions::TileHeight));
-
-		m_AnimatedSprite->addAnimation(
-			System::Vector2f(
-				DrillerDefinitions::TileWidth,
-				DrillerDefinitions::TileHeight),
-			System::Vector2f(
-				DrillerDefinitions::TileWidth * 4.0f,
-				DrillerDefinitions::TileHeight * 0.0f),
-			System::Vector2f(
-				DrillerDefinitions::TileWidth,
-				DrillerDefinitions::TileHeight));
-
-		m_AnimatedSprite->addAnimation(
-			System::Vector2f(
-				DrillerDefinitions::TileWidth,
-				DrillerDefinitions::TileHeight),
-			System::Vector2f(
-				DrillerDefinitions::TileWidth * 5.0f,
-				DrillerDefinitions::TileHeight * 0.0f),
-			System::Vector2f(
-				DrillerDefinitions::TileWidth,
-				DrillerDefinitions::TileHeight));
-
-		m_AnimatedSprite->addAnimation(
-			System::Vector2f(
-				DrillerDefinitions::TileWidth,
-				DrillerDefinitions::TileHeight),
-			System::Vector2f(
-				DrillerDefinitions::TileWidth * 6.0f,
-				DrillerDefinitions::TileHeight * 0.0f),
-			System::Vector2f(
-				DrillerDefinitions::TileWidth,
-				DrillerDefinitions::TileHeight));
-
-		m_AnimatedSprite->generate();
 	}
 
 	DrillerGameScene::~DrillerGameScene(void) {
-		glDeleteBuffers(1, &m_VBO);
-		glDeleteVertexArrays(1, &m_VAO);
 	}
 
 	
 	void DrillerGameScene::update(float _delta) {
 		Infrastructure::InstanceCollection::getInstance<RoomManager>().update(_delta);
+		Infrastructure::InstanceCollection::getInstance<ShuttleManager>().update(_delta);
 		Infrastructure::InstanceCollection::getInstance<WorkerManager>().update(_delta);
 	}
 
@@ -133,21 +62,6 @@ namespace Driller {
 
 		if (Infrastructure::InstanceCollection::getInstance<WorkerManager>().handleEvent(_event)) {
 			return true;
-		}
-
-		if (_event.type == System::Event::KeyDown) {
-			if (_event.key.key == System::Keyboard::Q) {
-				m_AnimatedSprite->setAnimationIndex(0);
-			}
-			if (_event.key.key == System::Keyboard::W) {
-				m_AnimatedSprite->setAnimationIndex(1);
-			}
-			if (_event.key.key == System::Keyboard::E) {
-				m_AnimatedSprite->setAnimationIndex(2);
-			}
-			if (_event.key.key == System::Keyboard::R) {
-				m_AnimatedSprite->setAnimationIndex(3);
-			}
 		}
 		
 		return false;
@@ -186,19 +100,8 @@ namespace Driller {
 
 		Infrastructure::InstanceCollection::getInstance<RoomManager>().render(_window, renderData);
 		Infrastructure::InstanceCollection::getInstance<WorkerManager>().render(_window, renderData);
-
+		Infrastructure::InstanceCollection::getInstance<ShuttleManager>().render(_window, renderData);
 		Infrastructure::InstanceCollection::getInstance<JobManager>().render(_window, renderData);
-
-		auto& shader = Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader(DrillerResources::TestShaderName);
-		shader.bind();
-		shader.passUniform(DrillerResources::TestShaderMVPUniformName, renderData.projection * renderData.view);
-		shader.passUniform(DrillerResources::TestShaderColourUniformName, Graphics::Colour::Magenta);
-
-		glBindVertexArray(m_VAO);
-		glDrawArrays(GL_LINES, 0, 6);
-
-		renderData.shaderName = DrillerResources::AnimatedSpriteShader;
-		m_AnimatedSprite->render(_window, renderData);
 	}
 
 	ElevatorShaftElement *DrillerGameScene::getElevator(int _level) {

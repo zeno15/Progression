@@ -4,7 +4,9 @@
 
 #include <Driller/Managers/JobManager.hpp>
 #include <Driller/Managers/NotificationService.hpp>
+#include <Driller/Managers/ResourceManager.hpp>
 #include <Driller/Managers/RoomManager.hpp>
+#include <Driller/Managers/ShuttleManager.hpp>
 #include <Driller/Managers/TileManager.hpp>
 #include <Driller/Managers/UserInteractionManager.hpp>
 #include <Driller/Managers/WorkerManager.hpp>
@@ -33,7 +35,9 @@ namespace Driller {
 
 		Infrastructure::InstanceCollection::registerInstance<JobManager>();
 		Infrastructure::InstanceCollection::registerInstance<NotificationService>();
+		Infrastructure::InstanceCollection::registerInstance<ResourceManager>();
 		Infrastructure::InstanceCollection::registerInstance<RoomManager>();
+		Infrastructure::InstanceCollection::registerInstance<ShuttleManager>();
 		Infrastructure::InstanceCollection::registerInstance<TileManager>();
 		Infrastructure::InstanceCollection::registerInstance<UserInteractionManager>();
 		Infrastructure::InstanceCollection::registerInstance<WorkerManager>();
@@ -97,7 +101,7 @@ namespace Driller {
 
 		auto scene = new DrillerGameScene();
 
-		Infrastructure::InstanceCollection::getInstance<WorkerManager>().addWorker(new WorkerElement());
+		Infrastructure::InstanceCollection::getInstance<ShuttleManager>().createShuttle();
 
 		Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().addScene(scene);
 		Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().setActiveScene(scene);

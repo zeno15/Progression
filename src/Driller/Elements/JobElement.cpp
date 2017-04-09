@@ -59,10 +59,19 @@ namespace Driller {
 	bool JobElement::workTimedJob(float _delta) {
 		reduceRemainingTime(_delta);
 
+		if (m_JobType == DrillerDefinitions::JobType::Infinite) {
+			if (m_RemainingTime <= 0.0f) {
+				onJobComplete.invoke(this);
+				m_RemainingTime += m_JobInfo.getInfiniteInterval();
+			}
+
+			return false;
+		}
+
 		return m_RemainingTime <= 0.0f;
 	}
 
-	JobContextInfo JobElement::getJobInfo(void) const {
+	const JobContextInfo &JobElement::getJobInfo(void) const {
 		return m_JobInfo;
 	}
 

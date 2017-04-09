@@ -27,8 +27,8 @@ namespace Graphics {
 
 		auto& shader = Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader(_renderData.shaderName);
 		shader.bind();
-		shader.passUniform("MVP", _renderData.projection * _renderData.view * System::Mat4x4::createTranslation(System::Vector3f(0.0f, 0.0f, 0.8f)));
-		Infrastructure::InstanceCollection::getInstance<Infrastructure::TextureManager>().getTexture("DrillerSpriteSheet").bind();
+		shader.passUniform("MVP", _renderData.projection * _renderData.view * _renderData.model * System::Mat4x4::createTranslation(System::Vector3f(getPosition(), 0.5f)));
+		_renderData.texture->bind();
 		glBindVertexArray(m_VAO);
 		glDrawArrays(GL_TRIANGLES, m_AnimationIndex * 6, 6);
 	}
@@ -83,6 +83,9 @@ namespace Graphics {
 	}
 
 	void AnimatedSprite::generate(void) {
+		glDeleteBuffers(1, &m_VBO);
+		glDeleteVertexArrays(1, &m_VAO);
+
 		glGenVertexArrays(1, &m_VAO);
 		glBindVertexArray(m_VAO);
 

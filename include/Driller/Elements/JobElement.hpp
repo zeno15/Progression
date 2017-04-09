@@ -106,7 +106,7 @@ namespace Driller {
 		///	\return	The job info
 		///
 		////////////////////////////////////////////////////////////
-		JobContextInfo getJobInfo(void) const;
+		const JobContextInfo &getJobInfo(void) const;
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Gets the tile coordinates

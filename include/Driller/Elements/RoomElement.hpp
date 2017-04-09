@@ -3,6 +3,8 @@
 
 #include <Driller/Elements/BaseElement.hpp>
 
+#include <Graphics/AnimatedSprite.hpp>
+
 ////////////////////////////////////////////////////////////
 ///
 ///	\namespace Driller
@@ -76,16 +78,25 @@ namespace Driller {
 		////////////////////////////////////////////////////////////
 		const System::Vector2i& getRoomSize(void) const;
 
-	private:
-		void generateGraphics(void);
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Method called when a room is created
+		///
+		////////////////////////////////////////////////////////////
+		virtual void onRoomCreated(void) {}
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Method called when a room is removed
+		///
+		////////////////////////////////////////////////////////////
+		virtual void onRoomRemoved(void) {}
 
 	private:
-		unsigned int		m_VAO;						///<	OpenGL VAO handle
-		unsigned int		m_VBO;						///<	OpenGL position VBO handle
-
 		System::Vector2i	m_BottomLeft;				///<	The bottom left tile of the room
 		System::Vector2i	m_SpriteSheetPosition;		///<	The bottom left of the sprite sheet
 		System::Vector2u	m_RoomSize;					///<	The size of the room
+
+		Graphics::AnimatedSprite		m_Graphics;		///<	The drawable room
 	};
 }
 

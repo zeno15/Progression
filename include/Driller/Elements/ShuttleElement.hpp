@@ -1,8 +1,9 @@
-#ifndef INCLUDED_DRILLER_ELEMENTS_WORKER_ELEMENT_HPP_
-#define INCLUDED_DRILLER_ELEMENTS_WORKER_ELEMENT_HPP_
+#ifndef INCLUDED_DRILLER_ELEMENTS_SHUTTLE_ELEMENT_HPP_
+#define INCLUDED_DRILLER_ELEMENTS_SHUTTLE_ELEMENT_HPP_
 
 #include <Driller/Elements/BaseElement.hpp>
-#include <Driller/Elements/JobElement.hpp>
+
+#include <Graphics/AnimatedSprite.hpp>
 
 ////////////////////////////////////////////////////////////
 ///
@@ -10,23 +11,24 @@
 ///
 ////////////////////////////////////////////////////////////
 namespace Driller {
+
 	////////////////////////////////////////////////////////////
 	///
-	///	\brief	Worker element for moving people things
+	///	\brief	Class to represent shuttle that exchanges economy value and workers
 	///
 	////////////////////////////////////////////////////////////
-	class WorkerElement : public BaseElement {
+	class ShuttleElement : public BaseElement {
 	public:
 		////////////////////////////////////////////////////////////
 		///
 		///	\brief	Constructor
-		///
+		///	
 		////////////////////////////////////////////////////////////
-		WorkerElement(void);
+		ShuttleElement(void);
 
 		////////////////////////////////////////////////////////////
 		///
-		///	\brief	Updates the worker 
+		///	\brief	Updates the shuttle 
 		///
 		///	\param	The elapsed time for the update
 		///
@@ -34,7 +36,7 @@ namespace Driller {
 		void update(float _delta) override;
 		////////////////////////////////////////////////////////////
 		///
-		///	\brief	Handles an event for the worker
+		///	\brief	Handles an event for the shuttle
 		///
 		///	\param	The event to handle
 		///
@@ -44,7 +46,7 @@ namespace Driller {
 		bool handleEvent(const System::Event& _event) override;
 		////////////////////////////////////////////////////////////
 		///
-		///	\brief	Renders the worker
+		///	\brief	Renders the shuttle
 		///
 		///	\param	The window to draw on
 		///
@@ -55,50 +57,54 @@ namespace Driller {
 
 		////////////////////////////////////////////////////////////
 		///
-		///	\brief	Sets the workers job and target
-		///
-		///	\param	The new job
+		///	\brief	Resets the shuttle for another arrival
 		///
 		////////////////////////////////////////////////////////////
-		void setJob(JobElement *_job);
+		void resetForArrival(void);
 
 		////////////////////////////////////////////////////////////
 		///
-		///	\brief	Gets the job
+		///	\brief	Gets whether the shuttle has completed its departure
 		///
-		///	\return	The job
-		///
-		////////////////////////////////////////////////////////////
-		JobElement *getJob(void) const;
-
-		////////////////////////////////////////////////////////////
-		///
-		///	\brief	Sets the position of the worker
-		///
-		///	\param	The position
+		///	\return	Whether it has been completed
 		///
 		////////////////////////////////////////////////////////////
-		void setPosition(const System::Vector2f& _position);
+		bool hasFinishedDeparture(void);
 
 	private:
 		////////////////////////////////////////////////////////////
 		///
-		///	\brief	Moves the worker towards the target
+		///	\brief	Whether the shuttle can leave
 		///
-		///	\param	The elapsed time for the update
+		///	\return Can leave
 		///
 		////////////////////////////////////////////////////////////
-		void moveTowardTarget(float _delta);
+		bool canLeave(void);
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Called when the shuttle lands for the first time
+		///
+		////////////////////////////////////////////////////////////
+		void onFirstLanding(void);
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Creates a worker at the landing position
+		///
+		////////////////////////////////////////////////////////////
+		void createWorker(void);
 
 	private:
-		unsigned int		m_VAO;						///<	OpenGL VAO handle
-		unsigned int		m_VBO;						///<	OpenGL position VBO handle
+		Graphics::AnimatedSprite			m_Graphics;				///<	The shuttle graphics
+		bool								m_GoingToLanding;		///<	Whether the shuttle is incoming
+		bool								m_Landed;				///<	Whether the shuttle has landed
+		bool								m_GoingToDeparture;		///<	Whether the shuttle is outgoing
+		bool								m_Complete;				///<	Whether the shuttle has completed its trip
+		bool								m_FirstLanding;			///<	Whether this is the shuttles first landing
 
-		System::Vector2f	m_Position;					///<	Position of the worker
-		System::Vector2f	m_TargetPosition;			///<	Target position of the worker
-
-		JobElement *		m_Job;						///<	The current job the worker has
+		float								m_LandedTime;
 	};
 }
 
-#endif // INCLUDED_DRILLER_ELEMENTS_WORKER_ELEMENT_HPP_
+#endif // INCLUDED_DRILLER_ELEMENTS_SHUTTLE_ELEMENT_HPP_
