@@ -69,6 +69,8 @@ namespace Driller {
 			float interval;
 		};
 
+		int Priority;
+
 		union {
 			DigDirtJob			DigDirtData;
 			BuildElevatorJob	BuildElevatorData;
@@ -111,22 +113,27 @@ namespace Driller {
 
 		JobContextInfo() {
 			JobType = None;
+			Priority = 0;
 		}
 		JobContextInfo(const DigDirtJob& _job) {
 			DigDirtData = _job;
 			JobType = DigDirt;
+			Priority = 40;
 		}
 		JobContextInfo(const BuildElevatorJob& _job) {
 			BuildElevatorData = _job;
 			JobType = BuildElevator;
+			Priority = 100;
 		}
 		JobContextInfo(const BuildRoomJob& _job) {
 			BuildRoomData = _job;
 			JobType = BuildRoom;
+			Priority = 50;
 		}
 		JobContextInfo(const WorkRoomJob& _job) {
 			WorkRoomData = _job;
 			JobType = WorkRoom;
+			Priority = 10;
 		}
 		
 		~JobContextInfo() {

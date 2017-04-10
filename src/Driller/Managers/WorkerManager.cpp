@@ -1,5 +1,10 @@
 #include <Driller/Managers/WorkerManager.hpp>
 
+#include <Driller/Managers/JobManager.hpp>
+
+#include <Infrastructure/InstanceCollection.hpp>
+
+
 namespace Driller {
 	const std::string WorkerManager::Name = "WorkerManager"; 
 	
@@ -8,6 +13,8 @@ namespace Driller {
 		for (auto& worker : m_Workers) {
 			worker->update(_delta);
 		}
+
+		Infrastructure::InstanceCollection::getInstance<JobManager>().assignWorkersJobs();
 	}
 
 	bool WorkerManager::handleEvent(const System::Event& _event) {

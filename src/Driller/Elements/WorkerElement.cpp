@@ -9,6 +9,7 @@
 #include <Driller/DrillerResources.hpp>
 #include <Driller/Elements/ElementHelpers.hpp>
 #include <Driller/Managers/JobManager.hpp>
+#include <Driller/Managers/UserInteractionManager.hpp>
 #include <Driller/Scenes/DrillerGameScene.hpp>
 
 #include <Window/OpenGL.hpp>
@@ -37,15 +38,8 @@ namespace Driller {
 		}
 		else {
 			if (m_Job == nullptr) {
-				// We don't have a job so lets try find one
-				auto& jobManager = Infrastructure::InstanceCollection::getInstance<JobManager>();
-
-				auto job = jobManager.getFirstAccessableJob();
-
-				if (job != nullptr) {
-					job->claimJob();
-					setJob(job);
-				}
+				// We don't have a job so lets register for one
+				Infrastructure::InstanceCollection::getInstance<JobManager>().registerWorkerForJob(this);
 			}
 			else {
 				// We have a job and we are at our target
@@ -129,5 +123,13 @@ namespace Driller {
 	void WorkerElement::setPosition(const System::Vector2f& _position) {
 		m_Position = System::Vector2f(_position);
 		m_TargetPosition = m_Position;
+	}
+
+	System::Vector2f WorkerElement::getPosition(void) const {
+		return m_Position;
+	}
+
+	System::Vector2i WorkerElement::getTilePosition(void) const {
+		return UserInteractionManager::getTilePositionFromWorldCoordinates(m_Position);
 	}
 }

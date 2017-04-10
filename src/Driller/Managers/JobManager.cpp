@@ -2,6 +2,8 @@
 
 #include <Driller/Managers/NotificationService.hpp>
 
+#include <Driller/Elements/WorkerElement.hpp>
+
 #include <Infrastructure/InstanceCollection.hpp>
 #include <Infrastructure/SceneManager.hpp>
 
@@ -9,6 +11,7 @@
 #include <Driller/Scenes/DrillerGameScene.hpp>
 
 #include <algorithm>
+#include <iostream>
 
 namespace Driller {
 	const std::string JobManager::Name = "JobManager";
@@ -97,9 +100,11 @@ namespace Driller {
 	}
 
 	void JobManager::completeJob(JobElement *_job) {
-		popJob(_job);
-		_job->completeJob();
-		delete _job;
+		if (_job->getJobType() != DrillerDefinitions::JobType::Infinite) {
+			popJob(_job);
+			_job->completeJob();
+			delete _job;
+		}
 	}
 	void JobManager::cancelJob(JobElement *_job) {
 		popJob(_job);
@@ -117,5 +122,88 @@ namespace Driller {
 		}
 
 		return jobs;
+	}
+	
+	void JobManager::registerWorkerForJob(WorkerElement *_worker) {
+		m_WorkersLookingForJobs.push_back(_worker);
+	}
+
+	void JobManager::assignWorkersJobs(void) {
+		if (m_WorkersLookingForJobs.size() <= 0) {
+			return;
+		}
+		auto& drillerGameScene = Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().getScene<DrillerGameScene>("DrillerGameScene");
+
+		std::vector<JobElement *> unclaimedJobs;
+
+		for (auto job : m_Jobs) {
+			if (!job->isJobClaimed()) {
+				unclaimedJobs.push_back(job);
+			}
+		}
+
+		std::sort(unclaimedJobs.begin(), unclaimedJobs.end(), [](JobElement *lhs, JobElement *rhs) {
+			return lhs->getJobInfo().Priority > rhs->getJobInfo().Priority;
+		});
+
+		std::cout << "There are " << m_WorkersLookingForJobs.size() << " worker(s) looking for work and " << unclaimedJobs.size() << " unclaimed jobs" << std::endl;
+
+		std::vector<std::vector<std::pair<WorkerElement *, unsigned int >>> workerJobsScores;
+
+		for (unsigned int iJob = 0; iJob < unclaimedJobs.size(); iJob += 1) {
+			workerJobsScores.push_back(std::vector<std::pair<WorkerElement *, unsigned int>>());
+
+			for (unsigned int iWorker = 0; iWorker < m_WorkersLookingForJobs.size(); iWorker += 1) {
+
+				unsigned int priorityScore = unclaimedJobs[iJob]->getJobInfo().Priority;
+				unsigned int distanceScore = createDistanceScore(unclaimedJobs[iJob]->getTileCoordinates(), m_WorkersLookingForJobs[iWorker]->getTilePosition());
+				unsigned int score = priorityScore + distanceScore;
+
+				if (!unclaimedJobs[iJob]->isAccessable(drillerGameScene)) {
+					score = std::numeric_limits<unsigned int>::max();
+				}
+
+				auto result = std::pair<WorkerElement *, unsigned int>(
+					m_WorkersLookingForJobs[iWorker],
+					score);
+
+
+				workerJobsScores[iJob].push_back(result);
+			}
+		}
+
+
+		for (unsigned int iJob = 0; iJob < unclaimedJobs.size(); iJob += 1) {
+			auto job = unclaimedJobs[iJob];
+			auto bestScore = std::numeric_limits<unsigned int>::max();
+			auto bestScoreIndex = 0;
+			for (unsigned int iWorker = 0; iWorker < m_WorkersLookingForJobs.size(); iWorker += 1) {
+				if (m_WorkersLookingForJobs[iWorker]->getJob() == nullptr) {
+					if (bestScore > workerJobsScores[iJob][iWorker].second) {
+						bestScore = workerJobsScores[iJob][iWorker].second;
+						bestScoreIndex = iWorker;
+					}
+				}
+			}
+
+			if (bestScore != std::numeric_limits<unsigned int>::max()) {
+				m_WorkersLookingForJobs[bestScoreIndex]->setJob(job);
+			}
+		}
+
+
+		m_WorkersLookingForJobs.clear();
+	}
+
+	unsigned int JobManager::createDistanceScore(const System::Vector2i& _jobCoordinates, const System::Vector2i& _tileCoordinates) {
+		if (_jobCoordinates.y == _tileCoordinates.y) {
+			return static_cast<unsigned int>(std::abs(_jobCoordinates.x) + std::abs(_tileCoordinates.x));
+		}
+
+		int jobDistance = std::abs(static_cast<int>(_jobCoordinates.x));
+		int tileDistance = std::abs(static_cast<int>(_tileCoordinates.x));
+		int elevatorDistance = static_cast<unsigned int>(std::abs(_jobCoordinates.y) - std::abs(_tileCoordinates.y));
+
+		return static_cast<unsigned int>(jobDistance + tileDistance + elevatorDistance);
 	}
 }

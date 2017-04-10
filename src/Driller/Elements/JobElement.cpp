@@ -63,9 +63,8 @@ namespace Driller {
 			if (m_RemainingTime <= 0.0f) {
 				onJobComplete.invoke(this);
 				m_RemainingTime += m_JobInfo.getInfiniteInterval();
+				return true;
 			}
-
-			return false;
 		}
 
 		return m_RemainingTime <= 0.0f;

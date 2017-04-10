@@ -10,6 +10,10 @@
 
 #include <Driller/Elements/JobElement.hpp>
 
+namespace Driller {
+	class WorkerElement;
+}
+
 ////////////////////////////////////////////////////////////
 ///
 ///	\namespace Driller
@@ -147,8 +151,28 @@ namespace Driller {
 		////////////////////////////////////////////////////////////
 		std::vector<JobElement *> getJobsThatContainTile(const System::Vector2i& _tileCoordinates);
 
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Registers a worker so it can be assigned a job
+		///
+		///	\param	The worker
+		///
+		////////////////////////////////////////////////////////////
+		void registerWorkerForJob(WorkerElement *_worker);
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Assigns all registered workers jobs 
+		///
+		////////////////////////////////////////////////////////////
+		void assignWorkersJobs(void);
+
 	private:
-		std::vector<JobElement *> m_Jobs;
+		unsigned int createDistanceScore(const System::Vector2i& _jobCoordinates, const System::Vector2i& _tileCoordinates);
+
+	private:
+		std::vector<JobElement *>			m_Jobs;
+		std::vector<WorkerElement *>		m_WorkersLookingForJobs;
 	};
 }
 
