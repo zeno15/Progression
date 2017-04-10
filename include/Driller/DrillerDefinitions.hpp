@@ -29,6 +29,7 @@ namespace Driller {
 		static const float BackgroundZ;							///<	Z depth of background sprites
 		static const float BuildingZ;							///<	Z depth of building sprites
 		static const float EntityZ;								///<	Z depth of entity sprites
+		static const float JobMarkerZ;							///<	Z depth of job markers
 		
 
 		static const int MaximumWidth;							///<	Maximum number of tiles away from elevator

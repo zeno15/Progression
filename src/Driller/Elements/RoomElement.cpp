@@ -47,6 +47,7 @@ namespace Driller {
 
 		_renderData.shaderName = DrillerResources::AnimatedSpriteShader;
 		_renderData.texture = &Infrastructure::InstanceCollection::getInstance<Infrastructure::TextureManager>().getTexture(DrillerResources::SpriteSheetName);
+		_renderData.model.translate(System::Vector3f(0.0f, 0.0f, DrillerDefinitions::BuildingZ));
 		m_Graphics.render(_window, _renderData);
 	}
 	

@@ -27,7 +27,7 @@ namespace Graphics {
 
 		auto& shader = Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader(_renderData.shaderName);
 		shader.bind();
-		shader.passUniform("MVP", _renderData.projection * _renderData.view * _renderData.model * System::Mat4x4::createTranslation(System::Vector3f(getPosition(), 0.5f)));
+		shader.passUniform("MVP", _renderData.projection * _renderData.view * _renderData.model * System::Mat4x4::createTranslation(System::Vector3f(getPosition(), 0.0f)));
 		_renderData.texture->bind();
 		glBindVertexArray(m_VAO);
 		glDrawArrays(GL_TRIANGLES, m_AnimationIndex * 6, 6);

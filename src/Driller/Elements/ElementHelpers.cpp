@@ -148,11 +148,17 @@ namespace Driller {
 		case DrillerDefinitions::RoomType::Mining: 
 		{
 			auto info = JobContextInfo(JobContextInfo::WorkRoomJob(_tileCoordinates.x, _tileCoordinates.y, _roomType, 1.0f));
+			
+			auto roomSize = DrillerDefinitions::RoomData[_roomType][DrillerDefinitions::RoomInfo::SpriteSize];
+			auto jobTileSize = System::Vector2f(roomSize.x * DrillerDefinitions::TileWidth, roomSize.y * DrillerDefinitions::TileHeight);
+
+			auto jobPosition =	System::Vector2f(_tileCoordinates.x * DrillerDefinitions::TileWidth, _tileCoordinates.y * DrillerDefinitions::TileHeight) +
+								System::Vector2f((roomSize.x - 1) * DrillerDefinitions::TileWidth / 2.0f, 0.0f);
 
 			auto job = new JobElement(
 				info, 
 				_tileCoordinates, 
-				System::Vector2i(_workPosition.x * DrillerDefinitions::TileWidth, _workPosition.y * DrillerDefinitions::TileHeight), 
+				jobPosition,
 				DrillerDefinitions::JobType::Infinite);
 			job->setRemaingTime(1.0f);
 			job->onJobComplete.registerCallback([&](JobElement *_job) {

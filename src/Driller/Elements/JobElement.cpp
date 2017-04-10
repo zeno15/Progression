@@ -47,9 +47,13 @@ namespace Driller {
 
 
 	void JobElement::render(const Window::Window& _window, Graphics::RenderData _renderData) const {
+		if (m_JobInfo.JobType == JobContextInfo::WorkRoom) {
+			return;
+		}
+
 		auto& shader = Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader(DrillerResources::StaticTexturedShaderName);
 		shader.bind();
-		shader.passUniform(DrillerResources::StaticTexturedShaderMVPUniformName, _renderData.projection * _renderData.view * System::Mat4x4::createTranslation(System::Vector3f(DrillerDefinitions::TileHeight * m_TileCoordinates.x, -DrillerDefinitions::TileHeight * m_TileCoordinates.y, 0.1f)));
+		shader.passUniform(DrillerResources::StaticTexturedShaderMVPUniformName, _renderData.projection * _renderData.view * System::Mat4x4::createTranslation(System::Vector3f(DrillerDefinitions::TileHeight * m_TileCoordinates.x, -DrillerDefinitions::TileHeight * m_TileCoordinates.y, DrillerDefinitions::JobMarkerZ)));
 		Infrastructure::InstanceCollection::getInstance<Infrastructure::TextureManager>().getTexture(DrillerResources::SpriteSheetName).bind();
 		glBindVertexArray(m_VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);

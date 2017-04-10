@@ -11,7 +11,8 @@ namespace Driller {
 
 	const float DrillerDefinitions::BackgroundZ = 0.0f;
 	const float DrillerDefinitions::BuildingZ = 0.1f;
-	const float DrillerDefinitions::EntityZ = 0.2f;
+	const float DrillerDefinitions::JobMarkerZ = 0.2f;
+	const float DrillerDefinitions::EntityZ = 0.3f;
 
 	const int DrillerDefinitions::MaximumWidth = 32;
 	const int DrillerDefinitions::MaximumHeight = 16;

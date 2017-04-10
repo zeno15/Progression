@@ -142,10 +142,13 @@ namespace Driller {
 			}
 		}
 
+		if (unclaimedJobs.size() == 0) {
+			return;
+		}
+
 		std::sort(unclaimedJobs.begin(), unclaimedJobs.end(), [](JobElement *lhs, JobElement *rhs) {
 			return lhs->getJobInfo().Priority > rhs->getJobInfo().Priority;
 		});
-
 		std::cout << "There are " << m_WorkersLookingForJobs.size() << " worker(s) looking for work and " << unclaimedJobs.size() << " unclaimed jobs" << std::endl;
 
 		std::vector<std::vector<std::pair<WorkerElement *, unsigned int >>> workerJobsScores;
