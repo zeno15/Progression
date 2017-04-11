@@ -4,6 +4,7 @@
 #include <Driller/DrillerResources.hpp>
 
 #include <Driller/Managers/JobManager.hpp>
+#include <Driller/Managers/ResourceManager.hpp>
 #include <Driller/Managers/RoomManager.hpp>
 
 #include <Driller/Scenes/DrillerGameScene.hpp>
@@ -163,6 +164,7 @@ namespace Driller {
 			job->setRemaingTime(1.0f);
 			job->onJobComplete.registerCallback([&](JobElement *_job) {
 				std::cout << "Work the mining room job complete" << std::endl;
+				Infrastructure::InstanceCollection::getInstance<ResourceManager>().addOre(static_cast<unsigned int>(_job->getTileCoordinates().y + 1));
 			});
 
 			return job;

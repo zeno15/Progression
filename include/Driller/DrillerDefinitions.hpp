@@ -41,6 +41,11 @@ namespace Driller {
 		static const System::Vector2f ShuttleBeginPoint;		///<	The coordinates of where the shuttle begins
 		static const System::Vector2f ShuttleEndPoint;			///<	The coordinates of where the shuttle ends
 
+		static const unsigned int BuildElevatorCost;			///<	The cost of building an elevator
+		static const unsigned int DigDirtCost;					///<	The cost of digging a dirt tile
+		static const unsigned int MiningRoomCost;				///<	The cost of building a mining room
+		static const unsigned int DormRoomCost;					///<	The cost of building a dorm room
+
 		enum TileInteractionContext {
 			NoContext,
 			ResetContext,

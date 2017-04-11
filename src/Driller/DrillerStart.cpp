@@ -102,6 +102,7 @@ namespace Driller {
 		auto scene = new DrillerGameScene();
 
 		Infrastructure::InstanceCollection::getInstance<ShuttleManager>().createShuttle();
+		Infrastructure::InstanceCollection::getInstance<ResourceManager>().addMoney(300);
 
 		Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().addScene(scene);
 		Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().setActiveScene(scene);

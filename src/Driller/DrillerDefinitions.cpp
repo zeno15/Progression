@@ -23,6 +23,11 @@ namespace Driller {
 	const System::Vector2f DrillerDefinitions::ShuttleBeginPoint =		System::Vector2f(-DrillerDefinitions::TileWidth * 16.0f, DrillerDefinitions::TileHeight * 12.0f);
 	const System::Vector2f DrillerDefinitions::ShuttleEndPoint =		System::Vector2f(+DrillerDefinitions::TileWidth * 16.0f, DrillerDefinitions::TileHeight * 20.0f);
 
+	const unsigned int DrillerDefinitions::BuildElevatorCost = 100;
+	const unsigned int DrillerDefinitions::DigDirtCost = 20;
+	const unsigned int DrillerDefinitions::MiningRoomCost = 100;
+	const unsigned int DrillerDefinitions::DormRoomCost = 80;
+
 	const System::Vector2i DrillerDefinitions::RoomData[RoomType::NumberRoomTypes][RoomInfo::NumberRoomInfo] = {
 		// None
 		{ System::Vector2i(0, 1), System::Vector2i(1, 1) },

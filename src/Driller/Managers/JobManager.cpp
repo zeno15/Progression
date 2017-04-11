@@ -143,6 +143,7 @@ namespace Driller {
 		}
 
 		if (unclaimedJobs.size() == 0) {
+			m_WorkersLookingForJobs.clear();
 			return;
 		}
 

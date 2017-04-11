@@ -48,6 +48,10 @@ namespace Driller {
 	}
 
 	bool DrillerGameScene::handleEvent(const System::Event& _event) {
+		if (_event.type == System::Event::KeyDown && _event.key.key == System::Keyboard::F1) {
+			std::cout << "Money: " << Infrastructure::InstanceCollection::getInstance<ResourceManager>().getMoney() << ", Ore: " << Infrastructure::InstanceCollection::getInstance<ResourceManager>().getOre() << std::endl;
+		}
+
 		if (Infrastructure::InstanceCollection::getInstance<UserInteractionManager>().handleEvent(_event)) {
 			return true;
 		}
@@ -63,7 +67,7 @@ namespace Driller {
 		if (Infrastructure::InstanceCollection::getInstance<WorkerManager>().handleEvent(_event)) {
 			return true;
 		}
-		
+				
 		return false;
 	}
 

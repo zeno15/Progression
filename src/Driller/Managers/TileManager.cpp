@@ -2,6 +2,7 @@
 
 #include <Driller/Managers/NotificationService.hpp>
 #include <Driller/Managers/JobManager.hpp>
+#include <Driller/Managers/ResourceManager.hpp>
 #include <Driller/Managers/RoomManager.hpp>
 
 #include <Driller/Elements/ElementHelpers.hpp>
@@ -41,15 +42,21 @@ namespace Driller {
 			assert(elevator != nullptr);
 
 			if (!elevator->isBuilt()) {
-				auto lastBuilt = drillerGameScene.getLastBuiltElevatorLevel();
-				if (lastBuilt + 1 == _y) {
-					Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(ElementHelpers::createBuildElevatorJob(_y));
-					auto elevator = drillerGameScene.getElevator(_y);
-					elevator->setJobQueuedFlag(true);
-				}
-				else {
-					//std::cout << "Cant create new elevator at x: " << _x << ", y: " << _y << " need to build before it." << std::endl;
-				}
+					auto lastBuilt = drillerGameScene.getLastBuiltElevatorLevel();
+					if (lastBuilt + 1 == _y) {
+						if (Infrastructure::InstanceCollection::getInstance<ResourceManager>().getMoney() >= DrillerDefinitions::BuildElevatorCost) {
+							Infrastructure::InstanceCollection::getInstance<ResourceManager>().removeMoney(DrillerDefinitions::BuildElevatorCost);
+							Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(ElementHelpers::createBuildElevatorJob(_y));
+							auto elevator = drillerGameScene.getElevator(_y);
+							elevator->setJobQueuedFlag(true);
+						}
+						else {
+							std::cout << "Cannot afford $" << DrillerDefinitions::BuildElevatorCost << " for elevator, only have $" << Infrastructure::InstanceCollection::getInstance<ResourceManager>().getMoney() << std::endl;
+						}
+					}
+					else {
+						//std::cout << "Cant create new elevator at x: " << _x << ", y: " << _y << " need to build before it." << std::endl;
+					}
 			}
 			else {
 				//std::cout << "We activated an existing elevator at x: " << _x << ", y: " << _y << ", and it already exists, activate as a room." << std::endl;
@@ -61,8 +68,14 @@ namespace Driller {
 			assert(tile != nullptr);
 
 			if (!tile->getIsClear() && !tile->getJobQueued()) {
-				Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(ElementHelpers::createDigDirtJob(_y, _x));
-				tile->setJobQueuedFlag(true);
+				if (Infrastructure::InstanceCollection::getInstance<ResourceManager>().getMoney() >= DrillerDefinitions::DigDirtCost) {
+					Infrastructure::InstanceCollection::getInstance<ResourceManager>().removeMoney(DrillerDefinitions::DigDirtCost);
+					Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(ElementHelpers::createDigDirtJob(_y, _x));
+					tile->setJobQueuedFlag(true);
+				}
+				else {
+					std::cout << "Cannot afford $" << DrillerDefinitions::DigDirtCost << " for dig dirt, only have $" << Infrastructure::InstanceCollection::getInstance<ResourceManager>().getMoney() << std::endl;
+				}
 			}
 			else {
 				//std::cout << "Activated  tile at x : " << _x << ", y: " << _y << " with no context where one exists and it is clear, do nothing." << std::endl;

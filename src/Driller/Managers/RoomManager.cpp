@@ -1,7 +1,8 @@
 #include <Driller/Managers/RoomManager.hpp>
 
-#include <Driller/Managers/UserInteractionManager.hpp>
 #include <Driller/Managers/JobManager.hpp>
+#include <Driller/Managers/ResourceManager.hpp>
+#include <Driller/Managers/UserInteractionManager.hpp>
 
 #include <Infrastructure/InstanceCollection.hpp>
 #include <Infrastructure/SceneManager.hpp>
@@ -71,22 +72,43 @@ namespace Driller {
 
 				auto bottomLeftTile = UserInteractionManager::getTilePositionFromEventCoordinates(mousePos) + drawingOffset;
 				auto& drillerGameScene = Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().getScene<DrillerGameScene>("DrillerGameScene");
+				auto& resourceManager = Infrastructure::InstanceCollection::getInstance<ResourceManager>();
 
 				auto isValid = drillerGameScene.isValid(bottomLeftTile, m_CurrentGhostSize);
 
+				
+
 				if (isValid) {
-					for (int y = bottomLeftTile.y; y < bottomLeftTile.y + static_cast<int>(m_CurrentGhostSize.y); y += 1) {
-						for (int x = bottomLeftTile.x; x < bottomLeftTile.x + static_cast<int>(m_CurrentGhostSize.x); x += 1) {
-							drillerGameScene.getTile(x, y)->setJobQueuedFlag(true);
+					switch (m_CurrentRoom) {
+					case DrillerDefinitions::RoomType::Mining:
+						isValid = isValid && resourceManager.getMoney() >= DrillerDefinitions::MiningRoomCost;
+						if (isValid) {
+							resourceManager.removeMoney(DrillerDefinitions::MiningRoomCost);
 						}
-					}				
+						break;
+					case DrillerDefinitions::RoomType::Dorm:
+						isValid = isValid && resourceManager.getMoney() >= DrillerDefinitions::DormRoomCost;
+						if (isValid) {
+							resourceManager.removeMoney(DrillerDefinitions::DormRoomCost);
+						}
+						break;
+					default:
+						break;
+					}
+					if (isValid) {
+						for (int y = bottomLeftTile.y; y < bottomLeftTile.y + static_cast<int>(m_CurrentGhostSize.y); y += 1) {
+							for (int x = bottomLeftTile.x; x < bottomLeftTile.x + static_cast<int>(m_CurrentGhostSize.x); x += 1) {
+								drillerGameScene.getTile(x, y)->setJobQueuedFlag(true);
+							}
+						}
 
-					auto contextInfo = JobContextInfo(JobContextInfo::BuildRoomJob(bottomLeftTile.x, bottomLeftTile.y, m_CurrentRoom));
+						auto contextInfo = JobContextInfo(JobContextInfo::BuildRoomJob(bottomLeftTile.x, bottomLeftTile.y, m_CurrentRoom));
 
-					auto job = ElementHelpers::createBuildRoomJob(contextInfo);
+						auto job = ElementHelpers::createBuildRoomJob(contextInfo);
 
-					Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(job);
-					resetFromDrawingGhost();
+						Infrastructure::InstanceCollection::getInstance<JobManager>().addJob(job);
+						resetFromDrawingGhost();
+					}
 				}
 
 				return true;
@@ -110,8 +132,20 @@ namespace Driller {
 
 				m_BottomLeftTile = UserInteractionManager::getTilePositionFromEventCoordinates(mousePos) + drawingOffset;
 				auto& drillerGameScene = Infrastructure::InstanceCollection::getInstance<Infrastructure::SceneManager>().getScene<DrillerGameScene>("DrillerGameScene");
+				auto& resourceManager = Infrastructure::InstanceCollection::getInstance<ResourceManager>();
 
 				m_IsCurrentPositionValid = drillerGameScene.isValid(m_BottomLeftTile, m_CurrentGhostSize);
+
+				switch (m_CurrentRoom) {
+				case DrillerDefinitions::RoomType::Mining:
+					m_IsCurrentPositionValid = m_IsCurrentPositionValid && resourceManager.getMoney() >= DrillerDefinitions::MiningRoomCost;
+					break;
+				case DrillerDefinitions::RoomType::Dorm:
+					m_IsCurrentPositionValid = m_IsCurrentPositionValid && resourceManager.getMoney() >= DrillerDefinitions::DormRoomCost;
+					break;
+				default:
+					break;
+				}
 			}
 		}
 		return false;
