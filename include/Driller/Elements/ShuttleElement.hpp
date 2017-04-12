@@ -95,6 +95,13 @@ namespace Driller {
 		////////////////////////////////////////////////////////////
 		void createWorker(void);
 
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Buys all the ore the mining operation has
+		///
+		////////////////////////////////////////////////////////////
+		void buyOre(void);
+
 	private:
 		Graphics::AnimatedSprite			m_Graphics;				///<	The shuttle graphics
 		bool								m_GoingToLanding;		///<	Whether the shuttle is incoming

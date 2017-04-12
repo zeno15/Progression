@@ -2,6 +2,7 @@
 
 #include <Driller/DrillerResources.hpp>
 
+#include <Driller/Managers/EconomyManager.hpp>
 #include <Driller/Managers/JobManager.hpp>
 #include <Driller/Managers/NotificationService.hpp>
 #include <Driller/Managers/ResourceManager.hpp>
@@ -33,6 +34,7 @@ namespace Driller {
 		Infrastructure::InstanceCollection::registerInstance<Infrastructure::ShaderManager>();
 		Infrastructure::InstanceCollection::registerInstance<Infrastructure::TextureManager>();
 
+		Infrastructure::InstanceCollection::registerInstance<EconomyManager>();
 		Infrastructure::InstanceCollection::registerInstance<JobManager>();
 		Infrastructure::InstanceCollection::registerInstance<NotificationService>();
 		Infrastructure::InstanceCollection::registerInstance<ResourceManager>();

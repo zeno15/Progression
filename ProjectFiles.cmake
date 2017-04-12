@@ -101,6 +101,7 @@ SET(DRILLER_INCLUDE_FILES ${DRILLER_INCLUDE_FILES}
 	${CMAKE_SOURCE_DIR}/include/Driller/Elements/Rooms/Dorm.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Elements/Rooms/Mining.hpp
 	
+	${CMAKE_SOURCE_DIR}/include/Driller/Managers/EconomyManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/JobManager.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/NotificationService.hpp
 	${CMAKE_SOURCE_DIR}/include/Driller/Managers/RoomManager.hpp
@@ -229,6 +230,7 @@ SET(DRILLER_SOURCE_FILES ${DRILLER_SOURCE_FILES}
 	${CMAKE_SOURCE_DIR}/src/Driller/Elements/Rooms/Dorm.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Elements/Rooms/Mining.cpp
 	
+	${CMAKE_SOURCE_DIR}/src/Driller/Managers/EconomyManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/JobManager.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/NotificationService.cpp
 	${CMAKE_SOURCE_DIR}/src/Driller/Managers/ResourceManager.cpp

@@ -6,6 +6,8 @@
 #include <Driller/DrillerDefinitions.hpp>
 #include <Driller/DrillerResources.hpp>
 
+#include <Driller/Managers/EconomyManager.hpp>
+#include <Driller/Managers/ResourceManager.hpp>
 #include <Driller/Managers/WorkerManager.hpp>
 
 #include <Infrastructure/InstanceCollection.hpp>
@@ -61,6 +63,7 @@ namespace Driller {
 				}
 
 				std::cout << "Shuttle landed" << std::endl;
+				buyOre();
 			}
 			else {
 				m_Graphics.translate(direction * speed * _delta);
@@ -126,5 +129,16 @@ namespace Driller {
 		auto worker = new WorkerElement();
 		worker->setPosition(DrillerDefinitions::ShuttleLandingPoint + System::Vector2f(0.0f, -DrillerDefinitions::TileHeight));
 		Infrastructure::InstanceCollection::getInstance<WorkerManager>().addWorker(worker);
+	}
+
+	void ShuttleElement::buyOre(void) {
+		auto& resourceManager = Infrastructure::InstanceCollection::getInstance<ResourceManager>();
+		auto& economyManager = Infrastructure::InstanceCollection::getInstance<EconomyManager>();
+
+		unsigned int oreTotal = resourceManager.getOre();
+		resourceManager.removeOre(oreTotal);
+
+		unsigned int moneyTotal = static_cast<unsigned int>(static_cast<float>(oreTotal) * economyManager.getOreToMoneyRate());
+		resourceManager.addMoney(moneyTotal);
 	}
 }
