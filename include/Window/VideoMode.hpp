@@ -9,11 +9,11 @@ namespace Window {
 	///
 	////////////////////////////////////////////////////////////
 	struct VideoMode {
-		unsigned int bitsPerPixel;		///<	Number of bits per pixel	
-		unsigned int width;				///<	Width
-		unsigned int height;			///<	Height
-		unsigned int major;				///<	Major version of OpenGL
-		unsigned int minor;				///<	Minor version of OpenGL
+		unsigned int bitsPerPixel = 32;	///<	Number of bits per pixel	
+		unsigned int width = 1280;		///<	Width
+		unsigned int height = 720;		///<	Height
+		unsigned int major = 3;			///<	Major version of OpenGL
+		unsigned int minor = 3;			///<	Minor version of OpenGL
 	};
 
 } 

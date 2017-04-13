@@ -15,6 +15,8 @@
 #include <Infrastructure/ShaderManager.hpp>
 #include <Infrastructure/TextureManager.hpp>
 
+#include <Window/OpenGL.hpp>
+
 #include <ctime>
 #include <cstdlib>
 #include <functional>

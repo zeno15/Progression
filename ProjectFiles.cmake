@@ -68,15 +68,11 @@ SET(UTILITY_INCLUDE_FILES ${UTILITY_INCLUDE_FILES}
 )
 
 SET(WINDOW_INCLUDE_FILES ${WINDOW_INCLUDE_FILES}
-	${CMAKE_SOURCE_DIR}/include/Window/ContextImplementation.hpp
-	${CMAKE_SOURCE_DIR}/include/Window/ContextWin32.hpp
 	${CMAKE_SOURCE_DIR}/include/Window/OpenGL.hpp
 	${CMAKE_SOURCE_DIR}/include/Window/OpenGLDefinitions.hpp
 	${CMAKE_SOURCE_DIR}/include/Window/OpenGLDefinitionsWindows.hpp
 	${CMAKE_SOURCE_DIR}/include/Window/VideoMode.hpp
 	${CMAKE_SOURCE_DIR}/include/Window/Window.hpp
-	${CMAKE_SOURCE_DIR}/include/Window/WindowImplementation.hpp
-	${CMAKE_SOURCE_DIR}/include/Window/WindowImplementationWin32.hpp
 	${CMAKE_SOURCE_DIR}/include/Window/WindowStyle.hpp
 )
 
@@ -193,10 +189,8 @@ SET(SYSTEM_SOURCE_FILES ${SYSTEM_SOURCE_FILES}
 )
 
 SET(WINDOW_SOURCE_FILES ${WINDOW_SOURCE_FILES}
-	${CMAKE_SOURCE_DIR}/src/Window/ContextWin32.cpp
 	${CMAKE_SOURCE_DIR}/src/Window/OpenGL.cpp
 	${CMAKE_SOURCE_DIR}/src/Window/Window.cpp
-	${CMAKE_SOURCE_DIR}/src/Window/WindowImplementationWin32.cpp
 )
 
 SET(DRILLER_SOURCE_FILES ${DRILLER_SOURCE_FILES}

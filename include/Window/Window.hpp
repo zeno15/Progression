@@ -1,12 +1,13 @@
 #ifndef INCLUDED_WINDOW_WINDOW_HPP_
 #define INCLUDED_WINDOW_WINDOW_HPP_
 
+#include <System/Event.hpp>
+#include <System/Vector2.hpp>
 
-#include <Window/ContextImplementation.hpp>
-#include <Window/WindowImplementation.hpp>
+#include <Window/VideoMode.hpp>
 #include <Window/WindowStyle.hpp>
 
-#include <System/Vector2.hpp>
+#include <SDL.h>
 
 namespace Graphics {
 	class Colour;
@@ -159,13 +160,6 @@ namespace Window {
 
 		////////////////////////////////////////////////////////////
 		//
-		//	Returns the system specific window handle
-		//
-		////////////////////////////////////////////////////////////
-		WindowHandle getHandle(void) const;
-
-		////////////////////////////////////////////////////////////
-		//
 		//	Sets the title of the window
 		//
 		////////////////////////////////////////////////////////////
@@ -178,13 +172,18 @@ namespace Window {
 		////////////////////////////////////////////////////////////
 		std::string getTitle(void) const;
 
+	private:
+		void mapSDLToCustomEvent(SDL_Event& _sdlEvent, System::Event& _customEvent);
+
 	protected:
 		uint32_t				m_WindowStyle;
 		VideoMode				m_VideoMode;
 		std::string				m_Title;
 
-		WindowImplementation	m_WindowImpl;
-		ContextImplementation	m_ContextImpl;
+		SDL_Window *			m_Window;
+		SDL_GLContext 			m_OpenGLContext;
+
+		static bool				m_SDLInitialised;
 	};
 
 }

@@ -30,10 +30,7 @@ namespace System {
 	}
 
 	Vector2<int> InputImplementationWin32::getMousePosition(const Window::Window& _window) {
-		POINT point;
-		GetCursorPos(&point);
-		ScreenToClient(_window.getHandle(), &point);
-		return Vector2i(point.x, point.y);
+		throw std::runtime_error("InputImplementationWin32::getMousePosition");
 	}
 
 	void InputImplementationWin32::setMousePosition(const Vector2<int>& _position) {
@@ -41,11 +38,7 @@ namespace System {
 	}
 
 	void InputImplementationWin32::setMousePosition(const Vector2<int>& _position, const Window::Window& _window) {
-		POINT pt;
-		pt.x = _position.x;
-		pt.y = _position.y;
-		ClientToScreen(_window.getHandle(), &pt);
-		SetCursorPos(pt.x, pt.y);
+		throw std::runtime_error("InputImplementationWin32::setMousePosition");
 	}
 
 	Keyboard::Key InputImplementationWin32::systemToZeno(int _sysKey) {

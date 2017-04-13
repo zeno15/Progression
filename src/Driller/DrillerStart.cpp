@@ -19,6 +19,8 @@
 #include <Infrastructure/ShaderManager.hpp>
 #include <Infrastructure/TextureManager.hpp>
 
+#include <Window/OpenGL.hpp>
+
 #include <iostream>
 
 namespace Driller {
