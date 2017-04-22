@@ -24,12 +24,16 @@ namespace Graphics {
 
 
 	void Text::render(const Window::Window& _window, RenderData _RenderData) const {
-		auto& shader = Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader("TextShader");
+		if (m_Font == nullptr) {
+			return;
+		}
+
+		auto& shader = Infrastructure::InstanceCollection::getInstance<Infrastructure::ShaderManager>().getShader(Infrastructure::ShaderManager::TextShaderName);
 
 		shader.bind();
-		shader.passUniform("View", _RenderData.view * _RenderData.projection);
-		shader.passUniform("TexSize", m_Font->getTextureAtlas().getSize());
-		shader.passUniform("Colour", m_Colour);
+		shader.passUniform(Infrastructure::ShaderManager::TextShaderMVPName, _RenderData.view * _RenderData.projection * _RenderData.model);
+		shader.passUniform(Infrastructure::ShaderManager::TextShaderTexSizeName, m_Font->getTextureAtlas().getSize());
+		shader.passUniform(Infrastructure::ShaderManager::TextShaderColourName, m_Colour);
 		
 		m_Font->getTextureAtlas().bind();
 
@@ -41,6 +45,11 @@ namespace Graphics {
 			return;
 		}
 
+		if (_text == m_Text && _font == m_Font) {
+			return;
+		}
+
+		m_Text = _text;
 		m_Font = _font;
 		
 		glDeleteVertexArrays(1, &m_VAO);

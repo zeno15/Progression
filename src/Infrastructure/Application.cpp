@@ -2,6 +2,7 @@
 
 #include <Infrastructure/InstanceCollection.hpp>
 #include <Infrastructure/SceneManager.hpp>
+#include <Infrastructure/ShaderManager.hpp>
 
 #include <System/Clock.hpp>
 #include <Window/OpenGL.hpp>
@@ -26,6 +27,8 @@ namespace Infrastructure {
 		videoMode.minor = 5;
 		m_Window.create(videoMode, _title, Window::WindowStyle::Titlebar | Window::WindowStyle::Close);
 		//m_Window.setVerticalSyncEnabled(true);
+
+		InstanceCollection::getInstance<ShaderManager>().initialiseSystemShaders();
 
 		std::cout << "Vendor: " << glGetString(GL_VENDOR) << std::endl;
 		std::cout << "Renderer: " << glGetString(GL_RENDERER) << std::endl;
@@ -65,10 +68,10 @@ namespace Infrastructure {
 				ups = upsAccumulator;
 				fpsAccumulator = 0;
 				upsAccumulator = 0;
+				std::cout << "FPS: " << fps << ", UPS: " << ups << std::endl;
 			}
 
 			while (accumulator >= dt) {
-
 				update(dt);
 				accumulator -= dt;
 				upsAccumulator += 1;

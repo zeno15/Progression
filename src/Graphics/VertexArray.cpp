@@ -17,7 +17,6 @@ namespace Graphics {
 	}
 
 	void VertexArray::clear(void) {
-
 		glDeleteBuffers(1, &m_VBO);
 		glDeleteVertexArrays(1, &m_VAO);
 	}

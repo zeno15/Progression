@@ -14,6 +14,7 @@ SET(ECS_INCLUDE_FILES ${ECS_INCLUDE_FILES}
 )
 
 SET(GRAPHICS_INCLUDE_FILES ${GRAPHICS_INCLUDE_FILES}
+	${CMAKE_SOURCE_DIR}/include/Graphics/CircleShape.hpp
 	${CMAKE_SOURCE_DIR}/include/Graphics/Colour.hpp
 	${CMAKE_SOURCE_DIR}/include/Graphics/Font.hpp
 	${CMAKE_SOURCE_DIR}/include/Graphics/Glyph.hpp
@@ -124,6 +125,35 @@ SET(PONG_INCLUDE_FILES ${PONG_INCLUDE_FILES}
 	${CMAKE_SOURCE_DIR}/include/Pong/Scenes/PongGameScene.hpp
 )
 
+SET(TOWER_INCLUDE_FILES ${TOWER_INCLUDE_FILES}
+	${CMAKE_SOURCE_DIR}/include/Tower/TowerDefinitions.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/TowerResources.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/TowerStart.hpp
+	
+	${CMAKE_SOURCE_DIR}/include/Tower/Components/Tile.hpp
+	
+	${CMAKE_SOURCE_DIR}/include/Tower/GameObjects/Creep.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/GameObjects/GameObject.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/GameObjects/Level.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/GameObjects/ProjectileBase.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/GameObjects/TowerBase.hpp
+
+	${CMAKE_SOURCE_DIR}/include/Tower/GameObjects/Projectiles/BasicBullet.hpp
+
+	${CMAKE_SOURCE_DIR}/include/Tower/GameObjects/Towers/BasicTower.hpp
+	
+	${CMAKE_SOURCE_DIR}/include/Tower/Managers/CreepManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/Managers/EconomyManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/Managers/LevelInteractionManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/Managers/LevelManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/Managers/NotificationManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/Managers/ProjectileManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/Managers/TowerManager.hpp
+	${CMAKE_SOURCE_DIR}/include/Tower/Managers/UserInteractionManager.hpp
+
+	${CMAKE_SOURCE_DIR}/include/Tower/Scenes/TowerGameScene.hpp
+)
+
 SET(INCLUDE_FILES ${INCLUDE_FILES}
 	${ECS_INCLUDE_FILES}
 	${GRAPHICS_INCLUDE_FILES}
@@ -153,6 +183,7 @@ SET(ECS_SOURCE_FILES ${ECS_SOURCE_FILES}
 )
 
 SET (GRAPHICS_SOURCE_FILES ${GRAPHICS_SOURCE_FILES}
+	${CMAKE_SOURCE_DIR}/src/Graphics/CircleShape.cpp
 	${CMAKE_SOURCE_DIR}/src/Graphics/Colour.cpp
 	${CMAKE_SOURCE_DIR}/src/Graphics/Font.cpp
 	${CMAKE_SOURCE_DIR}/src/Graphics/Glyph.cpp
@@ -225,6 +256,35 @@ SET(DRILLER_SOURCE_FILES ${DRILLER_SOURCE_FILES}
 	${CMAKE_SOURCE_DIR}/src/Driller/Scenes/DrillerGameScene.cpp
 
 	${CMAKE_SOURCE_DIR}/src/Driller/Systems/RenderSystem.cpp
+)
+
+SET(TOWER_SOURCE_FILES ${TOWER_SOURCE_FILES}
+	${CMAKE_SOURCE_DIR}/src/Tower/TowerDefinitions.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/TowerResources.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/TowerStart.cpp
+	
+	${CMAKE_SOURCE_DIR}/src/Tower/Components/Tile.cpp
+	
+	${CMAKE_SOURCE_DIR}/src/Tower/GameObjects/Creep.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/GameObjects/GameObject.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/GameObjects/Level.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/GameObjects/ProjectileBase.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/GameObjects/TowerBase.cpp
+
+	${CMAKE_SOURCE_DIR}/src/Tower/GameObjects/Projectiles/BasicBullet.cpp
+
+	${CMAKE_SOURCE_DIR}/src/Tower/GameObjects/Towers/BasicTower.cpp
+	
+	${CMAKE_SOURCE_DIR}/src/Tower/Managers/CreepManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/Managers/EconomyManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/Managers/LevelInteractionManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/Managers/LevelManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/Managers/NotificationManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/Managers/ProjectileManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/Managers/TowerManager.cpp
+	${CMAKE_SOURCE_DIR}/src/Tower/Managers/UserInteractionManager.cpp
+
+	${CMAKE_SOURCE_DIR}/src/Tower/Scenes/TowerGameScene.cpp
 )
 
 SET(PONG_SOURCE_FILES ${PONG_SOURCE_FILES}

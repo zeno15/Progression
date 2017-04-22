@@ -78,6 +78,7 @@ namespace Graphics {
 		unsigned int		m_Verticies;	///<	The number of verticies last generated
 		Colour					m_Colour;	///<	The colour of the text;
 		System::Vector2f		m_Position;	///<	The starting pen position
+		std::string				m_Text;		///<	The current text
 	};
 }
 

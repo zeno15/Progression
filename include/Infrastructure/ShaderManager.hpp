@@ -24,6 +24,21 @@ namespace Infrastructure {
 
 		const static std::string Name;			///<	Name of the manager
 
+		const static std::string NonTexturedVertexArrayShaderName;
+		const static std::string NonTexturedVertexArrayShaderMVPName;
+
+		const static std::string TextShaderName;
+		const static std::string TextShaderMVPName;
+		const static std::string TextShaderTexSizeName;
+		const static std::string TextShaderColourName;
+
+		////////////////////////////////////////////////////////////
+		///
+		///	\brief	Initialises system shaders
+		///
+		////////////////////////////////////////////////////////////
+		void initialiseSystemShaders(void);
+
 		////////////////////////////////////////////////////////////
 		//
 		//	Adds a shader to the manager by their file paths
